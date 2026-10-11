@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Simon Robin | Blog</title>
+  <subtitle>An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician and LEGO builder.</subtitle>
+  <link href="https://sljrobin.org/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://sljrobin.org/blog/" rel="alternate" type="text/html"/>
+  <id>https://sljrobin.org/blog/</id>
+  <updated>2020-06-18T00:00:00+02:00</updated>
+  <author><name>Simon Robin</name></author>
+  <icon>https://sljrobin.org/assets/images/site/favicon/favicon-192.png</icon>
+  <entry>
+    <title>Security Advisory – Multiple Vulnerabilities in Verint PTZ Cameras</title>
+    <link href="https://sljrobin.org/blog/security-advisory-verint-ptz-cameras/" rel="alternate" type="text/html"/>
+    <id>https://sljrobin.org/blog/security-advisory-verint-ptz-cameras/</id>
+    <published>2020-06-18T00:00:00+02:00</published>
+    <updated>2020-06-18T00:00:00+02:00</updated>
+    <summary>Three CVEs in Verint&apos;s PTZ cameras, CVE-2020-24055 to 24057: a stack buffer overflow, hardcoded credentials and a command injection, in an IOActive advisory.</summary>
+    <content type="html" xml:base="https://sljrobin.org/blog/security-advisory-verint-ptz-cameras/">&lt;h2 id=&quot;the-engagement-in-riyadh&quot;&gt;The Engagement in Riyadh&lt;/h2&gt;
+
+&lt;p&gt;In May 2019, I traveled to Saudi Arabia, to its capital Riyadh, with three colleagues: &lt;a href=&quot;https://blog.48bits.com/&quot;&gt;Mario Ballano&lt;/a&gt;, &lt;a href=&quot;https://www.gabrielcybersecurity.com/&quot;&gt;Gabriel Gonzalez&lt;/a&gt; and &lt;a href=&quot;https://realpentesting.blogspot.com/&quot;&gt;Josep Pi Rodríguez&lt;/a&gt;. The client we were working for wanted to evaluate the security of several surveillance cameras from different manufacturers. The job had to be done on site, as we needed physical access to the cameras to assess the security of their firmware and of their web interfaces.&lt;/p&gt;
+
+&lt;p&gt;At the end of the engagement, we found a few vulnerabilities, some of them high risk. With the agreement of my colleagues who had found some of these security issues, I proposed writing an advisory to disclose them. Before publishing, we informed the vendors, and some of the issues led to &lt;a href=&quot;https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures&quot;&gt;CVEs&lt;/a&gt;.&lt;sup id=&quot;fnref:cve1&quot;&gt;&lt;a href=&quot;#fn:cve1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:cve2&quot;&gt;&lt;a href=&quot;#fn:cve2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:cve3&quot;&gt;&lt;a href=&quot;#fn:cve3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-advisory&quot;&gt;The Advisory&lt;/h2&gt;
+&lt;p&gt;This post covers the vulnerabilities we disclosed in the cameras from &lt;a href=&quot;https://www.verint.com/&quot;&gt;Verint Systems Inc. (Verint)&lt;/a&gt;. Verint sells software and hardware for data analysis, but also &lt;a href=&quot;https://en.wikipedia.org/wiki/IP_camera&quot;&gt;IP cameras&lt;/a&gt; and video systems. Most of these cameras are configured from a web application, and they run a &lt;a href=&quot;https://en.wikipedia.org/wiki/Unix&quot;&gt;Unix&lt;/a&gt;-based operating system.&lt;sup id=&quot;fnref:advisory&quot;&gt;&lt;a href=&quot;#fn:advisory&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt; published the advisory, &lt;a href=&quot;https://www.ioactive.com/verint-ptz-cameras-multiple-vulnerabilities/&quot;&gt;Verint PTZ Cameras Multiple Vulnerabilities&lt;/a&gt;, on its site and as a PDF.&lt;sup id=&quot;fnref:pdf&quot;&gt;&lt;a href=&quot;#fn:pdf&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; Click the cover below to open it.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure post-cover&quot;&gt;
+  &lt;a class=&quot;post-cover__link&quot; href=&quot;https://www.ioactive.com/verint-ptz-cameras-multiple-vulnerabilities/&quot; title=&quot;The advisory on IOActive&#x27;s site&quot;&gt;&lt;img src=&quot;/assets/images/blog/security-advisory-verint-ptz-cameras/cover-640.jpg&quot; alt=&quot;The cover of the advisory: the IOActive banner, then the title Verint PTZ Cameras Multiple Vulnerabilities and the line IOActive Security Advisory&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;640&quot; height=&quot;828&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;The cover of the advisory&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;the-cves&quot;&gt;The CVEs&lt;/h2&gt;
+&lt;p&gt;The CVEs reported were:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24055&quot;&gt;CVE-2020-24055&lt;/a&gt;: a stack buffer overflow in the autodiscovery service of the &lt;a href=&quot;https://www.verint.com/Assets/resources/resource-types/datasheets/ds-v5620ptz.pdf&quot;&gt;5620PTZ&lt;/a&gt;&lt;sup id=&quot;fnref:ds5620&quot;&gt;&lt;a href=&quot;#fn:ds5620&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; and &lt;a href=&quot;https://www.sourcesecurity.com/verint-v4320fd-dn-ip-camera-technical-details.html&quot;&gt;4320&lt;/a&gt;&lt;sup id=&quot;fnref:ds4320&quot;&gt;&lt;a href=&quot;#fn:ds4320&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; units, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/sbin/DM&lt;/code&gt; binary listening on &lt;a href=&quot;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&quot;&gt;TCP&lt;/a&gt; port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6666&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24056&quot;&gt;CVE-2020-24056&lt;/a&gt;: hardcoded credentials in the &lt;a href=&quot;https://www.verint.com/Assets/resources/resource-types/datasheets/ds-v5620ptz.pdf&quot;&gt;5620PTZ&lt;/a&gt;, &lt;a href=&quot;https://www.sourcesecurity.com/verint-v4320fd-dn-ip-camera-technical-details.html&quot;&gt;4320&lt;/a&gt; and &lt;a href=&quot;https://www.sourcesecurity.com/verint-s5120fd-dn-ip-dome-camera-technical-details.html&quot;&gt;S5120FD&lt;/a&gt;&lt;sup id=&quot;fnref:ds5120&quot;&gt;&lt;a href=&quot;#fn:ds5120&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; units, usable over &lt;a href=&quot;https://en.wikipedia.org/wiki/File_Transfer_Protocol&quot;&gt;FTP&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Telnet&quot;&gt;Telnet&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Secure_Shell&quot;&gt;SSH&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24057&quot;&gt;CVE-2020-24057&lt;/a&gt;: a command injection in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ipfilter.cgi&lt;/code&gt; endpoint of the &lt;a href=&quot;https://www.sourcesecurity.com/verint-s5120fd-dn-ip-dome-camera-technical-details.html&quot;&gt;S5120FD&lt;/a&gt;&#x27;s management website, which lets an authenticated attacker run arbitrary commands on the unit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:cve1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24055&quot;&gt;“CVE-2020-24055”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/PkWuZ&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cve2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24056&quot;&gt;“CVE-2020-24056”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/DyWi0&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cve3&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24057&quot;&gt;“CVE-2020-24057”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/eYgUl&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:advisory&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.ioactive.com/verint-ptz-cameras-multiple-vulnerabilities/&quot;&gt;“Verint PTZ Cameras Multiple Vulnerabilities”&lt;/a&gt;. &lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt;, June 2020. (&lt;a href=&quot;https://archive.ph/PX96N&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:advisory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:pdf&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://act-on.ioactive.com/acton/attachment/34793/f-24d5a2c0-198a-48ad-ae7c-669620e4e1d3/1/-/-/-/-/Verint%20PTZ%20Cameras%20Multiple%20Vulnerabilities.pdf&quot;&gt;“Verint PTZ Cameras Multiple Vulnerabilities” (PDF)&lt;/a&gt;. &lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt;, June 2020. (&lt;a href=&quot;https://archive.ph/HintN&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:pdf&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ds5620&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.verint.com/Assets/resources/resource-types/datasheets/ds-v5620ptz.pdf&quot;&gt;“V5620PTZ Datasheet” (PDF)&lt;/a&gt;. &lt;a href=&quot;https://www.verint.com/&quot;&gt;Verint&lt;/a&gt;. (&lt;a href=&quot;https://archive.ph/VXxRn&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:ds5620&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ds4320&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.sourcesecurity.com/verint-v4320fd-dn-ip-camera-technical-details.html&quot;&gt;“Verint V4320FD-DN IP Camera Technical Details”&lt;/a&gt;. &lt;a href=&quot;https://www.sourcesecurity.com/&quot;&gt;SourceSecurity.com&lt;/a&gt;. (&lt;a href=&quot;https://archive.ph/IP9Al&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:ds4320&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ds5120&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.sourcesecurity.com/verint-s5120fd-dn-ip-dome-camera-technical-details.html&quot;&gt;“Verint S5120FD-DN IP Dome Camera Technical Details”&lt;/a&gt;. &lt;a href=&quot;https://www.sourcesecurity.com/&quot;&gt;SourceSecurity.com&lt;/a&gt;. (&lt;a href=&quot;https://archive.ph/kfubG&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:ds5120&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Security Advisory – Multiple Vulnerabilities in Moog EXO Series Cameras</title>
+    <link href="https://sljrobin.org/blog/security-advisory-moog-exo-cameras/" rel="alternate" type="text/html"/>
+    <id>https://sljrobin.org/blog/security-advisory-moog-exo-cameras/</id>
+    <published>2020-06-18T00:00:00+02:00</published>
+    <updated>2020-06-18T00:00:00+02:00</updated>
+    <summary>Four CVEs in Moog&apos;s EXO cameras, CVE-2020-24051 to 24054: an ONVIF authentication bypass, XXE, hardcoded credentials and root command execution, in an IOActive advisory.</summary>
+    <content type="html" xml:base="https://sljrobin.org/blog/security-advisory-moog-exo-cameras/">&lt;h2 id=&quot;the-engagement-in-riyadh&quot;&gt;The Engagement in Riyadh&lt;/h2&gt;
+
+&lt;p&gt;In May 2019, I traveled to Saudi Arabia, to its capital Riyadh, with three colleagues: &lt;a href=&quot;https://blog.48bits.com/&quot;&gt;Mario Ballano&lt;/a&gt;, &lt;a href=&quot;https://www.gabrielcybersecurity.com/&quot;&gt;Gabriel Gonzalez&lt;/a&gt; and &lt;a href=&quot;https://realpentesting.blogspot.com/&quot;&gt;Josep Pi Rodríguez&lt;/a&gt;. The client we were working for wanted to evaluate the security of several surveillance cameras from different manufacturers. The job had to be done on site, as we needed physical access to the cameras to assess the security of their firmware and of their web interfaces.&lt;/p&gt;
+
+&lt;p&gt;At the end of the engagement, we found a few vulnerabilities, some of them high risk. With the agreement of my colleagues who had found some of these security issues, I proposed writing an advisory to disclose them. Before publishing, we informed the vendors, and some of the issues led to &lt;a href=&quot;https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures&quot;&gt;CVEs&lt;/a&gt;.&lt;sup id=&quot;fnref:cve1&quot;&gt;&lt;a href=&quot;#fn:cve1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:cve2&quot;&gt;&lt;a href=&quot;#fn:cve2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:cve3&quot;&gt;&lt;a href=&quot;#fn:cve3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:cve4&quot;&gt;&lt;a href=&quot;#fn:cve4&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-advisory&quot;&gt;The Advisory&lt;/h2&gt;
+&lt;p&gt;This post covers the vulnerabilities we disclosed in the cameras from &lt;a href=&quot;https://www.moog.com.sg/&quot;&gt;Moog Inc. (Moog)&lt;/a&gt;. Moog offers a wide range of camera and &lt;a href=&quot;https://en.wikipedia.org/wiki/Closed-circuit_television&quot;&gt;video surveillance&lt;/a&gt; systems, network-based or part of larger tracking systems. The affected products are the &lt;a href=&quot;https://objects.eanixter.com/PD373623.PDF&quot;&gt;EXO series&lt;/a&gt;,&lt;sup id=&quot;fnref:exo&quot;&gt;&lt;a href=&quot;#fn:exo&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; built for extreme temperatures, power surges and heavy impacts. The units are configured from a web application, and they run a &lt;a href=&quot;https://en.wikipedia.org/wiki/Unix&quot;&gt;Unix&lt;/a&gt;-based operating system.&lt;sup id=&quot;fnref:advisory&quot;&gt;&lt;a href=&quot;#fn:advisory&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt; published the advisory, &lt;a href=&quot;https://www.ioactive.com/moog-exo-series-multiple-vulnerabilities/&quot;&gt;Moog EXO Series Multiple Vulnerabilities&lt;/a&gt;, on its site and as a PDF.&lt;sup id=&quot;fnref:pdf&quot;&gt;&lt;a href=&quot;#fn:pdf&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; Click the cover below to open it.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure post-cover&quot;&gt;
+  &lt;a class=&quot;post-cover__link&quot; href=&quot;https://www.ioactive.com/moog-exo-series-multiple-vulnerabilities/&quot; title=&quot;The advisory on IOActive&#x27;s site&quot;&gt;&lt;img src=&quot;/assets/images/blog/security-advisory-moog-exo-cameras/cover-640.jpg&quot; alt=&quot;The cover of the advisory: the IOActive banner, then the title Moog EXO Series Multiple Vulnerabilities and the line IOActive Security Advisory&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; width=&quot;640&quot; height=&quot;828&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;The cover of the advisory&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;the-cves&quot;&gt;The CVEs&lt;/h2&gt;
+&lt;p&gt;The CVEs reported were:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24051&quot;&gt;CVE-2020-24051&lt;/a&gt;: an authentication bypass in the &lt;a href=&quot;https://en.wikipedia.org/wiki/ONVIF&quot;&gt;ONVIF&lt;/a&gt; web service of the &lt;a href=&quot;https://www.scansource.com/~/media/security-us/brands/videolarm/pdf2/Videolarm-EXPF5C1-Specsheet-EN&quot;&gt;EXVF5C-2&lt;/a&gt;&lt;sup id=&quot;fnref:exvf&quot;&gt;&lt;a href=&quot;#fn:exvf&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; and &lt;a href=&quot;https://www.notice-facile.com/en/manual/1578096/moog+exvp7c2-2&quot;&gt;EXVP7C2-3&lt;/a&gt;&lt;sup id=&quot;fnref:exvp&quot;&gt;&lt;a href=&quot;#fn:exvp&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;9&lt;/a&gt;&lt;/sup&gt; units, which lets an attacker run operations that should require a login.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24052&quot;&gt;CVE-2020-24052&lt;/a&gt;: several &lt;a href=&quot;https://en.wikipedia.org/wiki/XML_external_entity_attack&quot;&gt;XML external entity (XXE)&lt;/a&gt; vulnerabilities, which let a remote unauthenticated user read arbitrary files through a crafted &lt;a href=&quot;https://en.wikipedia.org/wiki/Document_type_definition&quot;&gt;document type definition&lt;/a&gt; in an &lt;a href=&quot;https://en.wikipedia.org/wiki/XML&quot;&gt;XML&lt;/a&gt; request.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24053&quot;&gt;CVE-2020-24053&lt;/a&gt;: hardcoded credentials, usable over &lt;a href=&quot;https://en.wikipedia.org/wiki/File_Transfer_Protocol&quot;&gt;FTP&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Telnet&quot;&gt;Telnet&lt;/a&gt; and &lt;a href=&quot;https://en.wikipedia.org/wiki/Secure_Shell&quot;&gt;SSH&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24054&quot;&gt;CVE-2020-24054&lt;/a&gt;: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;statusbroadcast&lt;/code&gt; command of the administration console, which runs a given binary repeatedly as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt;, so any command can be run with the highest privileges.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:cve1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24051&quot;&gt;“CVE-2020-24051”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/Vyr0l&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cve2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24052&quot;&gt;“CVE-2020-24052”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/8m7c1&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cve3&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24053&quot;&gt;“CVE-2020-24053”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/JMrOm&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cve4&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.cve.org/CVERecord?id=CVE-2020-24054&quot;&gt;“CVE-2020-24054”&lt;/a&gt;. &lt;a href=&quot;https://www.cve.org/&quot;&gt;CVE Program&lt;/a&gt;, 2020. (&lt;a href=&quot;https://archive.ph/KO6O3&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:cve4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:exo&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://objects.eanixter.com/PD373623.PDF&quot;&gt;“EXO IP Camera Systems” (PDF)&lt;/a&gt;. &lt;a href=&quot;https://www.moog.com.sg/&quot;&gt;Moog&lt;/a&gt;, on &lt;a href=&quot;https://www.anixter.com/&quot;&gt;Anixter&lt;/a&gt;&#x27;s site. (&lt;a href=&quot;https://archive.ph/9v80o&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:exo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:advisory&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.ioactive.com/moog-exo-series-multiple-vulnerabilities/&quot;&gt;“Moog EXO Series Multiple Vulnerabilities”&lt;/a&gt;. &lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt;, June 2020. (&lt;a href=&quot;https://archive.ph/nzPvr&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:advisory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:pdf&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://act-on.ioactive.com/acton/attachment/34793/f-4a9d8492-13dc-45fb-8b07-788cd394954b/1/-/-/-/-/Moog%20EXO%20Series%20Multiple%20Vulnerabilities.pdf&quot;&gt;“Moog EXO Series Multiple Vulnerabilities” (PDF)&lt;/a&gt;. &lt;a href=&quot;https://www.ioactive.com/&quot;&gt;IOActive&lt;/a&gt;, June 2020. (&lt;a href=&quot;https://archive.ph/7ksck&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:pdf&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:exvf&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.scansource.com/~/media/security-us/brands/videolarm/pdf2/Videolarm-EXPF5C1-Specsheet-EN&quot;&gt;“EXO Fixed HD Camera Series” (PDF)&lt;/a&gt;. &lt;a href=&quot;https://www.moog.com.sg/&quot;&gt;Moog&lt;/a&gt;, 2014, on &lt;a href=&quot;https://www.scansource.com/&quot;&gt;ScanSource&lt;/a&gt;&#x27;s site. (&lt;a href=&quot;https://archive.ph/w39om&quot;&gt;Archive&lt;/a&gt;) &lt;a href=&quot;#fnref:exvf&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:exvp&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.notice-facile.com/en/manual/1578096/moog+exvp7c2-2&quot;&gt;“Moog EXVP7C2-2 Manual”&lt;/a&gt;. &lt;a href=&quot;https://www.notice-facile.com/&quot;&gt;Notice Facile&lt;/a&gt;. &lt;a href=&quot;#fnref:exvp&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+</feed>

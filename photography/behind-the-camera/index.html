@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+
+  <title>
+      Behind the Camera | Simon Robin
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="How my journey into photography started, the photographers who inspire me and the equipment I carry on my trips.">
+  <meta name="author" content="Simon Robin">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
+  <link rel="canonical" href="https://sljrobin.org/photography/behind-the-camera/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simon Robin">
+  <meta property="og:title" content="Behind the Camera">
+  <meta property="og:description" content="How my journey into photography started, the photographers who inspire me and the equipment I carry on my trips.">
+  <meta property="og:url" content="https://sljrobin.org/photography/behind-the-camera/">
+  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta name="twitter:card" content="summary_large_image">
+
+
+
+  <link rel="preload" href="/assets/fonts/SourceSerif4-Roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
+<script>
+  (function () {
+    if (!('onpagereveal' in window)) return;
+    var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
+    var path = location.pathname, play = false;
+    try {
+      var v = JSON.parse(localStorage.getItem('sig-intro'));
+      var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
+      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+    } catch (e) {}
+    window.addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition || play) return;
+      e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
+      e.viewTransition.skipTransition();
+    });
+  })();
+</script>
+
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/site/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/site/favicon/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/site/favicon/apple-touch.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+  
+  <body class="photography">
+    
+<script>
+  (function () {
+    var KEY = 'sig-intro', VISIT_MS = 30 * 60 * 1000, now = Date.now(), visit = null;
+    try { visit = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    if (!visit || typeof visit.t !== 'number' || now - visit.t > VISIT_MS) visit = null;
+    function save() { try { visit.t = now; localStorage.setItem(KEY, JSON.stringify(visit)); } catch (e) {} }
+    var el = document.getElementById('sig-intro');
+    if (!el) { if (visit) save(); return; }   // not a landing page: only keep the visit alive
+    function remove() { document.documentElement.classList.remove('sig-intro-playing'); if (el.parentNode) el.parentNode.removeChild(el); }
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var path = location.pathname, pageSeen = !!(visit && visit.pages && visit.pages[path]);
+    if (reduce || pageSeen) { remove(); if (visit) save(); return; }
+    var first = !visit;
+    if (first) visit = { pages: {} };
+    visit.pages = visit.pages || {};
+    visit.pages[path] = 1;
+    save();   // stamped at the start, so a tab opened during the intro does not replay it
+    el.classList.add('is-on');   // the overlay is display: none until here, so without script it never shows
+    function leave(ms) {
+      el.style.transitionDuration = ms + 'ms';
+      requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('is-leaving'); }); });
+      setTimeout(remove, ms + 50);
+    }
+    if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
+    document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
+    var done = false;
+    function finish() { if (done) return; done = true; leave(550); }
+    // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
+    // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
+    // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
+      finish();
+    });
+    el.addEventListener('click', finish);
+    // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
+    // A clock started here would run on while a window drag, a background tab or a slow first paint
+    // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
+    // The fallback timer, counted from the frame that starts the drawing, covers a transition that never ends.
+    var last = el.querySelector('.sig-intro__stroke:last-of-type');
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      el.classList.add('is-drawing');
+      var fallback = setTimeout(finish, 2930);
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+    }); });
+  })();
+</script>
+
+
+    
+<nav class="site-strip" aria-label="Sections and profiles">
+  <a class="site-strip__logo" href="/" title="Home">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+  </a>
+  <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </button>
+  <div class="site-strip__menu" id="site-menu">
+    <div class="site-strip__sections">
+    <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
+    <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
+    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
+
+    </div>
+    <div class="site-strip__profiles">
+      <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/sljrobin" title="LinkedIn"><svg class="icon icon-linkedin-in" aria-hidden="true" focusable="false"><use href="/assets/images/icons/linkedin-in.svg#linkedin-in"/></svg><span>LinkedIn</span></a>
+      <a target="_blank" rel="noopener" href="https://github.com/sljrobin" title="GitHub"><svg class="icon icon-github" aria-hidden="true" focusable="false"><use href="/assets/images/icons/github.svg#github"/></svg><span>GitHub</span></a>
+    </div>
+  </div>
+</nav>
+
+    <div class="page-photography-gallery page-photography-about">
+  <header class="photo-header">
+  <nav class="photo-nav" aria-label="Photography">
+    <a class="photo-nav__btn" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="">France</a>
+    <a class="photo-nav__btn" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="">UK</a>
+    <a class="photo-nav__btn" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="">Spain</a>
+    <a class="photo-nav__btn" href="/photography/gallery/finland/"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="">Finland</a>
+    <a class="photo-nav__btn" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="">Switzerland</a>
+    <a class="photo-nav__btn" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="">USA</a>
+    <a class="photo-nav__btn photo-nav__btn--active" href="/photography/behind-the-camera/" aria-current="page"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
+    <a class="photo-nav__btn" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg>Instagram</a>
+  </nav>
+</header>
+
+
+  <main>
+    <article class="about-page">
+  <div class="container">
+    <div class="about-page__head">
+    <div class="about-page__photo">
+      <img src="/assets/images/photography/behind-the-camera/portrait.webp" width="1536" height="1024" alt="Simon Robin's Instagram profile picture, a LEGO mosaic" decoding="async">
+    </div>
+
+    <h1 class="about-page__title">Behind the Camera</h1>
+    <p class="about-page__lede">How my journey into photography started, the photographers who inspire me and the equipment I carry on my trips.</p>
+    </div>
+    
+<nav class="toc" id="toc" aria-label="Contents" data-pagefind-ignore>
+  <div class="toc__head"><p class="toc__label">Contents</p></div>
+  <ul>
+    <li><a href="#how-it-started">How It Started</a>
+    </li>
+    <li><a href="#my-inspirations">My Inspirations</a>
+    </li>
+    <li><a href="#what-i-carry">What I Carry</a>
+    </li>
+    <li><a href="#say-hi">Say Hi</a>
+    </li>
+  </ul>
+</nav>
+<script src="/assets/js/toc.js" defer></script>
+
+    <div class="about-page__body">
+
+    <h2 id="how-it-started">How It Started</h2>
+    <p>I have always liked taking pictures. As a kid, I was the one in charge of taking the family photos, trying to get them sharp, not blurry, and memorable. This carried on with the arrival of smartphones, where I took pictures from time to time.</p>
+
+    <p>Around the beginning of 2017, I thought it was time to treat photography as an art, not just a source of random memories. I was about to leave for <a href="/photography/gallery/usa/#Seattle" title="Seattle">Seattle</a> for a month, and that was when I decided to jump. I bought a mirrorless camera and a tripod a few days before my departure, and I discovered a new world: choosing a proper subject, choosing the time of day, learning how to adjust the exposure and how to capture a scene with a lot of dynamic range.</p>
+
+    <p>As I was living in <a href="/photography/gallery/uk/" title="London">London</a> at the time, I continued my journey and focused mainly on cityscapes, trying to capture some of the most beautiful monuments of the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>. After five years abroad, I decided to come back to <a href="/photography/gallery/france/" title="France">France</a>, my home country.</p>
+
+    <p>That is when I turned to landscapes. The lavender fields of <a href="/photography/gallery/france/#Valensole" title="Valensole">Valensole</a> or the seascapes of the <a href="/photography/gallery/france/#West-Coast" title="West Coast">West Coast</a> were, and still are, absolute treasures to my eyes. From time to time I travel beyond my comfort zone, to <a href="/photography/gallery/spain/" title="Spain">Spain</a>, to <a href="/photography/gallery/finland/" title="Finland">Finland</a> or back to the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>, to see a different but equally gorgeous nature. Still, I keep being drawn back to the landscapes of <a href="/photography/gallery/france/#Etretat" title="Normandy">Normandy</a> and <a href="/photography/gallery/france/#Finistere" title="Brittany">Brittany</a>.</p>
+
+    <h2 id="my-inspirations">My Inspirations</h2>
+    <p>Over the years, I have been inspired by several photographers. To name a few: <a target="_blank" rel="noopener" href="https://elialocardi.com/" title="Elia Locardi">Elia Locardi</a>, <a target="_blank" rel="noopener" href="https://danielkordan.com/" title="Daniel Kordan">Daniel Kordan</a>, <a target="_blank" rel="noopener" href="https://www.facebook.com/aarondowlingphotos/" title="Aaron Dowling">Aaron Dowling</a>, <a target="_blank" rel="noopener" href="https://thomasheaton.co.uk/" title="Thomas Heaton">Thomas Heaton</a>, <a target="_blank" rel="noopener" href="https://www.nickpagephotography.com/" title="Nick Page">Nick Page</a> and <a target="_blank" rel="noopener" href="https://www.albertdros.com/" title="Albert Dros">Albert Dros</a>. But the artist who inspired me the most at the time was probably <a target="_blank" rel="noopener" href="https://www.marcadamus.com/" title="Marc Adamus">Marc Adamus</a>.</p>
+
+    <p>Now I feel I'm at a turning point with this hobby. I have the feeling I need to try something different, less tailored to social media algorithms, less epic, probably more minimalist. More time outdoors, less time in post-processing. After talking with photographers like <a target="_blank" rel="noopener" href="https://www.jeanlucgirod.com/" title="Jean-Luc Girod">Jean-Luc Girod</a> and <a target="_blank" rel="noopener" href="https://www.ianlawson.com/" title="Ian Lawson">Ian Lawson</a>, I realized pictures were more than a good composition with plenty of colors. They could be moments in time, with emotions and stories to tell.</p>
+
+    <p>So I'm trying to change my approach. Like many before me, I'm studying the pictures of <a target="_blank" rel="noopener" href="https://www.anseladams.com/" title="Ansel Adams">Ansel Adams</a> and <a target="_blank" rel="noopener" href="https://www.mountainlight.com/" title="Galen Rowell">Galen Rowell</a>, who are now a deep inspiration. Artists like <a target="_blank" rel="noopener" href="https://artwolfe.com/" title="Art Wolfe">Art Wolfe</a>, <a target="_blank" rel="noopener" href="https://jimmychin.com/" title="Jimmy Chin">Jimmy Chin</a> and <a target="_blank" rel="noopener" href="https://www.krystlewright.com/" title="Krystle Wright">Krystle Wright</a> are the examples I'm trying to follow today.</p>
+
+    <h2 id="what-i-carry">What I Carry</h2>
+    <p>Since day one, I have used Fujifilm equipment. I'm the lucky owner of an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/cameras/x-t2/" title="Fujifilm X-T2">X-T2</a>. I shoot mostly with the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/discontinued-lenses/xf10-24mmf4-r-ois/" title="Fujinon XF10-24mmF4 R OIS">XF 10–24 mm <i>f</i>/4</a>, I never got tired of the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf18-55mmf28-4-r-lm-ois/" title="Fujinon XF18-55mmF2.8-4 R LM OIS">XF 18–55 mm <i>f</i>/2.8–4</a>, and I acquired an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf70-300mmf4-56-r-lm-ois-wr/" title="Fujinon XF70-300mmF4-5.6 R LM OIS WR">XF 70–300 mm <i>f</i>/4–5.6</a> for very isolated landscapes. My <a target="_blank" rel="noopener" href="https://www.gitzo.com/global/tripod-kit-traveler-series-1-4-sections-gk1545t-82tqd/" title="Gitzo Traveler GK1545T">Gitzo GK1545T</a> tripod has followed me around the world without a single issue. A few years ago I switched to <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/" title="Really Right Stuff">Really Right Stuff</a> ball heads, such as the <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/bh-40/" title="Really Right Stuff BH-40">BH-40</a>, and I'm still exploring all their possibilities.</p>
+
+    <h2 id="say-hi">Say Hi</h2>
+    <p>I do have an <a target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/" title="Instagram">Instagram account</a>, even though I'm a very infrequent user. The <a href="/photography/#galleries" title="Galleries">galleries</a> on this website contain the pieces of my work I found the most interesting to share, but for the most curious, additional pictures can be found there. Either way, feel free to say hi!</p>
+    </div>
+  </div>
+</article>
+
+  </main>
+
+  
+<footer class="site-footer">
+  <nav class="site-footer__links" aria-label="Sections">
+    <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
+    <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
+    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
+
+  </nav>
+  <div class="site-footer__small">
+    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse or sell them without permission.</p>
+  </div>
+</footer>
+
+
+</div>
+
+<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+  <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
+</button>
+
+    <script src="/assets/js/scroll.js"></script>
+    <script src="/assets/js/nav.js"></script>
+    <script type="application/json" id="photo-meta">{}</script>
+    <script type="module" src="/assets/js/photoswipe-init.js"></script>
+  </body>
+</html>

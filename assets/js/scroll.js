@@ -1,12 +1,1 @@
-// JavaScript enabling a button that scrolls to the top of a page 
-
-var scrollToTopBtn = document.getElementById("btn-scroll-top");
-var rootElement = document.documentElement;
-
-function scrollToTop() {
-  rootElement.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-scrollToTopBtn.addEventListener("click", scrollToTop);
+(function(){"use strict";if(e=document.getElementById("btn-scroll-top"),!e)return;i=document.querySelector(".site-strip")||document.querySelector("header");function f(){return window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}function c(t){e.classList.toggle("is-visible",t)}function m(){window.scrollTo({top:0,behavior:f()?"auto":"smooth"}),e.blur()}if(e.addEventListener("click",m),s=document.querySelector(".site-footer"),s){var e,n,s,o,i,a,u,h=!1,r=!1,l=function(){r=!1;var t=Math.max(0,window.innerHeight-s.getBoundingClientRect().top);e.style.setProperty("--lift",Math.round(t)+"px")},t=function(){r||(r=!0,window.requestAnimationFrame(l))},d=function(n){if(n===h)return;h=n,n?(window.addEventListener("scroll",t,{passive:!0}),window.addEventListener("resize",t,{passive:!0}),l()):(window.removeEventListener("scroll",t),window.removeEventListener("resize",t),e.style.setProperty("--lift","0px"))};"IntersectionObserver"in window?new IntersectionObserver(function(e){d(e[e.length-1].isIntersecting)},{threshold:0}).observe(s):d(!0)}i&&"IntersectionObserver"in window?(u=new IntersectionObserver(function(e){var t=e[e.length-1];c(!t.isIntersecting&&t.boundingClientRect.bottom<0)},{threshold:0}),u.observe(i)):(o=!1,n=function(){o=!1,c((window.pageYOffset||document.documentElement.scrollTop||0)>window.innerHeight)},a=function(){o||(o=!0,window.requestAnimationFrame(n))},window.addEventListener("scroll",a,{passive:!0}),window.addEventListener("resize",a,{passive:!0}),window.addEventListener("pageshow",n),n())})()

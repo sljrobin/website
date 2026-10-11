@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+
+  <title>
+      Blog | Simon Robin
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Notes on offensive security, and now and then a post on something else I enjoy writing about.">
+  <meta name="author" content="Simon Robin">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
+  <link rel="canonical" href="https://sljrobin.org/blog/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Simon Robin">
+  <meta property="og:title" content="Blog">
+  <meta property="og:description" content="Notes on offensive security, and now and then a post on something else I enjoy writing about.">
+  <meta property="og:url" content="https://sljrobin.org/blog/">
+  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta name="twitter:card" content="summary_large_image">
+
+
+
+  <link rel="preload" href="/assets/fonts/SourceSerif4-Roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
+<script>
+  (function () {
+    if (!('onpagereveal' in window)) return;
+    var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
+    var path = location.pathname, play = false;
+    try {
+      var v = JSON.parse(localStorage.getItem('sig-intro'));
+      var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
+      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+    } catch (e) {}
+    window.addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition || play) return;
+      e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
+      e.viewTransition.skipTransition();
+    });
+  })();
+</script>
+
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/site/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/site/favicon/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/site/favicon/apple-touch.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+
+  
+  <body class="blog">
+    
+<div class="sig-intro sig-intro--navy" id="sig-intro" aria-hidden="true">
+  <svg class="sig-intro__svg" viewBox="0 0 890.64 304.99" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <mask id="sig-intro-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="890.64" height="304.99">
+      <path class="sig-intro__stroke" d="M16.2,238.4 L16.8,241.6 L9.2,256.8 L4.4,271.8 L3.8,281.0 L5.2,290.0 L7.6,295.0 L10.0,297.4 L13.6,299.2 L22.4,300.6 L32.4,299.6 L53.2,294.8 L80.8,285.8 L108.0,274.8 L149.4,255.8 L179.8,240.2 L198.8,228.8 L213.8,218.0 L228.0,205.0 L233.4,198.2 L235.2,192.8 L233.0,184.2 L225.4,177.0 L219.2,173.2 L206.0,167.2 L191.0,161.8 L143.2,147.0 L133.6,143.4 L118.6,136.4 L110.8,131.6 L106.6,127.4 L104.2,122.2 L102.8,113.0 L105.4,103.6 L109.6,95.8 L115.2,88.0 L136.4,63.4 L161.4,39.2 L189.0,17.4 L197.2,11.8 L204.6,7.8 L213.8,5.2 L221.2,6.0 L225.4,7.6 L228.6,10.6 L230.6,14.8 L231.6,22.0 L231.2,25.8 L227.4,37.2 L217.2,56.6 L203.6,77.2 L187.2,97.0 L168.2,115.2 L162.4,116.8" pathLength="1" style="transition-delay:0ms;transition-duration:264ms"/>
+      <path class="sig-intro__stroke" d="M162.2,116.6 L162.2,116.0" pathLength="1" style="transition-delay:264ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M162.2,116.0 L165.0,113.2" pathLength="1" style="transition-delay:264ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M165.2,112.8 L165.6,112.8" pathLength="1" style="transition-delay:266ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M162.2,116.0 L163.2,110.0 L170.6,98.0 L170.4,95.4" pathLength="1" style="transition-delay:266ms;transition-duration:8ms"/>
+      <path class="sig-intro__stroke" d="M162.2,117.0 L156.2,124.2" pathLength="1" style="transition-delay:273ms;transition-duration:3ms"/>
+      <path class="sig-intro__stroke" d="M267.6,152.6 L268.4,156.8 L261.2,173.6 L254.6,194.6 L254.4,200.4 L256.2,206.6 L261.2,207.2 L269.6,199.8 L288.2,178.2 L296.6,175.0" pathLength="1" style="transition-delay:277ms;transition-duration:37ms"/>
+      <path class="sig-intro__stroke" d="M296.8,175.0 L297.4,175.6 L297.6,182.4" pathLength="1" style="transition-delay:313ms;transition-duration:3ms"/>
+      <path class="sig-intro__stroke" d="M297.8,182.4 L303.0,177.2" pathLength="1" style="transition-delay:316ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M303.0,177.0 L303.4,177.0" pathLength="1" style="transition-delay:318ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M297.8,182.6 L297.8,183.0" pathLength="1" style="transition-delay:319ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M298.0,183.2 L307.0,180.4 L314.4,174.6 L319.4,172.4 L323.6,173.8 L325.0,187.4 L328.0,188.6 L333.0,187.0 L344.4,179.6 L349.0,178.4 L350.2,179.6 L351.2,188.8 L352.2,190.0 L355.2,190.8 L357.4,190.6 L360.2,189.2 L368.8,183.8 L375.0,182.2" pathLength="1" style="transition-delay:319ms;transition-duration:36ms"/>
+      <path class="sig-intro__stroke" d="M375.2,182.4 L375.2,187.4 L376.0,189.2 L377.4,189.6 L382.6,188.6 L385.8,186.6 L389.8,182.4 L392.6,177.4 L393.8,172.8 L394.2,164.2" pathLength="1" style="transition-delay:354ms;transition-duration:14ms"/>
+      <path class="sig-intro__stroke" d="M394.2,164.2 L390.6,163.8 L387.2,164.6 L381.8,170.8 L375.2,182.2" pathLength="1" style="transition-delay:369ms;transition-duration:10ms"/>
+      <path class="sig-intro__stroke" d="M394.2,164.2 L414.8,164.6 L420.8,165.8 L422.0,169.2 L420.0,182.8 L421.0,184.2" pathLength="1" style="transition-delay:378ms;transition-duration:15ms"/>
+      <path class="sig-intro__stroke" d="M421.0,184.4 L419.2,187.2" pathLength="1" style="transition-delay:393ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M421.2,184.4 L428.6,182.4 L439.0,174.8 L442.8,173.2 L447.2,174.8 L448.6,184.4 L449.8,187.6 L455.0,189.2 L460.4,189.2 L489.2,178.8 L527.6,163.2 L530.2,163.8" pathLength="1" style="transition-delay:394ms;transition-duration:43ms"/>
+      <path class="sig-intro__stroke" d="M297.8,183.4 L295.6,189.6" pathLength="1" style="transition-delay:437ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M296.8,174.8 L297.8,171.4 L300.6,166.6 L300.4,163.2" pathLength="1" style="transition-delay:439ms;transition-duration:4ms"/>
+      <path class="sig-intro__stroke" d="M524.6,88.2 L523.0,86.8 L521.8,83.2 L521.8,81.6 L523.0,79.4 L541.0,63.4 L560.2,48.4 L579.2,35.8 L597.6,25.6 L613.0,18.6 L631.6,12.0 L646.0,8.2 L664.2,5.2 L675.4,4.2 L695.2,4.6 L709.8,6.4 L723.4,10.2 L732.0,15.2 L738.2,22.2 L741.2,29.2 L742.8,39.4 L742.4,47.4 L739.8,56.8 L736.0,65.2 L729.0,76.4 L721.0,87.0 L710.8,98.6 L697.8,111.4 L685.0,122.4 L658.6,142.0 L636.0,156.6 L605.8,174.0 L594.0,180.4 L585.8,182.0" pathLength="1" style="transition-delay:444ms;transition-duration:164ms"/>
+      <path class="sig-intro__stroke" d="M585.6,181.8 L586.8,172.8 L590.2,163.4 L605.4,124.8 L620.6,91.0 L620.6,87.4" pathLength="1" style="transition-delay:607ms;transition-duration:34ms"/>
+      <path class="sig-intro__stroke" d="M585.4,182.0 L584.8,182.6 L584.2,187.4" pathLength="1" style="transition-delay:641ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M584.2,187.6 L600.0,201.2 L613.2,211.4 L638.4,228.2 L664.2,242.4 L694.2,255.8 L722.6,265.8 L743.6,271.6 L762.6,275.8 L797.2,281.0 L831.4,283.2 L850.2,282.2 L859.4,280.2 L867.8,276.6 L872.6,273.2 L878.4,266.4 L881.4,259.8 L882.8,253.0 L882.2,243.6 L881.2,239.2 L879.0,233.6 L875.4,227.2 L869.0,219.0 L860.2,210.2 L841.8,194.8" pathLength="1" style="transition-delay:643ms;transition-duration:137ms"/>
+      <path class="sig-intro__stroke" d="M584.0,187.6 L581.2,188.8 L579.4,190.8" pathLength="1" style="transition-delay:780ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M579.2,190.8 L578.6,190.2 L572.6,189.6" pathLength="1" style="transition-delay:782ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M579.2,191.0 L578.2,198.4 L567.2,234.0 L560.4,259.6 L561.6,265.0" pathLength="1" style="transition-delay:784ms;transition-duration:26ms"/>
+      <path class="sig-intro__stroke" d="M671.6,222.4 L674.8,224.0 L681.8,224.6 L691.0,222.2 L700.2,217.4 L713.8,207.4 L731.0,191.2 L746.0,172.8 L750.8,164.2 L750.0,158.2 L744.4,156.4 L742.8,157.0 L736.8,161.0 L724.2,172.2 L716.8,174.4" pathLength="1" style="transition-delay:810ms;transition-duration:50ms"/>
+      <path class="sig-intro__stroke" d="M716.6,174.4 L716.2,173.0 L717.4,165.2 L726.0,144.8 L727.4,137.4" pathLength="1" style="transition-delay:860ms;transition-duration:13ms"/>
+      <path class="sig-intro__stroke" d="M727.2,137.2 L725.8,137.4" pathLength="1" style="transition-delay:873ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M725.8,137.4 L722.8,140.6" pathLength="1" style="transition-delay:874ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M722.6,140.6 L722.6,141.0" pathLength="1" style="transition-delay:875ms;transition-duration:0ms"/>
+      <path class="sig-intro__stroke" d="M725.8,137.4 L719.8,139.0 L707.8,149.2 L693.2,159.6 L686.4,161.2" pathLength="1" style="transition-delay:875ms;transition-duration:16ms"/>
+      <path class="sig-intro__stroke" d="M686.2,161.0 L685.8,156.0" pathLength="1" style="transition-delay:891ms;transition-duration:2ms"/>
+      <path class="sig-intro__stroke" d="M686.2,161.2 L685.6,162.6" pathLength="1" style="transition-delay:892ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M685.4,162.8 L683.8,163.6 L680.0,169.4 L674.4,178.8 L671.2,186.2 L671.0,189.6 L672.0,193.6 L674.8,195.8 L679.4,196.2 L682.4,194.6 L687.0,188.8 L690.2,181.0 L691.2,176.6 L690.4,169.4 L688.6,165.8 L685.6,162.8" pathLength="1" style="transition-delay:893ms;transition-duration:28ms"/>
+      <path class="sig-intro__stroke" d="M727.6,137.2 L749.8,105.2 L749.4,102.0" pathLength="1" style="transition-delay:921ms;transition-duration:14ms"/>
+      <path class="sig-intro__stroke" d="M716.6,174.6 L713.6,179.4 L713.2,182.0" pathLength="1" style="transition-delay:935ms;transition-duration:3ms"/>
+      <path class="sig-intro__stroke" d="M771.4,157.0 L772.0,160.6 L768.8,166.2 L765.6,176.4 L767.4,183.4 L771.4,184.4 L774.8,184.0 L780.2,181.0 L787.8,174.8 L795.2,172.6 L796.8,173.2" pathLength="1" style="transition-delay:937ms;transition-duration:20ms"/>
+      <path class="sig-intro__stroke" d="M797.0,173.2 L799.0,167.0 L805.4,155.0 L805.2,152.0" pathLength="1" style="transition-delay:958ms;transition-duration:8ms"/>
+      <path class="sig-intro__stroke" d="M797.0,173.4 L797.4,176.0" pathLength="1" style="transition-delay:965ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M797.6,176.2 L807.0,174.2 L820.0,166.6 L823.2,165.8 L826.0,167.4 L826.4,169.4 L828.2,171.0 L836.2,173.0 L865.0,171.4 L884.4,168.8 L888.8,170.0" pathLength="1" style="transition-delay:966ms;transition-duration:32ms"/>
+      <path class="sig-intro__stroke" d="M797.4,176.2 L796.4,180.0" pathLength="1" style="transition-delay:999ms;transition-duration:1ms"/>
+      <path class="sig-intro__stroke" d="M272.8,124.2 L280.2,125.0" pathLength="1" style="transition-delay:1120ms;transition-duration:80ms"/>
+      <path class="sig-intro__stroke" d="M782.6,121.6 L785.4,122.0 L788.4,119.4" pathLength="1" style="transition-delay:1200ms;transition-duration:80ms"/>
+      </mask>
+    </defs>
+    <g class="sig-intro__sign" mask="url(#sig-intro-mask)">
+      <path d="M169.48,94.48c-6.37,9.47-12.11,19.29-17.16,29.53-1.02,2.07,3,6.08,4.99,4.6,20.86-15.51,39.21-34.25,54.01-55.64,6.96-10.06,13.18-20.63,18.46-31.67,4.35-9.12,8.31-20.59,2.37-29.97-15.41-24.32-45.91,1.5-60.55,12.82-21.51,16.64-41.06,35.82-58,57.1-7.5,9.42-16.18,20.08-15.54,32.84s9.4,20.53,19.77,26.2c23.22,12.7,49.4,17.95,74.37,26.04,11.71,3.79,25.71,7.83,35.28,15.88,5.89,4.95,4.99,10.22.38,15.75-4.71,5.65-10.21,10.67-15.93,15.27-21.9,17.61-47.52,30.5-72.87,42.32-28.71,13.39-57.92,27.11-88.58,35.4-7.66,2.07-15.44,3.78-23.29,4.98-7.28,1.11-16.81,2.57-18.82-6.51-3.55-16.04,6.1-33.1,13.25-46.74,1.58-3.01-5.31-9.36-7.29-5.74-6.67,12.16-13.45,24.95-14.26,39.09-.63,10.93,2.81,23.18,14.09,27.32,11.06,4.07,25.44-.46,36.36-3.15,13.64-3.37,26.94-7.98,39.99-13.17,26.71-10.61,53.23-22.55,78.72-35.82,23.15-12.05,48.29-25.84,65.24-46.17,18.44-22.11-18.82-37.71-34.8-43.88-24.94-9.64-51.6-14.7-75.75-26.39-4.61-2.23-11.49-4.79-14.37-9.24-3.54-5.46-1.42-13.49,1.03-18.87,5.51-12.11,15.62-22.87,24.32-32.78,18.01-20.52,38.5-38.66,60.73-54.5,6.28-4.47,13.08-9.63,21.05-10.23,3.17-.24,7.21.04,9.53,2.5,2.45,2.6,2.4,6.88,2.05,10.19-.71,6.75-3.79,13.04-6.76,19.04-3.16,6.38-6.62,12.61-10.35,18.67-15.29,24.78-35.36,46.42-58.52,64.01l4.99,4.6c4.8-10.22,10.23-20.08,16.33-29.59,1.1-1.72-3.31-5.8-4.45-4.1h0Z"/><path d="M265.2,150.89c-5.27,11.09-9.71,22.5-13.05,34.31-2.32,8.23-5.36,22.21,5.81,25.76,4.54,1.44,8.7-1.68,11.74-4.69,4.08-4.03,7.75-8.57,11.48-12.91,7.97-9.29,16.68-18.63,23.03-29.13,1.22-2.02-3.47-6.77-5.33-4.91-6.57,6.56-12.1,14.22-18.22,21.21-5.74,6.56-11.68,14.55-18.61,19.9-1.05.88-2.21,1.57-3.49,2.07.05,3.16-.02,3.23-.21.23,0-1.9.47-3.79.93-5.62,1.17-4.66,2.79-9.24,4.39-13.76,3.05-8.66,6.5-17.14,10.45-25.43,1.81-3.8-6.78-11.49-8.91-7.02h0Z"/><path d="M299.62,160.94c-5.16,8.72-8.12,19.12-9.61,29.09-.39,2.61,5.26,8.97,7.8,6.18,5.55-6.09,11.6-11.54,18.16-16.53,1.58-1.2,4.51-2.53,5.69-4.09,2.19-.48,2.08-1.54-.34-3.17l-.04,1.85c-.87,2.92-.69,8.79.03,11.8,1.34,5.61,6.52,7.72,11.45,5.22,7.35-3.73,14.32-8.72,20.94-13.59l-5.25-4.84c-1.28,6.22-2.82,20.88,6.97,21.29,4.13.18,9.02-3.55,12.39-5.66,4.83-3.02,9.92-6.47,13.62-10.85,1.39-1.65-1.98-5.19-3.74-4.01-5.44,3.65-10.34,7.84-16.13,11.01-1.1.6-6.13,4-7.29,3.53-2.64-1.06-.65-9.18-.26-10.93.49-2.21-2.85-6.54-5.25-4.84-3.61,2.56-7.29,5.01-11.07,7.33-2.05,1.26-10.07,7.55-12.56,6.09l2.76,2.96c-1.28-2.27-.03-7.37.1-9.87.11-2.25.43-4.58-.58-6.69-1.56-3.26-5.08-5.45-8.67-4.7-4.81.99-9.72,5.41-13.54,8.29-5.14,3.87-9.99,8.17-14.59,12.68l7.65,7.05c2.01-10.02,5.13-19.29,8.66-28.85,1.14-3.1-5.14-9.39-7.29-5.74h0Z"/><path d="M385.91,161.43c-9.03,6.65-13.88,17.07-15.24,27.99-.29,2.29,3.04,6.02,5.4,5.79,9.87-.94,18.39-8.01,20.74-17.79.95-3.96,1.18-8.79-.97-12.41-1.62-2.72-5.98-6.54-8.96-3.67-2.23,2.15,2.3,6.06,4.27,6.25,8.95.86,18.1.71,27.09.96,1,.03,2,.06,3,.08-1.44-2.77-2.25-2.83-2.43-.2-.95,1.3-1.18,4.12-1.62,5.63-1.26,4.37-2.52,8.74-3.8,13.1-.95,3.24,4.03,8.82,7.31,6.74,5.33-3.38,10.47-7.09,15.68-10.67,2.26-1.55,5.19-4.56,7.75-5.43l.92-1.23c-.05.93-.12,1.86-.22,2.78-.07,1.2-.17,2.38,0,3.58,1.2,8.17,9.3,11.3,16.61,10.01,5.37-.95,10.56-3.53,15.63-5.45,5.79-2.19,11.56-4.4,17.32-6.66,12.42-4.87,24.76-9.91,36.95-15.33,2.71-1.2-1.47-6.47-3.78-5.56-12.16,4.78-24.31,9.62-36.51,14.28-6.1,2.33-12.21,4.62-18.34,6.86-5.33,1.95-11.03,4.7-16.73,5.21-.88.08-2.43.31-3.26-.02-1.92-.76-1.25-.97-.91-3.08.36-2.24.52-4.42-.12-6.62-1.02-3.48-3.94-6.97-7.64-7.74-4.83-1-10.03,4.04-13.73,6.51-5.51,3.69-11.14,7.25-16.51,11.15l7.31,6.74c1.53-6.44,3.14-12.87,4.67-19.31,1.01-4.25,1.23-7.77-2.59-10.74s-9.77-1.96-14.33-2.04c-6.9-.13-13.92-.57-20.81-.19l4.27,6.25c-1.23-1.25-1.73-1.31-1.5-.18.04.67.03,1.33-.02,2-.1,1.33-.38,2.6-.78,3.87-.8,2.58-2.09,5.01-3.77,7.12-3.39,4.25-8.29,7.12-13.73,7.62l5.4,5.79c1.08-10.39,5.87-19.21,12.58-27.04,1.72-2.01-2.5-6.54-4.64-4.97h0Z"/><path d="M278.82,131.48c1-.66,2.03-1.15,3.12-1.65,1.35-.62,2.3-1.49,3.3-2.58,1.19-1.3.32-3.47-.55-4.69-1.23-1.73-2.87-2.97-4.96-3.37-1.81-.34-3.74-.5-5.46.23-1.55.66-3.02,1.5-4.43,2.42-.91.59-.78,2.37-.59,3.19.34,1.47,1.34,3.08,2.39,4.14,1.76,1.8,4.7,3.94,7.19,2.3h0Z"/><path d="M619.17,86.27c-28.41,54.94-48.57,114.14-62.94,174.23-.78,3.25,6.16,9.14,7.08,5.57,15.57-60.17,37.07-118.34,61.32-175.5.99-2.33-4.04-7.05-5.46-4.3h0Z"/><path d="M522.45,83.51l1.14,1.13c.8,1.48,1.3,1.55,1.5.21.25-.18.65-1.34.83-1.6.98-1.45,2.41-2.53,3.71-3.69,3.05-2.71,6.13-5.37,9.25-7.99,6.25-5.24,12.63-10.34,19.17-15.21,13.32-9.91,27.38-18.79,42.24-26.22,29.87-14.93,63.53-23.67,97.06-21.12,14.91,1.13,35.36,2.75,40.4,19.6,4.73,15.83-3.2,31.8-12.28,44.39-17.69,24.54-40.78,44.86-65.4,62.21-28.28,19.94-58.95,35.92-88.94,53.05-2.33,1.33,2.55,7.22,4.87,6.09,31.09-15.06,61.79-31.62,90.11-51.46,27.61-19.34,55.66-43.17,72.72-72.72,7.96-13.8,11.52-30.61,4.25-45.5-7.69-15.75-23.67-20.7-39.86-23.07-37.53-5.49-75.93,3.52-109.42,20.55-18.08,9.2-34.92,20.77-50.64,33.55-4.06,3.3-8.03,6.73-11.93,10.23-3.6,3.22-7.91,6.45-10.94,10.24-3.54,4.43-2.61,11.72,3.57,13.2,4.5,1.07.66-4.97-1.44-5.87h0Z"/><path d="M584.65,192.45c41.36,37.67,92.43,64.35,146.11,79.61,27.84,7.92,56.6,12.81,85.51,14.31,22.61,1.17,59.08,3.98,68.21-23.01,10.09-29.84-20.3-53.68-40.9-69.16-3.55-2.67-3.95,1.67-1.41,3.72,17.51,14.13,45.74,35.23,35.26,61.42-10.01,25.01-46.83,20.42-68.2,18.92-53.28-3.74-105.91-18.83-153.01-44.04-24.88-13.32-48.14-29.53-68.98-48.57-1.47-1.35-4.8-2.61-5.93-.25-1.18,2.49,1.77,5.62,3.34,7.05h0Z"/><path d="M684.4,154.86c-6.03,8.65-29,38.32-8.88,44.14,7.1,2.05,12.15-3.61,14.6-9.54,2.94-7.13,5.64-15.57,1-22.51-1.44-2.15-4.74-2.12-3,.9,2.85,4.95-.09,11.79-2.12,16.55-1.1,2.58-7.21,12.71-11.08,8.19-2.39-2.8,4.54-12.18,6.19-15.06,3.08-5.35,6.33-10.56,9.87-15.61,2.23-3.18-4.64-9.85-6.59-7.06h0Z"/><path d="M689.99,165.4c12.38-7.67,24.02-16.46,34.67-26.4s19.72-21.2,29.26-32.14c2.24-2.57-3.88-8.57-5.77-6.18-18.31,23.2-32.68,50.59-39.73,79.38-.63,2.58,3.96,8.82,6.74,6.22,4.74-4.42,9.67-8.62,14.57-12.86s9.74-9.99,15.41-12.68c4.02-1.9,3.39-.7,1.87,2.84-1.15,2.66-2.95,5.03-4.61,7.38-3.41,4.82-7.07,9.45-10.96,13.89-7.41,8.45-15.66,16.17-24.59,22.98-9.67,7.38-22.01,16.01-34.88,13.23-4.33-.93-1.08,5.21,1.44,5.9,14.69,4.03,27.81-4.51,39.06-13.11,12.28-9.38,23.26-20.45,32.56-32.79,3.53-4.69,8.69-10.4,9.44-16.48.62-5.05-2.75-10.26-7.79-11.46-6.64-1.57-12.38,5.11-16.92,8.93-6.94,5.85-13.8,11.82-20.96,17.41l6.74,6.22c8.86-28.33,20.97-54.66,38.36-78.82l-6.12-5.64c-14.24,24.52-38.28,44.69-62.03,59.66-1.86,1.18,2.11,5.83,4.22,4.53h0Z"/><path d="M770.19,155.63c-4.46,6.31-9.38,15.27-8.37,23.34.74,5.92,6.24,10.49,12.18,9.49,7.12-1.21,13.46-7.93,18.48-12.64,6.44-6.05,11.12-13.49,17.25-19.72l-5.83-6.25c-6.69,7.46-11.12,18.1-13.29,27.79-.61,2.72,3.68,9.43,7.04,7.55,10.36-5.8,20.66-11.7,30.47-18.39-2.05-1.89-4.09-3.77-6.14-5.66-.89,4.89,1.26,9.27,5.19,12.29,5,3.84,11.45,3.23,17.36,2.94,15.12-.75,30.29-2.19,45.18-4.94,2.79-.52-1.43-5.87-3.81-5.6-9.92,1.12-19.83,2.22-29.79,2.98-4.57.35-9.13.62-13.71.83-2.36.11-15.25,1.84-13.93-3.38.71-2.8-3.28-7.31-6.14-5.66-9.97,5.75-20.05,11.26-30.57,15.95l7.04,7.55c2.83-10.13,6.99-19,11.28-28.54,1.29-2.86-5.16-8.46-6.55-5.16-4.39,10.35-14.98,19.62-23.96,26.04-2.14,1.53-4.33,3.17-6.81,4.12-1.01.38-2.09.76-3.19.74-1.02-.05-1.08.04-.16.28l.18-1.64c1.18-3.19,1.51-6.69,2.79-9.91,1.17-2.94,2.67-5.67,4.38-8.33,1.62-2.51-4.81-8.58-6.59-6.07h0Z"/><path d="M787.41,127.87c2.44-2.01,4.77-3.92,6.7-6.44,1.22-1.59.14-3.66-.94-5.01-.92-1.15-3.45-3.52-5.18-2.63-1.57.81-3.05,1.63-4.47,2.71-1.31.99-2.54,2.09-3.79,3.15-1.86,1.57.32,5.02,1.53,6.26,1.34,1.37,4.2,3.57,6.14,1.97h0Z"/><path d="M230.22765500000003 268.29V248.12255000000002H236.29328500000003Q238.54095500000003 248.12255000000002 240.28059000000002 248.69216500000002Q242.020225 249.26178000000002 243.00550500000003 250.58575000000002Q243.99078500000002 251.90972000000002 243.99078500000002 254.18818000000002Q243.99078500000002 256.37427 243.00550500000003 257.79061Q242.020225 259.20695 240.31138 259.899725Q238.60253500000002 260.59250000000003 236.416445 260.59250000000003H233.30665500000003V268.29ZM233.30665500000003 258.09851000000003H236.10854500000002Q238.57174500000002 258.09851000000003 239.75716000000003 257.14402000000007Q240.94257500000003 256.18953000000005 240.94257500000003 254.18818000000002Q240.94257500000003 252.18683000000001 239.69558 251.38629000000003Q238.448585 250.58575000000002 235.985385 250.58575000000002H233.30665500000003Z M257.138115 268.29V248.12255000000002H260.21711500000004V256.40506000000005H268.99226500000003V248.12255000000002H272.07126500000004V268.29H268.99226500000003V259.08379H260.21711500000004V268.29Z M294.270855 268.65948000000003Q291.684495 268.65948000000003 289.69854 267.38169500000004Q287.712585 266.10391000000004 286.604145 263.73308000000003Q285.495705 261.36225 285.495705 258.1293Q285.495705 254.86556000000002 286.604145 252.55631000000002Q287.712585 250.24706000000003 289.69854 249.00006500000003Q291.684495 247.75307000000004 294.270855 247.75307000000004Q296.857215 247.75307000000004 298.827775 249.00006500000003Q300.798335 250.24706000000003 301.90677500000004 252.571705Q303.015215 254.89635 303.015215 258.1293Q303.015215 261.36225 301.90677500000004 263.73308000000003Q300.798335 266.10391000000004 298.827775 267.38169500000004Q296.857215 268.65948000000003 294.270855 268.65948000000003ZM294.270855 265.98075Q295.964305 265.98075 297.21130000000005 265.010865Q298.458295 264.04098000000005 299.15107 262.28595000000007Q299.843845 260.53092000000004 299.843845 258.1293Q299.843845 254.55766000000003 298.33513500000004 252.49473Q296.82642500000003 250.4318 294.270855 250.4318Q291.746075 250.4318 290.20657500000004 252.49473Q288.667075 254.55766000000003 288.667075 258.1293Q288.667075 260.53092000000004 289.35985000000005 262.28595000000007Q290.05262500000003 264.04098000000005 291.315015 265.010865Q292.577405 265.98075 294.270855 265.98075Z M320.59630500000003 268.29V250.70891000000003H314.623045V248.12255000000002H329.617775V250.70891000000003H323.67530500000004V268.29Z M350.00075499999997 268.65948000000003Q347.414395 268.65948000000003 345.42844 267.38169500000004Q343.442485 266.10391000000004 342.33404499999995 263.73308000000003Q341.225605 261.36225 341.225605 258.1293Q341.225605 254.86556000000002 342.33404499999995 252.55631000000002Q343.442485 250.24706000000003 345.42844 249.00006500000003Q347.414395 247.75307000000004 350.00075499999997 247.75307000000004Q352.587115 247.75307000000004 354.557675 249.00006500000003Q356.528235 250.24706000000003 357.63667499999997 252.571705Q358.745115 254.89635 358.745115 258.1293Q358.745115 261.36225 357.63667499999997 263.73308000000003Q356.528235 266.10391000000004 354.557675 267.38169500000004Q352.587115 268.65948000000003 350.00075499999997 268.65948000000003ZM350.00075499999997 265.98075Q351.694205 265.98075 352.9412 265.010865Q354.188195 264.04098000000005 354.88097 262.28595000000007Q355.573745 260.53092000000004 355.573745 258.1293Q355.573745 254.55766000000003 354.06503499999997 252.49473Q352.556325 250.4318 350.00075499999997 250.4318Q347.475975 250.4318 345.936475 252.49473Q344.396975 254.55766000000003 344.396975 258.1293Q344.396975 260.53092000000004 345.08975 262.28595000000007Q345.782525 264.04098000000005 347.044915 265.010865Q348.307305 265.98075 350.00075499999997 265.98075Z M380.359695 268.65948000000003Q377.680965 268.65948000000003 375.587245 267.443275Q373.493525 266.22707 372.27732 263.88703Q371.061115 261.54699 371.061115 258.25246000000004Q371.061115 254.95793000000003 372.30810999999994 252.61789000000005Q373.55510499999997 250.27785000000003 375.679615 249.01546000000002Q377.804125 247.75307000000004 380.482855 247.75307000000004Q382.607365 247.75307000000004 384.054495 248.52282000000002Q385.501625 249.29257 386.425325 250.27785000000003L384.76266499999997 252.18683000000001Q383.992915 251.38629000000003 383.007635 250.90904500000002Q382.022355 250.4318 380.575225 250.4318Q378.666245 250.4318 377.23451 251.37089500000002Q375.802775 252.30999000000003 375.01763 254.03423000000004Q374.232485 255.75847000000002 374.232485 258.16009Q374.232485 261.79331 375.89514499999996 263.88703Q377.557805 265.98075 380.667595 265.98075Q382.730525 265.98075 383.931335 264.93389V260.13065H379.897845V257.60587000000004H386.702435V266.28865Q385.717155 267.30472000000003 384.06989 267.98210000000006Q382.422625 268.65948000000003 380.359695 268.65948000000003Z M400.557935 268.29V248.12255000000002H407.116205Q409.209925 248.12255000000002 410.841795 248.67677000000003Q412.473665 249.23099000000002 413.42815499999995 250.49338Q414.38264499999997 251.75577 414.38264499999997 253.94186000000002Q414.38264499999997 256.2819 413.212625 257.69824000000006Q412.042605 259.11458000000005 410.10283499999997 259.69959L415.060025 268.29H411.611545L406.993045 260.09986000000004H403.636935V268.29ZM403.636935 257.60587000000004H406.74672499999997Q408.963605 257.60587000000004 410.14901999999995 256.69756500000005Q411.334435 255.78926 411.334435 253.94186000000002Q411.334435 252.09446000000003 410.14901999999995 251.34010500000002Q408.963605 250.58575000000002 406.74672499999997 250.58575000000002H403.636935Z M431.50188499999996 257.29797 430.670555 260.06907H436.274335L435.44300499999997 257.29797Q434.950365 255.66610000000003 434.47312 253.97265000000004Q433.99587499999996 252.27920000000003 433.534025 250.58575000000002H433.410865Q432.949015 252.27920000000003 432.487165 253.97265000000004Q432.025315 255.66610000000003 431.50188499999996 257.29797ZM425.035985 268.29 431.748205 248.12255000000002H435.28905499999996L442.00127499999996 268.29H438.737535L437.01329499999997 262.50148H429.93159499999996L428.176565 268.29Z M453.886215 268.29V248.12255000000002H459.951845Q462.19951499999996 248.12255000000002 463.93915 248.69216500000002Q465.678785 249.26178000000002 466.664065 250.58575000000002Q467.649345 251.90972000000002 467.649345 254.18818000000002Q467.649345 256.37427 466.664065 257.79061Q465.678785 259.20695 463.96994 259.899725Q462.261095 260.59250000000003 460.075005 260.59250000000003H456.965215V268.29ZM456.965215 258.09851000000003H459.767105Q462.230305 258.09851000000003 463.41571999999996 257.14402000000007Q464.601135 256.18953000000005 464.601135 254.18818000000002Q464.601135 252.18683000000001 463.35414000000003 251.38629000000003Q462.107145 250.58575000000002 459.643945 250.58575000000002H456.965215Z M480.796675 268.29V248.12255000000002H483.875675V256.40506000000005H492.650825V248.12255000000002H495.729825V268.29H492.650825V259.08379H483.875675V268.29Z M513.588025 268.29V260.62329L507.52239499999996 248.12255000000002H510.81692499999997L513.218545 253.54159Q513.680395 254.65003000000002 514.142245 255.72768000000002Q514.604095 256.80533 515.096735 257.94456H515.219895Q515.712535 256.80533 516.205175 255.72768000000002Q516.697815 254.65003000000002 517.159665 253.54159L519.530495 248.12255000000002H522.732655L516.667025 260.62329V268.29Z"/>
+    </g>
+  </svg>
+</div>
+<script>
+  (function () {
+    var KEY = 'sig-intro', VISIT_MS = 30 * 60 * 1000, now = Date.now(), visit = null;
+    try { visit = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    if (!visit || typeof visit.t !== 'number' || now - visit.t > VISIT_MS) visit = null;
+    function save() { try { visit.t = now; localStorage.setItem(KEY, JSON.stringify(visit)); } catch (e) {} }
+    var el = document.getElementById('sig-intro');
+    if (!el) { if (visit) save(); return; }   // not a landing page: only keep the visit alive
+    function remove() { document.documentElement.classList.remove('sig-intro-playing'); if (el.parentNode) el.parentNode.removeChild(el); }
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var path = location.pathname, pageSeen = !!(visit && visit.pages && visit.pages[path]);
+    if (reduce || pageSeen) { remove(); if (visit) save(); return; }
+    var first = !visit;
+    if (first) visit = { pages: {} };
+    visit.pages = visit.pages || {};
+    visit.pages[path] = 1;
+    save();   // stamped at the start, so a tab opened during the intro does not replay it
+    el.classList.add('is-on');   // the overlay is display: none until here, so without script it never shows
+    function leave(ms) {
+      el.style.transitionDuration = ms + 'ms';
+      requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('is-leaving'); }); });
+      setTimeout(remove, ms + 50);
+    }
+    if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
+    document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
+    var done = false;
+    function finish() { if (done) return; done = true; leave(550); }
+    // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
+    // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
+    // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
+      finish();
+    });
+    el.addEventListener('click', finish);
+    // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
+    // A clock started here would run on while a window drag, a background tab or a slow first paint
+    // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
+    // The fallback timer, counted from the frame that starts the drawing, covers a transition that never ends.
+    var last = el.querySelector('.sig-intro__stroke:last-of-type');
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      el.classList.add('is-drawing');
+      var fallback = setTimeout(finish, 2930);
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+    }); });
+  })();
+</script>
+
+
+    
+<nav class="site-strip" aria-label="Sections and profiles">
+  <a class="site-strip__logo" href="/" title="Home">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+  </a>
+  <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </button>
+  <div class="site-strip__menu" id="site-menu">
+    <div class="site-strip__sections">
+    <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
+    <a href="/blog/" class="is-current" aria-current="page"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
+    <a href="/photography/"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
+
+    </div>
+    <div class="site-strip__profiles">
+      <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/sljrobin" title="LinkedIn"><svg class="icon icon-linkedin-in" aria-hidden="true" focusable="false"><use href="/assets/images/icons/linkedin-in.svg#linkedin-in"/></svg><span>LinkedIn</span></a>
+      <a target="_blank" rel="noopener" href="https://github.com/sljrobin" title="GitHub"><svg class="icon icon-github" aria-hidden="true" focusable="false"><use href="/assets/images/icons/github.svg#github"/></svg><span>GitHub</span></a>
+    </div>
+  </div>
+</nav>
+
+    <div id="page-blog" class="page-blog--index">
+  
+<header class="blog-header">
+  <nav class="blog-nav" aria-label="Blog">
+    <form class="blog-search" action="/blog/" method="get" role="search">
+      <svg class="icon icon-search blog-search__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/search.svg#search"/></svg>
+      <input class="blog-search__input" type="search" name="q" placeholder="Search" aria-label="Search posts" title="Search posts" autocomplete="off">
+    </form>
+    <a class="blog-nav__btn blog-nav__feed" href="/feed.xml" data-feed-url="https://sljrobin.org/feed.xml" target="_blank" rel="noopener"><svg class="icon icon-rss blog-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/rss.svg#rss"/></svg>Feed</a>
+  </nav>
+</header>
+<script src="/assets/js/search.js" defer></script>
+<script src="/assets/js/feed.js" defer></script>
+
+
+  <main>
+    <div class="container">
+      <h1 class="blog-title">Blog</h1>
+      <p class="blog-lede">I have loved writing since I was a kid, documentation included. Most of what I share here is notes on security. The rest is about what I do off the clock.</p>
+      
+<ul class="posts posts__list">
+  
+<li class="post-entry">
+  <div class="post-entry__head">
+    <h2 class="post-entry__title"><a href="/blog/security-advisory-verint-ptz-cameras/">Security Advisory – Multiple Vulnerabilities in Verint PTZ Cameras</a></h2>
+    <p class="post-meta"><time datetime="2020-06-18T00:00:00+02:00">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+  </div>
+  <p class="post-entry__summary">Three CVEs in <a target="_blank" rel="noopener" href="https://www.verint.com/">Verint</a>'s PTZ cameras, CVE-2020-24055 to 24057: a stack buffer overflow, hardcoded credentials and a command injection, in an <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a> advisory.</p>
+</li>
+
+  
+<li class="post-entry">
+  <div class="post-entry__head">
+    <h2 class="post-entry__title"><a href="/blog/security-advisory-moog-exo-cameras/">Security Advisory – Multiple Vulnerabilities in Moog EXO Series Cameras</a></h2>
+    <p class="post-meta"><time datetime="2020-06-18T00:00:00+02:00">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+  </div>
+  <p class="post-entry__summary">Four CVEs in <a target="_blank" rel="noopener" href="https://www.moog.com.sg/">Moog</a>'s EXO cameras, CVE-2020-24051 to 24054: an ONVIF authentication bypass, XXE, hardcoded credentials and root command execution, in an <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a> advisory.</p>
+</li>
+
+</ul>
+
+    </div>
+  </main>
+
+  
+<footer class="site-footer">
+  <nav class="site-footer__links" aria-label="Sections">
+    <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
+    <a href="/blog/" class="is-current" aria-current="page"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
+    <a href="/photography/"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
+
+  </nav>
+  <div class="site-footer__small">
+    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a></p>
+  </div>
+</footer>
+
+
+</div>
+
+<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+  <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
+</button>
+
+    <script src="/assets/js/scroll.js"></script>
+    <script src="/assets/js/nav.js"></script>
+  </body>
+</html>
