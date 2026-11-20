@@ -10,7 +10,7 @@
   </title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician and LEGO builder.">
+  <meta name="description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician, and LEGO builder.">
   <meta name="author" content="Simon Robin">
   <meta name="robots" content="noindex">
   <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
@@ -18,12 +18,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Simon Robin">
   <meta property="og:title" content="Page Not Found">
-  <meta property="og:description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician and LEGO builder.">
+  <meta property="og:description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician, and LEGO builder.">
   <meta property="og:url" content="https://sljrobin.org/404.html">
   <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta property="og:image:alt" content="Simon Robin’s signature in white on navy">
   <meta name="twitter:card" content="summary_large_image">
 
 
@@ -32,20 +32,26 @@
   <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
 
 
+  <script>(function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {} if (t !== "dark" && t !== "light") t = "light"; var r = document.documentElement; r.classList.add("js"); r.setAttribute("data-theme", t); r.setAttribute("data-theme-default", "light"); })();</script>
+
   <link rel="stylesheet" href="/assets/css/style.css">
-  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
 <script>
   (function () {
+    // the opt-in, written here rather than in the stylesheet (2026-10-13): without a script nothing would skip the
+    // transition on the intro's page, so the fade belongs to scripted pages only
+    var vt = document.createElement('style');
+    vt.textContent = '@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}';
+    document.head.appendChild(vt);
     if (!('onpagereveal' in window)) return;
     var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
-    var path = location.pathname, play = false;
+    var intro = false;
     try {
       var v = JSON.parse(localStorage.getItem('sig-intro'));
       var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
-      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+      intro = !live && sections.indexOf(location.pathname) > -1;
     } catch (e) {}
     window.addEventListener('pagereveal', function (e) {
-      if (!e.viewTransition || play) return;
+      if (!e.viewTransition || !intro) return;
       e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
       e.viewTransition.skipTransition();
     });
@@ -90,15 +96,24 @@
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
     function finish() { if (done) return; done = true; leave(550); }
+    // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
+    // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
+    // under the fade instead of running on beneath it.
+    function skip() {
+      if (done) return; done = true;
+      var strokes = el.querySelectorAll('.sig-intro__stroke');
+      for (var i = 0; i < strokes.length; i++) { var v = getComputedStyle(strokes[i]).strokeDashoffset; strokes[i].style.transition = 'none'; strokes[i].style.strokeDashoffset = v; }
+      leave(300);
+    }
     // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
     // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
     // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
-      finish();
+      skip();
     });
-    el.addEventListener('click', finish);
+    el.addEventListener('click', skip);
     // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
     // A clock started here would run on while a window drag, a background tab or a slow first paint
     // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
@@ -112,17 +127,28 @@
   })();
 </script>
 
+    <noscript>
+  <p class="noscript-banner"><svg class="icon icon-info noscript-banner__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/info.svg#info"/></svg><span>Some features of this website need JavaScript, including the blog’s search, the photo viewer, and remembering the chosen theme. Everything else works.</span></p>
+</noscript>
+
 
     
+<a class="skip-link" href="#main">Skip to Content</a>
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
-    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
   </a>
   <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
     <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
     <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
     <span>Menu</span>
   </button>
+  <input class="site-strip__check" type="checkbox" id="site-menu-check" aria-controls="site-menu">
+  <label class="site-strip__toggle site-strip__toggle--label" for="site-menu-check">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </label>
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
@@ -141,14 +167,15 @@
 
     
 <div id="page-404">
-  <div class="container">
+  <main id="main" class="container">
     <div class="logo" aria-hidden="true">
       <svg class="icon icon-meh" aria-hidden="true" focusable="false"><use href="/assets/images/icons/meh.svg#meh"/></svg>
     </div>
     <h1 class="error-title">Page Not Found</h1>
     <p class="error-text">There is no page at this address. It may have moved, or the link may be wrong.</p>
+    <p class="error-text error-text--next">Try <a href="/">Home</a>, <a href="/blog/">Blog</a>, <a href="/photography/">Photography</a>, or <a href="/about/">About</a>.</p>
 
-  </div>
+  </main>
 
 </div>
 

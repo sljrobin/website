@@ -9,7 +9,7 @@
   </title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="The talks I gave, with the slides and the recording when there is one.">
+  <meta name="description" content="The talks I gave, with the slides and the recording when there’s one.">
   <meta name="author" content="Simon Robin">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
@@ -18,12 +18,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Simon Robin">
   <meta property="og:title" content="Talks">
-  <meta property="og:description" content="The talks I gave, with the slides and the recording when there is one.">
+  <meta property="og:description" content="The talks I gave, with the slides and the recording when there’s one.">
   <meta property="og:url" content="https://sljrobin.org/talks/">
-  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
+  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/talks.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta property="og:image:alt" content="Simon Robin’s signature in white on navy, with the microphone icon of the Talks section beneath it">
   <meta name="twitter:card" content="summary_large_image">
 
 
@@ -32,20 +32,26 @@
   <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
 
 
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
+  <script>(function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {} if (t !== "dark" && t !== "light") t = "light"; var r = document.documentElement; r.classList.add("js"); r.setAttribute("data-theme", t); r.setAttribute("data-theme-default", "light"); })();</script>
+
+  <link rel="stylesheet" href="/assets/css/page.css">
 <script>
   (function () {
+    // the opt-in, written here rather than in the stylesheet (2026-10-13): without a script nothing would skip the
+    // transition on the intro's page, so the fade belongs to scripted pages only
+    var vt = document.createElement('style');
+    vt.textContent = '@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}';
+    document.head.appendChild(vt);
     if (!('onpagereveal' in window)) return;
     var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
-    var path = location.pathname, play = false;
+    var intro = false;
     try {
       var v = JSON.parse(localStorage.getItem('sig-intro'));
       var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
-      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+      intro = !live && sections.indexOf(location.pathname) > -1;
     } catch (e) {}
     window.addEventListener('pagereveal', function (e) {
-      if (!e.viewTransition || play) return;
+      if (!e.viewTransition || !intro) return;
       e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
       e.viewTransition.skipTransition();
     });
@@ -145,15 +151,24 @@
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
     function finish() { if (done) return; done = true; leave(550); }
+    // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
+    // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
+    // under the fade instead of running on beneath it.
+    function skip() {
+      if (done) return; done = true;
+      var strokes = el.querySelectorAll('.sig-intro__stroke');
+      for (var i = 0; i < strokes.length; i++) { var v = getComputedStyle(strokes[i]).strokeDashoffset; strokes[i].style.transition = 'none'; strokes[i].style.strokeDashoffset = v; }
+      leave(300);
+    }
     // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
     // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
     // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
-      finish();
+      skip();
     });
-    el.addEventListener('click', finish);
+    el.addEventListener('click', skip);
     // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
     // A clock started here would run on while a window drag, a background tab or a slow first paint
     // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
@@ -167,18 +182,29 @@
   })();
 </script>
 
+    <noscript>
+  <p class="noscript-banner"><svg class="icon icon-info noscript-banner__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/info.svg#info"/></svg><span>Some features of this website need JavaScript, including the blog’s search, the photo viewer, and remembering the chosen theme. Everything else works.</span></p>
+</noscript>
+
 
     <div id="page-site">
       
+<a class="skip-link" href="#main">Skip to Content</a>
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
-    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
   </a>
   <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
     <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
     <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
     <span>Menu</span>
   </button>
+  <input class="site-strip__check" type="checkbox" id="site-menu-check" aria-controls="site-menu">
+  <label class="site-strip__toggle site-strip__toggle--label" for="site-menu-check">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </label>
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
@@ -195,39 +221,24 @@
   </div>
 </nav>
 
-      <main>
+      <main id="main">
         <div class="container">
 
 <h1 class="page-title">Talks</h1>
-<p class="page-lede">I'm a <a href="/blog/">writer</a> first, but I also got hooked on speaking. A room asks better questions than a page. Below are the talks I have given, with the slides and the recording when there is one.</p>
+<p class="page-lede">I’m a <a href="/blog/">writer</a> first, but I also got hooked on speaking. A room asks better questions than a page. Below are the talks I’ve given, with the slides and the recording when there’s one.</p>
+<ul class="posts__list posts__list--cards talks">
 
-<ul class="talks">
-
-<li class="talk">
-  <div class="post-entry__head">
-    <h2 class="post-entry__title talk__title">Secure YAML, Insecure Clusters: Breaking Kubernetes Without Exploits</h2>
-    <p class="talk__meta"><time class="post-meta" datetime="2026-01-29">Jan 29, 2026</time><span class="post-meta__sep" aria-hidden="true">·</span><a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/event/hacksoho-29-jan-secure-yaml-insecure-clusters-breaking-kubernetes-without-exploits/" title="hack::soho"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" role="img" aria-label="IOActive" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">hack::soho</span></a></p>
+<li class="post-entry post-entry--card">
+  <div class="post-entry__picture"><span class="theme-twin theme-twin--light">
+    <img src="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-light-720.webp" srcset="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-light-720.webp 720w, /assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-light-1080.webp 1080w, /assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-light-1280.webp 1280w" sizes="(min-width: 640px) 600px, calc(100vw - 40px)" width="2400" height="1634" alt="" fetchpriority="high" decoding="async"></span>
+    <span class="theme-twin theme-twin--dark"><img src="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-dark-720.webp" srcset="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-dark-720.webp 720w, /assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-dark-1080.webp 1080w, /assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/secure-yaml-insecure-clusters-dark-1280.webp 1280w" sizes="(min-width: 640px) 600px, calc(100vw - 40px)" width="2400" height="1634" alt="" loading="lazy" decoding="async"></span>
   </div>
-  
-<figure class="post-figure">
-  <a class="post-figure__link" href="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/simon-robin-speaking-at-hacksoho-2026.jpg" title="View full size" data-pswp-width="2400" data-pswp-height="1600" data-caption="&lt;span class=&quot;pswp-caption__title&quot;&gt;Secure YAML, Insecure Clusters: Breaking Kubernetes Without Exploits&lt;/span&gt;&lt;span class=&quot;pswp-caption__text&quot;&gt;How can Kubernetes clusters with clean scan results still be compromised, with no kernel exploits, no zero-days and no exotic techniques?&lt;/span&gt;">
-    <img src="/assets/images/talks/2026-hacksoho-secure-yaml-insecure-clusters/simon-robin-speaking-at-hacksoho-2026-1080.jpg" alt="Simon at the lectern with a microphone, beside a screen that reads: tools don&#39;t chain context, automation finds problems, humans prove impact." fetchpriority="high" decoding="async" width="2400" height="1600">
-  </a>
-</figure>
-
-  <p class="post-entry__summary talk__description">How can Kubernetes clusters with clean scan results still be compromised, with no kernel exploits, no zero-days and no exotic techniques?</p>
-  <div class="talk__actions">
-    <div class="talk__abstract" id="abstract-2026-01-29-hack-soho" role="region" aria-label="Abstract">
-      <button class="talk__close" type="button" aria-label="Close the abstract" title="Close" hidden><svg class="icon icon-cross" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg></button>
-      <p>Kubernetes security is increasingly reduced to static configuration reviews and misconfiguration scanners. While these tools provide value, they are often treated as authoritative indicators of real security posture.</p>
-      <p>In this talk, we will show how Kubernetes clusters with clean scan results can still be compromised through realistic attack paths that require no kernel exploits, no zero-days, and no exotic techniques.</p>
-      <p>Drawing on academic research, real incidents, and offensive security experience, we demonstrate how attackers chain legitimate Kubernetes features into high-impact compromises.</p>
+  <div class="post-entry__body">
+    <div class="post-entry__head">
+      <h2 class="post-entry__title"><a href="/talks/secure-yaml-insecure-clusters/">Secure YAML, Insecure Clusters: Breaking Kubernetes Without Exploits</a></h2>
+      <p class="post-meta"><time datetime="2026-01-29">Jan 29, 2026</time> <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/event/hacksoho-29-jan-secure-yaml-insecure-clusters-breaking-kubernetes-without-exploits/" title="hack::soho"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" role="img" aria-label="IOActive" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">hack::soho</span></a></p>
     </div>
-    <ul class="talk__buttons">
-      <li><button class="talk__button talk__button--abstract talk__toggle" type="button" aria-expanded="false" aria-controls="abstract-2026-01-29-hack-soho" hidden><svg class="icon icon-abstract talk__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/abstract.svg#abstract"/></svg><span>Abstract</span></button></li>
-      <li><a class="talk__button talk__button--slides" href="/assets/slides/2026-hacksoho-secure-yaml-insecure-clusters.pdf" target="_blank" rel="noopener" title="PDF, 7 MB"><svg class="icon icon-slides talk__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/slides.svg#slides"/></svg><span>Slides</span></a></li>
-      <li><a class="talk__button talk__button--recording" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Dy23L8B9k8A" title="On YouTube"><svg class="icon icon-youtube talk__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/youtube.svg#youtube"/></svg><span>Recording</span></a></li>
-    </ul>
+    <p class="post-entry__summary">How can Kubernetes clusters with clean scan results still be compromised, with no kernel exploits, no zero-days, and no exotic techniques?</p>
   </div>
 </li>
 
@@ -247,18 +258,18 @@
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a>&nbsp;· <span class="site-footer__credit">Illustration by <a target="_blank" rel="noopener" href="https://annieruygtillustration.com/" title="Annie Ruygt">Annie Ruygt</a>.</span></p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a>&nbsp;· <span class="site-footer__credit">Illustrations by <a target="_blank" rel="noopener" href="https://annieruygtillustration.com/" title="Annie Ruygt">Annie Ruygt</a></span><span class="site-footer__sep" aria-hidden="true">·</span><label class="theme-switch" title="Dark theme"><input class="theme-switch__input" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme"><svg class="icon icon-moon theme-switch__moon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/moon.svg#moon"/></svg><svg class="icon icon-sun theme-switch__sun" aria-hidden="true" focusable="false"><use href="/assets/images/icons/sun.svg#sun"/></svg></label>
+</p>
   </div>
 </footer>
 
     </div>
-<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
-</button>
+</a>
 
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/nav.js"></script>
-    <script type="module" src="/assets/js/post-lightbox.js"></script>
-    <script src="/assets/js/talks.js" defer></script>
+    <script src="/assets/js/cards.js" defer></script>
   </body>
 </html>

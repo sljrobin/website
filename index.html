@@ -10,7 +10,7 @@
   </title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician and LEGO builder.">
+  <meta name="description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician, and LEGO builder.">
   <meta name="author" content="Simon Robin">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
@@ -19,12 +19,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Simon Robin">
   <meta property="og:title" content="Simon Robin · Offensive Security Engineer and Consultant">
-  <meta property="og:description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician and LEGO builder.">
+  <meta property="og:description" content="An engineer by training who still codes and does offensive security, mostly on cloud environments and platforms. Also a photographer, musician, and LEGO builder.">
   <meta property="og:url" content="https://sljrobin.org/">
   <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta property="og:image:alt" content="Simon Robin’s signature in white on navy">
   <meta name="twitter:card" content="summary_large_image">
 
   <script type="application/ld+json">
@@ -43,20 +43,26 @@
   <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
 
 
+  <script>(function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {} if (t !== "dark" && t !== "light") t = "light"; var r = document.documentElement; r.classList.add("js"); r.setAttribute("data-theme", t); r.setAttribute("data-theme-default", "light"); })();</script>
+
   <link rel="stylesheet" href="/assets/css/style.css">
-  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
 <script>
   (function () {
+    // the opt-in, written here rather than in the stylesheet (2026-10-13): without a script nothing would skip the
+    // transition on the intro's page, so the fade belongs to scripted pages only
+    var vt = document.createElement('style');
+    vt.textContent = '@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}';
+    document.head.appendChild(vt);
     if (!('onpagereveal' in window)) return;
     var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
-    var path = location.pathname, play = false;
+    var intro = false;
     try {
       var v = JSON.parse(localStorage.getItem('sig-intro'));
       var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
-      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+      intro = !live && sections.indexOf(location.pathname) > -1;
     } catch (e) {}
     window.addEventListener('pagereveal', function (e) {
-      if (!e.viewTransition || play) return;
+      if (!e.viewTransition || !intro) return;
       e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
       e.viewTransition.skipTransition();
     });
@@ -156,15 +162,24 @@
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
     function finish() { if (done) return; done = true; leave(550); }
+    // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
+    // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
+    // under the fade instead of running on beneath it.
+    function skip() {
+      if (done) return; done = true;
+      var strokes = el.querySelectorAll('.sig-intro__stroke');
+      for (var i = 0; i < strokes.length; i++) { var v = getComputedStyle(strokes[i]).strokeDashoffset; strokes[i].style.transition = 'none'; strokes[i].style.strokeDashoffset = v; }
+      leave(300);
+    }
     // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
     // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
     // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
-      finish();
+      skip();
     });
-    el.addEventListener('click', finish);
+    el.addEventListener('click', skip);
     // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
     // A clock started here would run on while a window drag, a background tab or a slow first paint
     // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
@@ -178,17 +193,28 @@
   })();
 </script>
 
+    <noscript>
+  <p class="noscript-banner"><svg class="icon icon-info noscript-banner__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/info.svg#info"/></svg><span>Some features of this website need JavaScript, including the blog’s search, the photo viewer, and remembering the chosen theme. Everything else works.</span></p>
+</noscript>
+
 
     
+<a class="skip-link" href="#main">Skip to Content</a>
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
-    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
   </a>
   <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
     <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
     <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
     <span>Menu</span>
   </button>
+  <input class="site-strip__check" type="checkbox" id="site-menu-check" aria-controls="site-menu">
+  <label class="site-strip__toggle site-strip__toggle--label" for="site-menu-check">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </label>
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/" class="is-current" aria-current="page"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
@@ -206,55 +232,89 @@
 </nav>
 
     <div id="page-home">
-  <main>
+  <main id="main">
     <div class="container">
       
 <section id="home-intro">
   <h1 class="home-title">Hi, I’m <span class="home-title__name">Simon</span></h1>
   <p class="home-claim">Over 10 years of offensive security. I test cloud environments and Kubernetes clusters from the attacker’s side.</p>
-  <p class="home-lede">I'm Simon Robin, a Senior Security Consultant at <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a>. I find out how cloud-native infrastructure fails under real attack, and how to design and operate it so that it doesn't. I also test web and mobile applications and networks, review code and build threat models.</p>
-  <p class="home-site">This site is where I keep track of what I write, the talks I give and what I do off the clock.</p>
+  <p class="home-lede">I’m Simon Robin, a Senior Security Consultant at <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a>. I find out how cloud-native infrastructure fails under real attack, and how to design and operate it so that it doesn’t. I also test web and mobile applications and networks, review code, and build threat models.</p>
+  <p class="home-site">This site is where I keep track of what I write, the talks I give, and what I do off the clock.</p>
+  <p class="home-site home-contact">I’m always glad to talk about security. You’ll find me on several networks, but <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/sljrobin">LinkedIn</a> is where I usually answer.</p>
 </section>
 
       
-<nav class="home-doors" aria-label="Blog, Talks and About">
-  <a class="home-door" href="/blog/">
-    <svg class="icon icon-pen home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg>
-    <span class="home-door__name">Blog</span>
+<nav class="home-doors" aria-label="Blog, Talks, and About">
+  <div class="home-door">
+    <a class="home-door__link" href="/blog/">
+      <svg class="icon icon-pen home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg>
+      <span class="home-door__name">Blog</span>
+    </a>
     <span class="home-door__line">Notes on security, and now and then on everything else.</span>
-  </a>
-  <a class="home-door" href="/talks/">
-    <svg class="icon icon-mic home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg>
-    <span class="home-door__name">Talks</span>
+  </div>
+  <div class="home-door">
+    <a class="home-door__link" href="/talks/">
+      <svg class="icon icon-mic home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg>
+      <span class="home-door__name">Talks</span>
+    </a>
     <span class="home-door__line">What I have said on stage, with slides and recordings.</span>
-  </a>
-  <a class="home-door" href="/about/">
-    <svg class="icon icon-user home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg>
-    <span class="home-door__name">About</span>
+  </div>
+  <div class="home-door">
+    <a class="home-door__link" href="/about/">
+      <svg class="icon icon-user home-door__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg>
+      <span class="home-door__name">About</span>
+    </a>
     <span class="home-door__line">Career, studies, certifications, and the rest of the story.</span>
-  </a>
+  </div>
 </nav>
 
       
 <section id="home-latest">
-  <h2>Latest Posts</h2>
-  <ul class="posts posts__list">
+  <h2>Featured Posts</h2>
+  <ul class="posts posts__list posts__list--cards">
     
-<li class="post-entry">
-  <div class="post-entry__head">
-    <h3 class="post-entry__title"><a href="/blog/security-advisory-verint-ptz-cameras/">Security Advisory – Multiple Vulnerabilities in Verint PTZ Cameras</a></h3>
-    <p class="post-meta"><time datetime="2020-06-18T00:00:00+02:00">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+<li class="post-entry post-entry--card">
+  <div class="post-entry__picture">
+    <img src="/assets/images/blog/practical-deep-dive-into-kubernetes-security/practical-deep-dive-into-kubernetes-security-illustration-640.webp" srcset="/assets/images/blog/practical-deep-dive-into-kubernetes-security/practical-deep-dive-into-kubernetes-security-illustration-640.webp 640w, /assets/images/blog/practical-deep-dive-into-kubernetes-security/practical-deep-dive-into-kubernetes-security-illustration-1280.webp 1280w" sizes="(min-width: 641px) 160px, min(calc(100vw - 64px), 624px)" width="1280" height="672" alt="" loading="lazy" decoding="async">
   </div>
-  <p class="post-entry__summary">Three CVEs in <a target="_blank" rel="noopener" href="https://www.verint.com/">Verint</a>'s PTZ cameras, CVE-2020-24055 to 24057: a stack buffer overflow, hardcoded credentials and a command injection, in an <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a> advisory.</p>
+  <div class="post-entry__body">
+  <div class="post-entry__head">
+    <h3 class="post-entry__title"><a href="/blog/practical-deep-dive-into-kubernetes-security/">Practical Deep Dive into Kubernetes Security</a></h3>
+    <p class="post-meta"><span class="post-meta__read">18 min read</span>
+</p>
+  </div>
+  <p class="post-entry__summary">My review of <a target="_blank" rel="noopener" href="https://hackarcana.com/workshop-session/2026-Q2-k8s/join-k8s">Practical Deep Dive into Kubernetes Security</a>, an attack-first workshop on <a target="_blank" rel="noopener" href="https://hexarcana.ch/">HexArcana</a>, and the best <a target="_blank" rel="noopener" href="https://kubernetes.io/">Kubernetes</a> training I’ve seen.</p>
+  </div>
 </li>
 
     
-<li class="post-entry">
-  <div class="post-entry__head">
-    <h3 class="post-entry__title"><a href="/blog/security-advisory-moog-exo-cameras/">Security Advisory – Multiple Vulnerabilities in Moog EXO Series Cameras</a></h3>
-    <p class="post-meta"><time datetime="2020-06-18T00:00:00+02:00">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+<li class="post-entry post-entry--card">
+  <div class="post-entry__picture">
+    <img src="/assets/images/blog/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras-illustration-640.webp" srcset="/assets/images/blog/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras-illustration-640.webp 640w, /assets/images/blog/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras-illustration-1280.webp 1280w" sizes="(min-width: 641px) 160px, min(calc(100vw - 64px), 624px)" width="1280" height="672" alt="" loading="lazy" decoding="async">
   </div>
-  <p class="post-entry__summary">Four CVEs in <a target="_blank" rel="noopener" href="https://www.moog.com.sg/">Moog</a>'s EXO cameras, CVE-2020-24051 to 24054: an ONVIF authentication bypass, XXE, hardcoded credentials and root command execution, in an <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a> advisory.</p>
+  <div class="post-entry__body">
+  <div class="post-entry__head">
+    <h3 class="post-entry__title"><a href="/blog/disclosing-multiple-vulnerabilities-in-verint-ptz-cameras/">Disclosing Multiple Vulnerabilities in Verint PTZ Cameras</a></h3>
+    <p class="post-meta"><span class="post-meta__read">2 min read</span>
+ <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+  </div>
+  <p class="post-entry__summary">With three colleagues, I broke into <a target="_blank" rel="noopener" href="https://www.verint.com/">Verint</a>’s <abbr>PTZ</abbr> cameras through three vulnerabilities, <abbr>CVE</abbr>-2020-24055 to 24057: a stack buffer overflow, hardcoded credentials, and a command injection, disclosed with <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a>.</p>
+  </div>
+</li>
+
+    
+<li class="post-entry post-entry--card">
+  <div class="post-entry__picture">
+    <img src="/assets/images/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras-illustration-640.webp" srcset="/assets/images/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras-illustration-640.webp 640w, /assets/images/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras-illustration-1280.webp 1280w" sizes="(min-width: 641px) 160px, min(calc(100vw - 64px), 624px)" width="1280" height="672" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="post-entry__body">
+  <div class="post-entry__head">
+    <h3 class="post-entry__title"><a href="/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/">Disclosing Multiple Vulnerabilities in Moog EXO Series Cameras</a></h3>
+    <p class="post-meta"><span class="post-meta__read">2 min read</span>
+ <span class="post-meta__sep" aria-hidden="true">·</span> <a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="Published with IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></p>
+  </div>
+  <p class="post-entry__summary">With three colleagues, I broke into <a target="_blank" rel="noopener" href="https://www.moog.com.sg/">Moog</a>’s <abbr>EXO</abbr> cameras through four vulnerabilities, <abbr>CVE</abbr>-2020-24051 to 24054: an <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ONVIF"><abbr>ONVIF</abbr></a> authentication bypass, <abbr>XXE</abbr>, hardcoded credentials, and <code>root</code> command execution, disclosed with <a target="_blank" rel="noopener" href="https://www.ioactive.com/">IOActive</a>.</p>
+  </div>
 </li>
 
   </ul>
@@ -264,10 +324,10 @@
 <section id="home-beyond">
   <h2>Off the Clock</h2>
   <ul class="home-beyond__list">
-    <li><svg class="icon icon-flag home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/flag.svg#flag"/></svg><span>I still solve capture the flag challenges from time to time, mostly on <a target="_blank" rel="noopener" href="https://www.root-me.org/sljrobin">Root Me</a>, <a target="_blank" rel="noopener" href="https://www.newbiecontest.org/index.php?page=info_membre&amp;nick=sljrobin">NewbieContest</a> and <a target="_blank" rel="noopener" href="https://www.wechall.net/profile/sljrobin">WeChall</a>.</span></li>
+    <li><svg class="icon icon-flag home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/flag.svg#flag"/></svg><span>I still solve capture the flag challenges from time to time, mostly on <a target="_blank" rel="noopener" href="https://www.root-me.org/sljrobin">Root Me</a>, <a target="_blank" rel="noopener" href="https://www.newbiecontest.org/index.php?page=info_membre&amp;nick=sljrobin">NewbieContest</a>, and <a target="_blank" rel="noopener" href="https://www.wechall.net/profile/sljrobin">WeChall</a>.</span></li>
     <li><svg class="icon icon-code home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/code.svg#code"/></svg><span>I code projects, such as <a target="_blank" rel="noopener" href="https://github.com/sljrobin/Audious">Audious</a> and <a target="_blank" rel="noopener" href="https://github.com/sljrobin/MonitorMoney">MonitorMoney</a>, and share them on <a target="_blank" rel="noopener" href="https://github.com/sljrobin">GitHub</a>.</span></li>
     <li><svg class="icon icon-camera home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>I hike with a camera and chase the light. The pictures are in the <a href="/photography/">Photography section</a>.</span></li>
-    <li><svg class="icon icon-brick home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/brick.svg#brick"/></svg><span>I co-founded <a target="_blank" rel="noopener" href="https://www.brickwinterburrow.com">Brick Winter Burrow</a>, a modular <a target="_blank" rel="noopener" href="https://www.lego.com/">LEGO</a> winter village exhibited at events across France to raise funds for charities.</span></li>
+    <li><svg class="icon icon-brick home-beyond__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/brick.svg#brick"/></svg><span>I co-founded <a target="_blank" rel="noopener" href="https://www.brickwinterburrow.com">Brick Winter Burrow</a>, a modular <a target="_blank" rel="noopener" href="https://www.lego.com/"><abbr>LEGO</abbr></a> winter village exhibited at events in France to raise funds for charities.</span></li>
   </ul>
 </section>
 
@@ -285,17 +345,19 @@
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a></p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a><span class="site-footer__sep" aria-hidden="true">·</span><label class="theme-switch" title="Dark theme"><input class="theme-switch__input" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme"><svg class="icon icon-moon theme-switch__moon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/moon.svg#moon"/></svg><svg class="icon icon-sun theme-switch__sun" aria-hidden="true" focusable="false"><use href="/assets/images/icons/sun.svg#sun"/></svg></label>
+</p>
   </div>
 </footer>
 
 </div>
 
-<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
-</button>
+</a>
 
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/nav.js"></script>
+    <script src="/assets/js/cards.js" defer></script>
   </body>
 </html>

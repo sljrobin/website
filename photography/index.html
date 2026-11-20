@@ -10,7 +10,7 @@
   </title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Landscapes and cityscapes, mostly from France and the UK, sometimes from further away. Chasing the light when I am not behind a laptop.">
+  <meta name="description" content="Landscapes and cityscapes, mostly from France and the UK, sometimes from further away. Chasing the light when I’m not behind a laptop.">
   <meta name="author" content="Simon Robin">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="alternate" type="application/atom+xml" title="Simon Robin | Blog" href="https://sljrobin.org/feed.xml">
@@ -19,12 +19,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Simon Robin">
   <meta property="og:title" content="Photography">
-  <meta property="og:description" content="Landscapes and cityscapes, mostly from France and the UK, sometimes from further away. Chasing the light when I am not behind a laptop.">
+  <meta property="og:description" content="Landscapes and cityscapes, mostly from France and the UK, sometimes from further away. Chasing the light when I’m not behind a laptop.">
   <meta property="og:url" content="https://sljrobin.org/photography/">
-  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/default.png">
+  <meta property="og:image" content="https://sljrobin.org/assets/images/cards/photography.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Simon Robin's signature in white on navy">
+  <meta property="og:image:alt" content="Simon Robin’s signature in white on navy, with the camera icon of the Photography section beneath it">
   <meta name="twitter:card" content="summary_large_image">
 
 
@@ -33,20 +33,26 @@
   <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
 
 
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
+  <script>(function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {} if (t !== "dark" && t !== "light") t = "light"; var r = document.documentElement; r.classList.add("js"); r.setAttribute("data-theme", t); r.setAttribute("data-theme-default", "light"); })();</script>
+
+  <link rel="stylesheet" href="/assets/css/photography.css">
 <script>
   (function () {
+    // the opt-in, written here rather than in the stylesheet (2026-10-13): without a script nothing would skip the
+    // transition on the intro's page, so the fade belongs to scripted pages only
+    var vt = document.createElement('style');
+    vt.textContent = '@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}';
+    document.head.appendChild(vt);
     if (!('onpagereveal' in window)) return;
     var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
-    var path = location.pathname, play = false;
+    var intro = false;
     try {
       var v = JSON.parse(localStorage.getItem('sig-intro'));
       var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
-      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+      intro = !live && sections.indexOf(location.pathname) > -1;
     } catch (e) {}
     window.addEventListener('pagereveal', function (e) {
-      if (!e.viewTransition || play) return;
+      if (!e.viewTransition || !intro) return;
       e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
       e.viewTransition.skipTransition();
     });
@@ -146,15 +152,24 @@
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
     function finish() { if (done) return; done = true; leave(550); }
+    // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
+    // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
+    // under the fade instead of running on beneath it.
+    function skip() {
+      if (done) return; done = true;
+      var strokes = el.querySelectorAll('.sig-intro__stroke');
+      for (var i = 0; i < strokes.length; i++) { var v = getComputedStyle(strokes[i]).strokeDashoffset; strokes[i].style.transition = 'none'; strokes[i].style.strokeDashoffset = v; }
+      leave(300);
+    }
     // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
     // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
     // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
-      finish();
+      skip();
     });
-    el.addEventListener('click', finish);
+    el.addEventListener('click', skip);
     // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
     // A clock started here would run on while a window drag, a background tab or a slow first paint
     // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
@@ -168,17 +183,28 @@
   })();
 </script>
 
+    <noscript>
+  <p class="noscript-banner"><svg class="icon icon-info noscript-banner__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/info.svg#info"/></svg><span>Some features of this website need JavaScript, including the blog’s search, the photo viewer, and remembering the chosen theme. Everything else works.</span></p>
+</noscript>
+
 
     
+<a class="skip-link" href="#main">Skip to Content</a>
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
-    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
   </a>
   <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
     <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
     <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
     <span>Menu</span>
   </button>
+  <input class="site-strip__check" type="checkbox" id="site-menu-check" aria-controls="site-menu">
+  <label class="site-strip__toggle site-strip__toggle--label" for="site-menu-check">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </label>
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
@@ -198,124 +224,62 @@
     <div id="page-photography-home">
   <header class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
-    <a class="photo-nav__btn" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="">France</a>
-    <a class="photo-nav__btn" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="">UK</a>
-    <a class="photo-nav__btn" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="">Spain</a>
-    <a class="photo-nav__btn" href="/photography/gallery/finland/"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="">Finland</a>
-    <a class="photo-nav__btn" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="">Switzerland</a>
-    <a class="photo-nav__btn" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="">USA</a>
-    <a class="photo-nav__btn" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
-    <a class="photo-nav__btn" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg>Instagram</a>
+    <details class="photo-nav__menu">
+      <summary class="photo-nav__btn photo-nav__summary">Galleries<svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
+      <div class="photo-nav__list">
+        <a class="photo-nav__item" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="" width="140" height="110">France</a>
+        <a class="photo-nav__item" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="" width="140" height="110">UK</a>
+        <a class="photo-nav__item" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</a>
+        <a class="photo-nav__item" href="/photography/gallery/finland/"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</a>
+        <a class="photo-nav__item" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</a>
+        <a class="photo-nav__item" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</a>
+      </div>
+    </details>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="" width="140" height="110">France</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="" width="140" height="110">UK</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/finland/"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</a>
+    <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
+    <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
 </header>
 
 
-  <main>
+  <main id="main">
     <section id="photography-home">
   <div class="photo-landing">
-    <h1 class="photo-landing__title">Photography</h1>
-    <p class="photo-landing__lede">When I'm not behind a laptop, I chase the light and admire nature. I travel mostly in France and the UK, and sometimes to other parts of the world. Here are some of my landscapes and cityscapes.</p>
-
-<div class="photo-grid">
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise.jpg" title="San Juan de Gaztelugatxe Hidden Sunrise" data-pswp-width="2560" data-pswp-height="1704" data-pswp-slug="san-juan-de-gaztelugatxe-hidden-sunrise" data-pswp-srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise-1600.jpg 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise.jpg 2560w" data-pswp-place="San Juan de Gaztelugatxe, Spain">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise-1080.jpg"> 
-        <img fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-hidden-sunrise-1080.jpg" alt="San Juan de Gaztelugatxe at sunrise, Basque Country">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/etretat/falaise-daval-sunrise.jpg" title="Falaise d'Aval Sunrise" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="falaise-daval-sunrise" data-pswp-srcset="/assets/images/photography/galleries/france/etretat/falaise-daval-sunrise-1600.jpg 1600w, /assets/images/photography/galleries/france/etretat/falaise-daval-sunrise.jpg 2560w" data-pswp-place="Étretat, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/etretat/falaise-daval-sunrise-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/etretat/falaise-daval-sunrise-1080.jpg"> 
-        <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/etretat/falaise-daval-sunrise-1080.jpg" alt="The Falaise d'Aval at sunrise, Étretat">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022.jpg" title="Mont-Saint-Michel Sunset" data-pswp-width="2560" data-pswp-height="1706" data-pswp-slug="mont-saint-michel-sunset-2022" data-pswp-srcset="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022-1600.jpg 1600w, /assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022.jpg 2560w" data-pswp-place="Mont-Saint-Michel, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022-1080.jpg"> 
-        <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-sunset-2022-1080.jpg" alt="Mont-Saint-Michel at sunset, Normandy">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/provence/the-magic-tree.jpg" title="The Magic Tree" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="the-magic-tree" data-pswp-srcset="/assets/images/photography/galleries/france/provence/the-magic-tree-1600.jpg 1600w, /assets/images/photography/galleries/france/provence/the-magic-tree.jpg 2560w" data-pswp-place="Valensole, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/provence/the-magic-tree-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/provence/the-magic-tree-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/provence/the-magic-tree-1080.jpg" alt="A lone tree in a lavender field, Valensole, Provence">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset.jpg" title="Lac de Guizengeard Sunset" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="lac-de-guizengeard-sunset" data-pswp-srcset="/assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset-1600.jpg 1600w, /assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset.jpg 2560w" data-pswp-place="Guizengeard, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/guizengeard/lac-de-guizengeard-sunset-1080.jpg" alt="The Lac de Guizengeard at sunset, Charente">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1.jpg" title="Flysch de Zumaia 1" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="flysch-de-zumaia-1" data-pswp-srcset="/assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1-1600.jpg 1600w, /assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1.jpg 2560w" data-pswp-place="Northern Coast, Spain">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/northern-coast/flysch-de-zumaia-1-1080.jpg" alt="The flysch cliffs of Zumaia, Basque Country">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/morbihan/larche-de-port-blanc.jpg" title="L'Arche de Port Blanc" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="larche-de-port-blanc" data-pswp-srcset="/assets/images/photography/galleries/france/morbihan/larche-de-port-blanc-1600.jpg 1600w, /assets/images/photography/galleries/france/morbihan/larche-de-port-blanc.jpg 2560w" data-pswp-place="Morbihan, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/morbihan/larche-de-port-blanc-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/morbihan/larche-de-port-blanc-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/morbihan/larche-de-port-blanc-1080.jpg" alt="L'Arche de Port Blanc, Morbihan">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu.jpg" title="Pointe Saint-Mathieu" data-pswp-width="2560" data-pswp-height="1694" data-pswp-slug="pointe-saint-mathieu" data-pswp-srcset="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-1600.jpg 1600w, /assets/images/photography/galleries/france/finistere/pointe-saint-mathieu.jpg 2560w" data-pswp-place="Finistère, France">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-1080.jpg" alt="The Pointe Saint-Mathieu, Finistère">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2.jpg" title="The Single Man in Hyde Park 2" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="the-single-man-in-hyde-park-2" data-pswp-srcset="/assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2-1600.jpg 1600w, /assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2.jpg 2560w" data-pswp-place="Hyde Park, UK">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/uk/hyde-park/the-single-man-in-hyde-park-2-1080.jpg" alt="A man walking alone on a path through Hyde Park at sunset, London">
-        </picture>
-    </a>
-  </figure>
-  <figure class="photo-grid__item">
-    <a href="/assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall.jpg" title="The Shard with City Hall" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="the-shard-with-city-hall" data-pswp-srcset="/assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall-1600.jpg 1600w, /assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall.jpg 2560w" data-pswp-place="River Thames, UK">
-        <picture>
-        <source type="image/webp" srcset="/assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall-1080.webp">   
-        <source type="image/jpeg" srcset="/assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall-1080.jpg"> 
-        <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/uk/river-thames/the-shard-with-city-hall-1080.jpg" alt="The Shard and City Hall on the Thames, London">
-        </picture>
-    </a>
-  </figure>
+    <div class="photo-landing__head">
+<div class="photo-hero" aria-hidden="true">
+  <div class="photo-hero__row photo-hero__row--left" style="--dur: 340s"><div class="photo-hero__track">
+    <span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-640.avif"><img src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glenfinnan/glenfinnan-viaduct-steam-train-640.avif"><img src="/assets/images/photography/galleries/uk/glenfinnan/glenfinnan-viaduct-steam-train-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-storm-640.avif"><img src="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-storm-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-forest-track-mist-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-forest-track-mist-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/guizengeard/guizengeard-lake-sunset-640.avif"><img src="/assets/images/photography/galleries/france/guizengeard/guizengeard-lake-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-sgorr-nam-fiannaidh-waterfalls-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-sgorr-nam-fiannaidh-waterfalls-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/morbihan/quiberon-arche-de-port-blanc-sunset-640.avif"><img src="/assets/images/photography/galleries/france/morbihan/quiberon-arche-de-port-blanc-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/st-pauls-cathedral/london-st-pauls-cathedral-orange-bridge-640.avif"><img src="/assets/images/photography/galleries/uk/st-pauls-cathedral/london-st-pauls-cathedral-orange-bridge-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-torren-river-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-torren-river-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/provence/valensole-lavender-hot-air-balloons-640.avif"><img src="/assets/images/photography/galleries/france/provence/valensole-lavender-hot-air-balloons-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/charente-maritime/la-rochelle-old-port-towers-640.avif"><img src="/assets/images/photography/galleries/france/charente-maritime/la-rochelle-old-port-towers-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-path-640.avif"><img src="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-path-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-cliff-house-640.avif"><img src="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-cliff-house-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/langdale-valley-autumn-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/langdale-valley-autumn-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span>
+    <span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-640.avif"><img src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glenfinnan/glenfinnan-viaduct-steam-train-640.avif"><img src="/assets/images/photography/galleries/uk/glenfinnan/glenfinnan-viaduct-steam-train-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-storm-640.avif"><img src="/assets/images/photography/galleries/france/mont-saint-michel/mont-saint-michel-storm-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-forest-track-mist-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-forest-track-mist-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/guizengeard/guizengeard-lake-sunset-640.avif"><img src="/assets/images/photography/galleries/france/guizengeard/guizengeard-lake-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-sgorr-nam-fiannaidh-waterfalls-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-sgorr-nam-fiannaidh-waterfalls-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/morbihan/quiberon-arche-de-port-blanc-sunset-640.avif"><img src="/assets/images/photography/galleries/france/morbihan/quiberon-arche-de-port-blanc-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/st-pauls-cathedral/london-st-pauls-cathedral-orange-bridge-640.avif"><img src="/assets/images/photography/galleries/uk/st-pauls-cathedral/london-st-pauls-cathedral-orange-bridge-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/glencoe/glencoe-torren-river-640.avif"><img src="/assets/images/photography/galleries/uk/glencoe/glencoe-torren-river-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/provence/valensole-lavender-hot-air-balloons-640.avif"><img src="/assets/images/photography/galleries/france/provence/valensole-lavender-hot-air-balloons-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/charente-maritime/la-rochelle-old-port-towers-640.avif"><img src="/assets/images/photography/galleries/france/charente-maritime/la-rochelle-old-port-towers-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-path-640.avif"><img src="/assets/images/photography/galleries/uk/hyde-park/hyde-park-lone-walker-path-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-cliff-house-640.avif"><img src="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-cliff-house-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/langdale-valley-autumn-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/langdale-valley-autumn-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span>
+  </div></div>
+  <div class="photo-hero__row photo-hero__row--right" style="--dur: 380s"><div class="photo-hero__track">
+    <span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/etretat/etretat-falaise-d-aval-red-sunrise-640.avif"><img src="/assets/images/photography/galleries/france/etretat/etretat-falaise-d-aval-red-sunrise-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/morbihan/saint-cado-island-house-blue-hour-640.avif"><img src="/assets/images/photography/galleries/france/morbihan/saint-cado-island-house-blue-hour-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/provence/valensole-lavender-lone-tree-640.avif"><img src="/assets/images/photography/galleries/france/provence/valensole-lavender-lone-tree-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/brighton/brighton-west-pier-ruins-dusk-640.avif"><img src="/assets/images/photography/galleries/uk/brighton/brighton-west-pier-ruins-dusk-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/bordeaux/bordeaux-place-de-la-bourse-sunset-640.avif"><img src="/assets/images/photography/galleries/france/bordeaux/bordeaux-place-de-la-bourse-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/cuil-bay/cuil-bay-loch-linnhe-storm-640.avif"><img src="/assets/images/photography/galleries/uk/cuil-bay/cuil-bay-loch-linnhe-storm-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-lighthouse-abbey-640.avif"><img src="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-lighthouse-abbey-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/derwentwater-dead-tree-sheep-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/derwentwater-dead-tree-sheep-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/london-eye-tower-bridge/london-eye-county-hall-640.avif"><img src="/assets/images/photography/galleries/uk/london-eye-tower-bridge/london-eye-county-hall-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/culgaith-grain-field-fells-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/culgaith-grain-field-fells-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-640.avif"><img src="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset-640.avif"><img src="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-640.avif"><img src="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/river-thames/london-shard-city-hall-thames-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/river-thames/london-shard-city-hall-thames-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/etretat/etretat-manneporte-arch-640.avif"><img src="/assets/images/photography/galleries/france/etretat/etretat-manneporte-arch-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span>
+    <span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/etretat/etretat-falaise-d-aval-red-sunrise-640.avif"><img src="/assets/images/photography/galleries/france/etretat/etretat-falaise-d-aval-red-sunrise-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/morbihan/saint-cado-island-house-blue-hour-640.avif"><img src="/assets/images/photography/galleries/france/morbihan/saint-cado-island-house-blue-hour-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/provence/valensole-lavender-lone-tree-640.avif"><img src="/assets/images/photography/galleries/france/provence/valensole-lavender-lone-tree-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="high"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/brighton/brighton-west-pier-ruins-dusk-640.avif"><img src="/assets/images/photography/galleries/uk/brighton/brighton-west-pier-ruins-dusk-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/bordeaux/bordeaux-place-de-la-bourse-sunset-640.avif"><img src="/assets/images/photography/galleries/france/bordeaux/bordeaux-place-de-la-bourse-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1080.jpg" alt="" width="1080" height="720" decoding="async"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-640.avif"><img src="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/cuil-bay/cuil-bay-loch-linnhe-storm-640.avif"><img src="/assets/images/photography/galleries/uk/cuil-bay/cuil-bay-loch-linnhe-storm-1080.jpg" alt="" width="1080" height="720" decoding="async" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-lighthouse-abbey-640.avif"><img src="/assets/images/photography/galleries/france/finistere/pointe-saint-mathieu-lighthouse-abbey-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/derwentwater-dead-tree-sheep-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/derwentwater-dead-tree-sheep-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/london-eye-tower-bridge/london-eye-county-hall-640.avif"><img src="/assets/images/photography/galleries/uk/london-eye-tower-bridge/london-eye-county-hall-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/lake-district/culgaith-grain-field-fells-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/lake-district/culgaith-grain-field-fells-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-640.avif"><img src="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset-640.avif"><img src="/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-640.avif"><img src="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/uk/river-thames/london-shard-city-hall-thames-sunset-640.avif"><img src="/assets/images/photography/galleries/uk/river-thames/london-shard-city-hall-thames-sunset-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span><span class="photo-hero__tile"><picture><source type="image/avif" srcset="/assets/images/photography/galleries/france/etretat/etretat-manneporte-arch-640.avif"><img src="/assets/images/photography/galleries/france/etretat/etretat-manneporte-arch-1080.jpg" alt="" width="1080" height="720" decoding="async" loading="lazy" fetchpriority="low"></picture></span>
+  </div></div>
 </div>
 
+      <h1 class="photo-landing__title">Photography</h1>
+      <p class="photo-landing__lede">When I’m not behind a laptop, I chase the light and admire nature. I travel mostly in France and the UK, and sometimes to other parts of the world. Here are some of my landscapes and&nbsp;cityscapes.</p>
+    </div>
+
+    <div class="photo-wall">
+      <img class="photo-wall__map" src="/assets/images/photography/world-map.svg" alt="" width="1600" height="901" loading="lazy" decoding="async">
 
     <section class="country-tiles" id="galleries" aria-labelledby="country-tiles-title">
       <h2 class="country-tiles__title" id="country-tiles-title">Galleries</h2>
+      <p class="country-tiles__lede">Choose a country to see its photographs.</p>
+      <svg class="gallery-lamp-sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs><radialGradient id="gallery-lamp-glow"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><symbol id="gallery-lamp" viewBox="0 0 100 92" overflow="visible"><path d="M61.0 3.4 C61.4 3.6 61.5 4.2 61.6 4.6 C61.7 5.0 61.6 5.1 61.7 6.0 C61.7 7.0 62.2 9.4 62.1 10.3 C62.1 11.2 61.5 10.8 61.2 11.3 C60.8 11.7 60.4 12.7 60.0 12.9 C59.7 13.1 60.8 12.4 59.2 12.5 C57.6 12.6 53.5 13.4 50.5 13.5 C47.5 13.6 43.1 13.4 41.2 13.1 C39.3 12.9 39.6 12.4 39.1 12.1 C38.7 11.7 38.7 11.4 38.4 11.0 C38.2 10.6 37.8 10.6 37.7 9.7 C37.5 8.9 37.4 6.8 37.5 6.0 C37.6 5.2 38.0 5.3 38.3 4.9 C38.7 4.5 39.1 3.8 39.5 3.6 C40.0 3.3 39.3 3.3 41.0 3.2 C42.7 3.0 47.0 2.8 50.0 2.8 C52.9 2.7 57.1 3.0 58.9 3.1 C60.8 3.2 60.5 3.1 61.0 3.4 Z" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M50.0 13.0 C50.0 14.8 50.0 22.2 50.0 24.0" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M41.7 25.4 C44.5 25.3 46.9 24.8 49.7 24.7 C52.4 24.6 55.2 24.7 58.1 24.7 C61.0 24.7 65.6 23.3 67.3 24.6 C68.9 25.8 67.6 29.6 67.8 32.2 C68.0 34.7 68.0 37.4 68.3 39.9 C68.6 42.5 69.4 45.1 69.6 47.6 C69.8 50.1 70.8 53.5 69.5 54.8 C68.1 56.1 64.1 55.3 61.6 55.4 C59.1 55.5 56.9 55.4 54.3 55.3 C51.8 55.3 49.0 55.3 46.4 55.3 C43.7 55.3 41.3 55.3 38.5 55.3 C35.7 55.3 31.0 56.6 29.7 55.4 C28.4 54.1 30.4 50.4 30.7 47.8 C31.0 45.2 31.3 42.5 31.6 39.9 C31.8 37.4 31.9 34.9 32.1 32.4 C32.3 30.0 31.1 26.4 32.7 25.2 C34.3 24.0 38.9 25.5 41.7 25.4 Z" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><ellipse class="lamp__glow" cx="50.0" cy="63.5" rx="34.0" ry="14.3" fill="url(#gallery-lamp-glow)" style="opacity: var(--lamp-glow, .7)"/><path class="lamp__face" d="M68.9 58.2 C68.2 58.8 66.6 58.9 65.1 59.3 C63.7 59.8 62.2 60.5 60.2 60.9 C58.2 61.3 55.6 61.4 53.3 61.6 C51.0 61.7 48.7 61.8 46.4 61.6 C44.2 61.5 41.6 60.9 39.7 60.5 C37.8 60.2 36.4 59.8 35.0 59.4 C33.6 59.0 31.8 58.7 31.0 58.1 C30.2 57.5 30.1 56.4 30.1 55.7 C30.1 55.1 30.5 54.8 31.2 54.3 C32.0 53.7 33.0 53.1 34.4 52.6 C35.8 52.1 37.7 51.5 39.7 51.1 C41.7 50.7 43.8 50.4 46.2 50.3 C48.6 50.2 51.5 50.4 53.9 50.5 C56.2 50.6 58.5 50.8 60.4 51.2 C62.3 51.6 64.0 52.3 65.4 52.8 C66.8 53.2 68.2 53.2 68.9 53.8 C69.7 54.4 69.7 55.4 69.7 56.2 C69.7 56.9 69.7 57.7 68.9 58.2 Z" fill="#fafbff"/><path d="M69.0 57.6 C68.2 58.2 67.2 58.6 65.7 59.1 C64.3 59.7 62.3 60.5 60.3 60.9 C58.3 61.4 56.1 61.8 53.8 61.8 C51.4 61.9 48.6 61.5 46.3 61.3 C44.1 61.1 42.1 60.9 40.2 60.6 C38.2 60.3 35.9 59.7 34.5 59.3 C33.0 58.9 32.2 58.8 31.5 58.2 C30.8 57.6 30.2 56.5 30.2 55.8 C30.2 55.1 30.8 54.7 31.5 54.1 C32.3 53.6 33.1 53.0 34.5 52.4 C35.9 51.9 37.9 51.2 39.9 50.9 C42.0 50.6 44.3 50.5 46.6 50.5 C48.8 50.5 51.3 50.8 53.5 50.9 C55.8 51.0 58.1 50.8 60.1 51.2 C62.1 51.5 64.2 52.3 65.6 52.9 C67.1 53.4 68.0 54.0 68.8 54.5 C69.6 54.9 70.3 55.1 70.4 55.6 C70.4 56.1 69.8 57.0 69.0 57.6 Z" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+
       <div class="country-tiles__grid">
 
         <a class="country-tile" href="/photography/gallery/france/" title="France">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -452,13 +416,20 @@ c-131 -38 -143 -36 -164 35 -9 30 -14 35 -38 32 -29 -4 -32 0 -42 60 -5 33
 162 -11 0 -19 -1 -20 -2z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">France</span>
-          <img class="country-tile__flag" src="/assets/images/flags/france.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:37deg;--sp:39%;--sw:12%;--so:.21" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/france.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">France</span>
+          </span>
         </a>
 
         <a class="country-tile" href="/photography/gallery/uk/" title="UK">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -724,13 +695,20 @@ c21 14 23 19 14 45 -8 23 -7 35 5 53 9 13 25 50 36 83 15 44 17 61 8 72 -9 11
 46 -186 51 -76 5 -78 5 -166 -41z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">UK</span>
-          <img class="country-tile__flag" src="/assets/images/flags/uk.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:149deg;--sp:64%;--sw:19%;--so:.21" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/uk.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">UK</span>
+          </span>
         </a>
 
         <a class="country-tile" href="/photography/gallery/spain/" title="Spain">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -860,13 +838,20 @@ c-14 18 -25 41 -25 51 0 10 -6 18 -14 18 -8 0 -21 3 -30 6 -10 4 -19 -5 -29
 -33 14z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">Spain</span>
-          <img class="country-tile__flag" src="/assets/images/flags/spain.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:87deg;--sp:49%;--sw:24%;--so:.13" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">Spain</span>
+          </span>
         </a>
 
         <a class="country-tile" href="/photography/gallery/finland/" title="Finland">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -966,13 +951,20 @@ l37 14 6 -34 c7 -34 9 -35 51 -35 35 0 45 4 45 16 0 9 8 38 17 64 16 45 20 49
 50 13 59 -11 31 -87 106 -138 138 l-52 31 -6 -31z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">Finland</span>
-          <img class="country-tile__flag" src="/assets/images/flags/finland.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:7deg;--sp:54%;--sw:22%;--so:.16" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">Finland</span>
+          </span>
         </a>
 
         <a class="country-tile" href="/photography/gallery/switzerland/" title="Switzerland">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -1101,13 +1093,20 @@ l-51 -2 -14 53 c-25 94 -21 125 25 163 31 27 37 36 27 46 -7 7 -13 25 -13 40
 -35z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">Switzerland</span>
-          <img class="country-tile__flag" src="/assets/images/flags/switzerland.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:125deg;--sp:72%;--sw:11%;--so:.21" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">Switzerland</span>
+          </span>
         </a>
 
         <a class="country-tile" href="/photography/gallery/usa/" title="USA">
-          <span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <span class="country-tile__print">
+            <svg class="country-tile__lamp" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><use href="#gallery-lamp"/></svg>
+            <span class="country-tile__mat"><span class="country-tile__silhouette"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
 <metadata>
 Created by potrace 1.10, written by Peter Selinger 2001-2011
 </metadata>
@@ -1221,9 +1220,14 @@ c-12 19 -17 38 -14 55 8 36 -26 57 -90 56 -28 0 -61 5 -74 12 -22 12 -23 14
 27 -13 92 35 60 43 166 133 157 132 -2 -1 -43 -18 -90 -38z"/>
 </g>
 </svg>
-</span>
-          <span class="country-tile__label">USA</span>
-          <img class="country-tile__flag" src="/assets/images/flags/usa.svg" alt="">
+</span></span>
+            <span class="country-tile__sheen" style="--sa:63deg;--sp:32%;--sw:16%;--so:.18" aria-hidden="true"></span>
+            <span class="country-tile__glare" aria-hidden="true"></span>
+          </span>
+          <span class="country-tile__placard">
+            <img class="country-tile__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">
+            <span class="country-tile__label">USA</span>
+          </span>
         </a>
 
       </div>
@@ -1231,20 +1235,36 @@ c-12 19 -17 38 -14 55 8 36 -26 57 -90 56 -28 0 -61 5 -74 12 -22 12 -23 14
 
     <section class="about" id="about" aria-labelledby="about-title">
       <h2 class="about__title" id="about-title">The Photographer</h2>
+      <p class="about__lede">Who takes these pictures, and where to see more.</p>
       <div class="insta">
       <div class="insta__photo">
-        <img src="/assets/images/photography/behind-the-camera/portrait.webp" width="1536" height="1024" alt="Simon Robin's Instagram profile picture, a LEGO mosaic" loading="lazy" decoding="async">
+        <img src="/assets/images/photography/behind-the-camera/portrait.webp" width="1536" height="1024" alt="Simon Robin’s Instagram profile picture, a LEGO mosaic" loading="lazy" decoding="async">
       </div>
       <div class="insta__text">
-        <p>Besides my work, I enjoy taking pictures. I'm drawn to cityscapes and landscapes, with a soft spot for <a href="/photography/gallery/france/#Etretat">Normandy</a> and <a href="/photography/gallery/france/#Finistere">Brittany</a> in <a href="/photography/gallery/france/">France</a>. I took up photography seriously in 2017, on my way to <a href="/photography/gallery/usa/#Seattle">Seattle</a> in the <a href="/photography/gallery/usa/">USA</a>, and I've been chasing light ever since.</p>
-        <p>If you're curious, I've written about how my journey started, the photographers who inspire me and the equipment I carry on my trips in <a href="/photography/behind-the-camera/">Behind the Camera</a>.</p>
-        <p class="insta__find">You can also find me on <a target="_blank" rel="noopener" href="https://www.instagram.com/">Instagram</a>, where I post now and then: <a class="insta__handle" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram insta__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg>@sljrobin</a></p>
+        <p>Besides my work, I enjoy taking pictures. I’m drawn to cityscapes and landscapes, with a soft spot for <a href="/photography/gallery/france/#Etretat">Normandy</a> and <a href="/photography/gallery/france/#Finistere">Brittany</a> in <a href="/photography/gallery/france/">France</a>. I took up photography seriously in 2017, on my way to <a href="/photography/gallery/usa/#Seattle">Seattle</a> in the <a href="/photography/gallery/usa/"><abbr>USA</abbr></a>, and I’ve been chasing light ever since.</p>
+        <p>If you’re curious, I’ve written about how my journey started, the photographers who inspire me, and the equipment I carry on my trips in <a href="/photography/behind-the-camera/">Behind the Camera</a>.</p>
+        <p class="insta__find">You can also find me on <a target="_blank" rel="noopener" href="https://www.instagram.com/">Instagram</a>, where I post now and then: <a class="insta__handle" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/">sljrobin</a></p>
       </div>
       </div>
+      <a class="insta-balloon" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/" title="sljrobin on Instagram" tabindex="-1" aria-hidden="true" draggable="false">
+  <svg class="insta-balloon__body" viewBox="0 0 80 100" focusable="false">
+    <path class="insta-balloon__skin" d="M40 4.5c19.6.4 33.2 15.7 33.4 34.6.3 21.7-17.4 40.2-31.3 46.2l-1.8.7-2.1-.8C24.4 79.3 6.7 61 6.6 39.5 6.4 19.9 20.8 4.1 40 4.5Z"/>
+    <path class="insta-balloon__shine" d="M21.5 22.6c3.2-5.4 8.4-9.1 14.2-10.2"/>
+    <path class="insta-balloon__tie" d="M37.5 85.7l5 5M42.5 85.7l-5 5"/>
+    <svg class="insta-balloon__mark" x="22" y="23" width="36" height="36" viewBox="0 0 448 512"><use href="/assets/images/icons/instagram.svg#instagram"/></svg>
+  </svg>
+  <svg class="insta-balloon__string" viewBox="0 0 30 100" focusable="false">
+    <path class="insta-balloon__line" vector-effect="non-scaling-stroke" d="M15 0V13C15 27 19.6 35 18.2 47S11.2 63 12.6 73 15 80 15 84.4"/>
+    <path class="insta-balloon__tie" d="M13 82.4l4 4M17 82.4l-4 4"/>
+  </svg>
+</a>
+
     </section>
+    </div>
 
   </div>
 </section>
+<script src="/assets/js/photography-wall.js" defer></script>
 
   </main>
 
@@ -1259,17 +1279,17 @@ c-12 19 -17 38 -14 55 8 36 -26 57 -90 56 -28 0 -61 5 -74 12 -22 12 -23 14
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a>&nbsp;· <span class="site-footer__credit">Country silhouettes by <a target="_blank" rel="noopener" href="https://github.com/djaiss/mapsicon" title="mapsicon">mapsicon</a>.</span></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a>&nbsp;· <span class="site-footer__credit">Country silhouettes by <a target="_blank" rel="noopener" href="https://github.com/djaiss/mapsicon" title="mapsicon">mapsicon</a></span>&nbsp;· <span class="site-footer__credit">Rivers from <a target="_blank" rel="noopener" href="https://www.hydrosheds.org/products/hydrorivers" title="HydroRIVERS">HydroRIVERS</a></span></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
 
-<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
-</button>
+</a>
 
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/nav.js"></script>

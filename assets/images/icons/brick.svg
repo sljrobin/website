@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <!-- brick: drawn by hand for this site (2026-09-20) in the line of the Doodle Icons, a 2×4 brick seen from the front, its box tightened to the drawing (2026-09-20) so it fills the em like the others; no CC0 set carries one; built by _scripts/icons/build.js, do not edit by hand -->
-  <symbol id="brick" viewBox="18 31.5 124 124">
+  <!-- brick: drawn by hand for this site (2026-09-20) in the line of the Doodle Icons, a 2×4 brick seen from the front, its box tightened to the drawing (2026-09-20) so it fills the em like the others; no CC0 set carries one; built by _scripts/site/icons/build.js, do not edit by hand -->
+  <symbol id="brick" viewBox="18 31.5 124 124" overflow="visible">
     <g fill="none"><g stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M24.5 71.5Q80 69.5 135.5 72.5Q138.5 100 136 128Q80 130.5 24 128.5Q21.5 100 24.5 71.5Z"/><path d="M30 71Q30.5 60 34 59.5L46.5 59.5Q50 60.5 50.5 71"/><path d="M58 71Q58.5 60.5 62 59.5L74.5 60Q78 60.5 78.5 71"/><path d="M86 71Q86.5 60 90 59.5L102.5 59.5Q106 60.5 106.5 71"/><path d="M114 71Q114.5 60.5 118 59.5L130.5 59.5Q134 60.5 134.5 71"/><path d="M35 100.5Q80 98.5 125 101"/></g></g>
   </symbol>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <!-- arrow-single-right: Doodle Icons by Khushmeen (CC0), https://www.svgrepo.com/svg/409850/arrow-single-right; built by _scripts/icons/build.js, do not edit by hand -->
-  <symbol id="chevron-right" viewBox="-15 0 91 91">
+  <!-- arrow-single-right: Doodle Icons by Khushmeen (CC0), https://www.svgrepo.com/svg/409850/arrow-single-right; built by _scripts/site/icons/build.js, do not edit by hand -->
+  <symbol id="chevron-right" viewBox="-15 0 91 91" overflow="visible">
     <g fill="none"><path d="M50.43 45.49C44.98 41.18 40.13 37.31 35.26 33.48C27.27 27.21 19.16 21.08 11.32 14.63C8.05 11.94 5.30 8.62 2.36 5.53C1.10 4.21 0.00 2.50 1.49 0.91C3.15 -0.85 4.96 0.25 6.35 1.63C21.25 16.46 39.71 26.64 56.08 39.55C60.91 43.35 61.54 46.55 57.45 51.25C56.19 52.76 54.81 54.18 53.34 55.48C42.65 64.66 32.03 73.93 21.14 82.85C17.64 85.71 13.39 87.69 9.40 89.91C8.72 90.29 6.93 90.14 6.82 89.83C6.43 88.69 6.00 87.03 6.55 86.20C8.70 82.96 10.85 79.55 13.68 76.96C20.53 70.68 27.77 64.85 34.82 58.80C38.97 55.25 43.06 51.62 47.19 48.05C48.09 47.27 49.07 46.56 50.43 45.49Z" fill="currentColor"/></g>
   </symbol>
 </svg>

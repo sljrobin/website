@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <!-- mortarboard: drawn by hand for this site (2026-09-23) in the line of the Doodle Icons, the board, the cap and the tassel; the set has no graduation cap; built by _scripts/icons/build.js, do not edit by hand -->
-  <symbol id="mortarboard" viewBox="8 5 144 144">
+  <!-- mortarboard: drawn by hand for this site (2026-09-23) in the line of the Doodle Icons, the board, the cap and the tassel; the set has no graduation cap; built by _scripts/site/icons/build.js, do not edit by hand -->
+  <symbol id="mortarboard" viewBox="8 5 144 144" overflow="visible">
     <g fill="none"><g stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 64.5Q46.5 48 80 34.5Q113.5 48.5 146 64Q113 79.5 80 93Q47.5 79 14 64.5Z"/><path d="M45 78Q42.5 104.5 80 108.5Q117.5 104 115 78.5"/><path d="M81 64Q113.5 60.5 146 64Q149.5 84 145 104"/><path d="M145 104Q139.5 111 143 118.5Q149 116 146.5 108"/></g></g>
   </symbol>
 </svg>

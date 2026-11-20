@@ -24,7 +24,7 @@
   <meta property="og:image" content="https://sljrobin.org/assets/images/cards/photography-gallery-finland.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Vuosaari and its bay from above at blue hour, Helsinki">
+  <meta property="og:image:alt" content="Three photographs from the Finland gallery, Vuosaari from above at blue hour the largest, with the Finnish flag and the name Finland in brush strokes">
   <meta name="twitter:card" content="summary_large_image">
 
   <script type="application/ld+json">
@@ -40,12 +40,12 @@
     {
       "@context": "https://schema.org",
       "@type": "ImageObject",
-      "@id": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/vuosaari-bay.jpg",
-      "contentUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/vuosaari-bay.jpg",
-      "url": "https://sljrobin.org/photography/gallery/finland/#photo-vuosaari-bay",
-      "thumbnailUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/vuosaari-bay-1080.jpg",
-      "name": "Vuosaari Bay",
-      "caption": "Vuosaari Bay",
+      "@id": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour.jpg",
+      "contentUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour.jpg",
+      "url": "https://sljrobin.org/photography/gallery/finland/#photo-helsinki-vuosaari-aerial-blue-hour",
+      "thumbnailUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-1080.jpg",
+      "name": "The Lights of Vuosaari",
+      "caption": "The Lights of Vuosaari",
       "description": "Vuosaari and its bay from above at blue hour, Helsinki",
       "contentLocation": "Helsinki, Finland",
       "width": 2560,
@@ -59,14 +59,33 @@
     {
       "@context": "https://schema.org",
       "@type": "ImageObject",
-      "@id": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday.jpg",
-      "contentUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday.jpg",
-      "url": "https://sljrobin.org/photography/gallery/finland/#photo-helsinki-holiday",
-      "thumbnailUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-1080.jpg",
+      "@id": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk.jpg",
+      "contentUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk.jpg",
+      "url": "https://sljrobin.org/photography/gallery/finland/#photo-helsinki-holiday-restaurant-dusk",
+      "thumbnailUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-1080.jpg",
       "name": "Helsinki Holiday",
       "caption": "Helsinki Holiday",
       "description": "The brick front and terrace of the Holiday restaurant at dusk, Helsinki",
       "contentLocation": "Helsinki, Finland",
+      "width": 2560,
+      "height": 1707,
+      "creator": {"@type": "Person", "@id": "https://sljrobin.org/about/#person", "name": "Simon Robin", "url": "https://sljrobin.org/about/"},
+      "creditText": "Simon Robin",
+      "copyrightNotice": "© Simon Robin, all rights reserved",
+      "license": "https://sljrobin.org/photography/#rights",
+      "acquireLicensePage": "https://sljrobin.org/about/#say-hi"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "@id": "https://sljrobin.org/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum.jpg",
+      "contentUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum.jpg",
+      "url": "https://sljrobin.org/photography/gallery/finland/#photo-turku-aboa-vetus-ars-nova-museum",
+      "thumbnailUrl": "https://sljrobin.org/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-1080.jpg",
+      "name": "The Glass Rotunda",
+      "caption": "The Glass Rotunda",
+      "description": "The round glass pavilion of the Aboa Vetus Ars Nova museum in Turku, lit warm at blue hour",
+      "contentLocation": "Turku, Finland",
       "width": 2560,
       "height": 1707,
       "creator": {"@type": "Person", "@id": "https://sljrobin.org/about/#person", "name": "Simon Robin", "url": "https://sljrobin.org/about/"},
@@ -83,20 +102,26 @@
   <link rel="preload" href="/assets/fonts/SourceSans3-Upright.woff2" as="font" type="font/woff2" crossorigin>
 
 
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <noscript><style>@media screen and (max-width: 48rem) { .site-strip__menu { display: block; } .site-strip__toggle { display: none; } }</style></noscript>
+  <script>(function () { var t = null; try { t = localStorage.getItem("theme"); } catch (e) {} if (t !== "dark" && t !== "light") t = "light"; var r = document.documentElement; r.classList.add("js"); r.setAttribute("data-theme", t); r.setAttribute("data-theme-default", "light"); })();</script>
+
+  <link rel="stylesheet" href="/assets/css/photography.css">
 <script>
   (function () {
+    // the opt-in, written here rather than in the stylesheet (2026-10-13): without a script nothing would skip the
+    // transition on the intro's page, so the fade belongs to scripted pages only
+    var vt = document.createElement('style');
+    vt.textContent = '@view-transition{navigation:auto}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}';
+    document.head.appendChild(vt);
     if (!('onpagereveal' in window)) return;
     var sections = ["/", "/blog/", "/talks/", "/photography/", "/about/"];
-    var path = location.pathname, play = false;
+    var intro = false;
     try {
       var v = JSON.parse(localStorage.getItem('sig-intro'));
       var live = v && typeof v.t === 'number' && Date.now() - v.t <= 30 * 60 * 1000;
-      play = !!live && sections.indexOf(path) > -1 && !(v.pages && v.pages[path]);
+      intro = !live && sections.indexOf(location.pathname) > -1;
     } catch (e) {}
     window.addEventListener('pagereveal', function (e) {
-      if (!e.viewTransition || play) return;
+      if (!e.viewTransition || !intro) return;
       e.viewTransition.ready.catch(function () {});   // a skipped transition rejects its ready promise; unhandled, Chrome logs it as an error
       e.viewTransition.skipTransition();
     });
@@ -141,15 +166,24 @@
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
     function finish() { if (done) return; done = true; leave(550); }
+    // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
+    // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
+    // under the fade instead of running on beneath it.
+    function skip() {
+      if (done) return; done = true;
+      var strokes = el.querySelectorAll('.sig-intro__stroke');
+      for (var i = 0; i < strokes.length; i++) { var v = getComputedStyle(strokes[i]).strokeDashoffset; strokes[i].style.transition = 'none'; strokes[i].style.strokeDashoffset = v; }
+      leave(300);
+    }
     // A plain key ends the intro early. A modifier on its own, or a key held with Command, Control or
     // Option, is a shortcut for the browser or the system (a window manager's Command-Shift-arrow snaps
     // the window) and must not: the owner saw the intro cut short that way (2026-10-10).
     document.addEventListener('keydown', function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(Shift|Meta|Control|Alt|CapsLock|Fn|Tab|Dead|Unidentified)$/.test(e.key)) return;
-      finish();
+      skip();
     });
-    el.addEventListener('click', finish);
+    el.addEventListener('click', skip);
     // The fade waits for the pen itself: the last stroke's transition ends, then the hold, then the fade.
     // A clock started here would run on while a window drag, a background tab or a slow first paint
     // held the frames back, and the overlay faded over an unfinished signature (owner's report, 2026-10-10).
@@ -163,17 +197,28 @@
   })();
 </script>
 
+    <noscript>
+  <p class="noscript-banner"><svg class="icon icon-info noscript-banner__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/info.svg#info"/></svg><span>Some features of this website need JavaScript, including the blog’s search, the photo viewer, and remembering the chosen theme. Everything else works.</span></p>
+</noscript>
+
 
     
+<a class="skip-link" href="#main">Skip to Content</a>
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
-    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin">
+    <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
   </a>
   <button class="site-strip__toggle" type="button" aria-expanded="false" aria-controls="site-menu">
     <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
     <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
     <span>Menu</span>
   </button>
+  <input class="site-strip__check" type="checkbox" id="site-menu-check" aria-controls="site-menu">
+  <label class="site-strip__toggle site-strip__toggle--label" for="site-menu-check">
+    <svg class="icon icon-menu site-strip__toggle-open" aria-hidden="true" focusable="false"><use href="/assets/images/icons/menu.svg#menu"/></svg>
+    <svg class="icon icon-cross site-strip__toggle-close" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg>
+    <span>Menu</span>
+  </label>
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
@@ -190,36 +235,49 @@
   </div>
 </nav>
 
-    <div class="page-photography-gallery">
+    <div class="page-photography-gallery" data-gallery="finland">
   <header class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
-    <a class="photo-nav__btn" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="">France</a>
-    <a class="photo-nav__btn" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="">UK</a>
-    <a class="photo-nav__btn" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="">Spain</a>
-    <a class="photo-nav__btn photo-nav__btn--active" href="/photography/gallery/finland/" aria-current="page"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="">Finland</a>
-    <a class="photo-nav__btn" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="">Switzerland</a>
-    <a class="photo-nav__btn" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="">USA</a>
-    <a class="photo-nav__btn" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
-    <a class="photo-nav__btn" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg>Instagram</a>
+    <details class="photo-nav__menu">
+      <summary class="photo-nav__btn photo-nav__summary"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Galleries<span class="photo-nav__hidden">, Finland open</span><svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
+      <div class="photo-nav__list">
+        <a class="photo-nav__item" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="" width="140" height="110">France</a>
+        <a class="photo-nav__item" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="" width="140" height="110">UK</a>
+        <a class="photo-nav__item" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</a>
+        <a class="photo-nav__item" href="/photography/gallery/finland/" aria-current="page"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</a>
+        <a class="photo-nav__item" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</a>
+        <a class="photo-nav__item" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</a>
+      </div>
+    </details>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/france/"><img class="photo-nav__flag" src="/assets/images/flags/france.svg" alt="" width="140" height="110">France</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/uk/"><img class="photo-nav__flag" src="/assets/images/flags/uk.svg" alt="" width="140" height="110">UK</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/spain/"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</a>
+    <a class="photo-nav__btn photo-nav__country photo-nav__btn--active" href="/photography/gallery/finland/" aria-current="page"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/switzerland/"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</a>
+    <a class="photo-nav__btn photo-nav__country" href="/photography/gallery/usa/"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</a>
+    <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
+    <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
 </header>
 
 
-  <main>
-    <section class="gallery-intro">
-      <div class="container">
-  <h1><img class="gallery-flag" src="/assets/images/flags/finland.svg" alt="">Finland</h1>
-  
-  <p>An invitation took me to Finland during a summer. From its capital, <a href="#Helsinki" title="Helsinki">Helsinki</a>, to the famous Archipelago, I was lucky to see the summer nights, when the sky is never fully dark and the blue hour stretches on for a while.</p>
+  <main id="main">
 
-  <p>The light is like nowhere else, and the city's buildings, rich in history, sit in a mood somewhere between sunset and blue hour.</p>
+
+    <section class="gal-open">
+      <div class="gal-open__maps" aria-hidden="true"><div class="gal-open__grid"></div>
+<svg class="hm" viewBox="-95.9 -89.9 1216.2 1217.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/><text class="hm__sea" style="font-size:31.5px" x="219.1" y="764.8">Gulf of Bothnia</text><text class="hm__sea" style="font-size:31.5px" x="540.6" y="1037.2">Gulf of Finland</text></svg><svg class="hm-compass" viewBox="-75 -112 150 187" aria-hidden="true" focusable="false"><g class="hm__compass"><circle cx="0" cy="0" r="43.4"/><circle cx="0" cy="0" r="46.2"/><path d="M0 0L-3.5 -8.4L0 -70L3.5 -8.4ZM0 0L3.5 -8.4L22.3 -22.3L8.4 -3.5ZM0 0L8.4 -3.5L70 0L8.4 3.5ZM0 0L8.4 3.5L22.3 22.3L3.5 8.4ZM0 0L3.5 8.4L0 70L-3.5 8.4ZM0 0L-3.5 8.4L-22.3 22.3L-8.4 3.5ZM0 0L-8.4 3.5L-70 0L-8.4 -3.5ZM0 0L-8.4 -3.5L-22.3 -22.3L-3.5 -8.4Z"/><text x="0" y="-82">N</text></g></svg>
 </div>
-
-      <hr>
+      <div class="container">
+        <h1><img class="gallery-flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</h1>
+        <p class="gal-open__lede">An invitation took me to Finland during a summer.</p>
+      </div>
     </section>
     <article>
       <section id="Helsinki">
   <div class="container container-photography">
+    <svg class="sec-map sec-map--l" viewBox="328.2 807.7 171.5 372.8" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="447.1" y="985.4" width="9" height="9"/></svg>
+
     <div class="row row-bottom location">
       <div class="column">
         <h2>
@@ -229,43 +287,92 @@
       </div>
     </div>
 
-    <div class="row padded">
-      <div class="column">
-        <a href="/assets/images/photography/galleries/finland/helsinki/vuosaari-bay.jpg" title="Vuosaari Bay" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="vuosaari-bay" data-pswp-srcset="/assets/images/photography/galleries/finland/helsinki/vuosaari-bay-1600.jpg 1600w, /assets/images/photography/galleries/finland/helsinki/vuosaari-bay.jpg 2560w">
-          <picture>
-            <source type="image/webp" srcset="/assets/images/photography/galleries/finland/helsinki/vuosaari-bay-1080.webp">
-            <source type="image/jpeg" srcset="/assets/images/photography/galleries/finland/helsinki/vuosaari-bay-1080.jpg">
-            <img fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/finland/helsinki/vuosaari-bay-1080.jpg" alt="Vuosaari and its bay from above at blue hour, Helsinki">
-          </picture>
-        </a>
+    <div class="gal-grid">
+      <div class="gal-cell">
+        <a href="/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour.jpg" title="The Lights of Vuosaari" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="helsinki-vuosaari-aerial-blue-hour" data-pswp-srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-1600.jpg 1600w, /assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-1600.avif 1600w, /assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-2560.avif 2560w">
+            <picture>
+              <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-640.avif 640w, /assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-1200.avif 1200w">
+              <img fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/finland/helsinki/helsinki-vuosaari-aerial-blue-hour-1080.jpg" alt="Vuosaari and its bay from above at blue hour, Helsinki">
+            </picture>
+          </a>
       </div>
+      <div class="gal-cell">
+        <a href="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk.jpg" title="Helsinki Holiday" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="helsinki-holiday-restaurant-dusk" data-pswp-srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-1600.jpg 1600w, /assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-1600.avif 1600w, /assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-2560.avif 2560w">
+            <picture>
+              <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-640.avif 640w, /assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-1200.avif 1200w">
+              <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-restaurant-dusk-1080.jpg" alt="The brick front and terrace of the Holiday restaurant at dusk, Helsinki">
+            </picture>
+          </a>
+      </div>
+    </div>
+  </div>
+</section>
 
+      
+<div class="gal-river" role="separator" style="--w: 41.4rem"><svg viewBox="0 -2 480 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g transform="translate(0 1.5)"><g class="gal-river__side"><path d="M298.3 19.1L296.8 20.6L295.1 21.9L293.6 23.3L291.8 24.5L289.9 25.4L287.9 26.2L286 27.1L284 27.9L282 28.5L280 29.1"/><path d="M363.4 9.4L361.9 11.3L360.3 13.1L358.8 15L357.4 17L356.1 19L354.5 20.9L352.9 22.7L351.3 24.5L349.7 26.4L348.2 28.3"/><path d="M120 9.3L116.8 8.1L113.4 7.5L110 7.4L106.5 7.3L103.1 7.1L99.7 7L96.2 7.2L92.9 7.9L89.6 9L86.4 10.1"/><path d="M229.7 23.4L226.2 20.2L222.7 16.8L219.5 13.3L215.9 10.1L212.2 7.1L208.2 4.4L203.9 2.2L199.4 0.6L194.8 -0.8L190.2 -2.2"/><path d="M421.7 16.7L419.2 17.8L416.6 18.8L413.9 19.4L411.2 19.7L408.4 20L405.7 20.2L402.9 20.5L400.2 20.5L397.4 20.5L394.7 20.2"/></g><g class="gal-river__stem"><path style="stroke-width:0.29px" d="M0 20.8L3.4 21.4L6.9 22.4L10.3 22.8L13.7 23.4"/><path style="stroke-width:0.31px" d="M13.7 23.4L17.1 23.5L20.6 24.1L24 24.4L27.4 24.1"/><path style="stroke-width:0.33px" d="M27.4 24.1L30.9 23.9L34.3 24.2L37.7 24.2L41.1 24"/><path style="stroke-width:0.35px" d="M41.1 24L44.6 23.7L48 23.4L51.4 23.3L54.9 22.4"/><path style="stroke-width:0.37px" d="M54.9 22.4L58.3 21.9L61.7 21.8L65.1 21.5L68.6 20.2"/><path style="stroke-width:0.39px" d="M68.6 20.2L72 19.6L75.4 19.1L78.9 18.1L82.3 17.2"/><path style="stroke-width:0.41px" d="M82.3 17.2L85.7 16.9L89.1 15.6L92.6 14.8L96 14"/><path style="stroke-width:0.43px" d="M96 14L99.4 13.4L102.9 12.7L106.3 11.9L109.7 11.4"/><path style="stroke-width:0.45px" d="M109.7 11.4L113.1 10.7L116.6 10.1L120 9.3L123.4 8.8"/><path style="stroke-width:0.47px" d="M123.4 8.8L126.9 8.4L130.3 8.3L133.7 8.1L137.1 8"/><path style="stroke-width:0.49px" d="M137.1 8L140.6 7.8L144 8L147.4 8.1L150.9 8.2"/><path style="stroke-width:0.51px" d="M150.9 8.2L154.3 8.8L157.7 9L161.1 9.3L164.6 9.6"/><path style="stroke-width:0.53px" d="M164.6 9.6L168 10.2L171.4 10.9L174.9 11.8L178.3 12"/><path style="stroke-width:0.55px" d="M178.3 12L181.7 13L185.1 13.5L188.6 14.4L192 15.5"/><path style="stroke-width:0.58px" d="M192 15.5L195.4 16.4L198.9 17.2L202.3 18.4L205.7 19.1"/><path style="stroke-width:0.60px" d="M205.7 19.1L209.1 19.7L212.6 20.5L216 21.4L219.4 22"/><path style="stroke-width:0.62px" d="M219.4 22L222.9 22.4L226.3 23L229.7 23.4L233.1 24.3"/><path style="stroke-width:0.64px" d="M233.1 24.3L236.6 24L240 24.8L243.4 24.9L246.9 25.2"/><path style="stroke-width:0.66px" d="M246.9 25.2L250.3 24.8L253.7 25.1L257.1 25.2L260.6 24.9"/><path style="stroke-width:0.68px" d="M260.6 24.9L264 24.5L267.4 24.4L270.9 23.8L274.3 23.3"/><path style="stroke-width:0.70px" d="M274.3 23.3L277.7 22.3L281.1 22.4L284.6 21.6L288 21.2"/><path style="stroke-width:0.72px" d="M288 21.2L291.4 20.3L294.9 19.7L298.3 19.1L301.7 18.6"/><path style="stroke-width:0.74px" d="M301.7 18.6L305.1 17.8L308.6 17L312 16.3L315.4 15.6"/><path style="stroke-width:0.76px" d="M315.4 15.6L318.9 15.1L322.3 14L325.7 13.2L329.1 12.8"/><path style="stroke-width:0.78px" d="M329.1 12.8L332.6 12.6L336 11.6L339.4 11.2L342.9 10.2"/><path style="stroke-width:0.80px" d="M342.9 10.2L346.3 10.2L349.7 10.2L353.1 9.5L356.6 9.1"/><path style="stroke-width:0.82px" d="M356.6 9.1L360 8.9L363.4 9.4L366.9 9L370.3 9.6"/><path style="stroke-width:0.84px" d="M370.3 9.6L373.7 9.5L377.1 10.2L380.6 10.1L384 10.3"/><path style="stroke-width:0.86px" d="M384 10.3L387.4 10.7L390.9 11L394.3 11.1L397.7 11.7"/><path style="stroke-width:0.88px" d="M397.7 11.7L401.1 12.7L404.6 13.2L408 14L411.4 14.2"/><path style="stroke-width:0.90px" d="M411.4 14.2L414.9 15.2L418.3 15.9L421.7 16.7L425.1 17.5"/><path style="stroke-width:0.92px" d="M425.1 17.5L428.6 17.9L432 19.2L435.4 19.3L438.9 20.1"/><path style="stroke-width:0.94px" d="M438.9 20.1L442.3 20.8L445.7 21.3L449.1 21.5L452.6 22.2"/><path style="stroke-width:0.96px" d="M452.6 22.2L456 22.3L459.4 23.2L462.9 23.2L466.3 23.9"/><path style="stroke-width:0.98px" d="M466.3 23.9L469.7 24L473.1 24.7L476.6 24.5L480 23.8"/><path style="stroke-width:0.44px" d="M178.3 12L181.7 12.2L185.1 11.8L188.6 11.9L192 12.3L195.4 12.5L198.9 12.7L202.3 13.4L205.7 13.7L209.1 14.1L212.6 14.6L216 15.5L219.4 16.2L222.9 16.8L226.3 17.6L229.7 18.4L233.1 19.8L236.6 20.1L240 21.6L243.4 22.4L246.9 23.5L250.3 23.9L253.7 25.1"/></g></g></svg></div>
+
+      
+<section id="Turku">
+  <div class="container container-photography">
+    <svg class="sec-map sec-map--r" viewBox="260.6 784.2 171.5 372.8" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="304.1" y="961.9" width="9" height="9"/></svg>
+
+    <div class="row row-bottom location">
       <div class="column">
-        <a href="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday.jpg" title="Helsinki Holiday" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="helsinki-holiday" data-pswp-srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-1600.jpg 1600w, /assets/images/photography/galleries/finland/helsinki/helsinki-holiday.jpg 2560w">
-          <picture>
-            <source type="image/webp" srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-1080.webp">
-            <source type="image/jpeg" srcset="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-1080.jpg">
-            <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/finland/helsinki/helsinki-holiday-1080.jpg" alt="The brick front and terrace of the Holiday restaurant at dusk, Helsinki">
-          </picture>
-        </a>
+        <h2>
+          <span><svg class="icon icon-location" aria-hidden="true" focusable="false"><use href="/assets/images/icons/location.svg#location"/></svg></span>
+          Turku
+        </h2>
       </div>
     </div>
 
+    <div class="gal-grid">
+      <div class="gal-cell">
+        <a href="/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum.jpg" title="The Glass Rotunda" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="turku-aboa-vetus-ars-nova-museum" data-pswp-srcset="/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-1600.jpg 1600w, /assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-1600.avif 1600w, /assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-2560.avif 2560w">
+            <picture>
+              <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-640.avif 640w, /assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-1200.avif 1200w">
+              <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/finland/turku/turku-aboa-vetus-ars-nova-museum-1080.jpg" alt="The round glass pavilion of the Aboa Vetus Ars Nova museum in Turku, lit warm at blue hour">
+            </picture>
+          </a>
+      </div>
+    </div>
   </div>
 </section>
 
     </article>
+
+    <section class="gal-story">
+      <div class="gal-story__bg" aria-hidden="true"><div class="gal-open__grid"></div>
+<svg class="hm" viewBox="-95.9 -89.9 1216.2 1217.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/></svg>
+</div>
+      <div class="container">
+        <div class="gal-story__text">
+          <h2 class="gal-story__title">About this Gallery</h2>
+          
+<p>From its capital, <a href="#Helsinki" title="Helsinki">Helsinki</a>, to <a href="#Turku" title="Turku">Turku</a> and the famous Archipelago, I was lucky to see the summer nights, when the sky is never fully dark and the blue hour stretches on for a while.</p>
+
+<p>The light is like nowhere else, and the city’s buildings, rich in history, sit in a mood somewhere between sunset and blue hour.</p>
+
+        </div>
+        <div class="gal-story__map">
+<figure class="em" style="--ar: 0.640"><svg class="em__map" viewBox="40.4 -29.9 797.6 1246.5" role="img" aria-label="Map of Finland with the places of this gallery">
+<use class="em__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/fi.svg#land"/>
+<a class="em__pin" href="#Helsinki" data-n="1" aria-label="Helsinki"><title>Helsinki</title><path class="em__lead" d="M451.6 994.1L414.5 1040.6L134.4 1040.6"/><circle class="em__dot" cx="451.6" cy="994.1" r="6"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__disc" cx="106.4" cy="1040.6" r="28"/><text x="106.4" y="1050.1">1</text></a>
+<a class="em__pin" href="#Turku" data-n="2" aria-label="Turku"><title>Turku</title><path class="em__lead" d="M308.6 970.6L302.6 970.6L134.4 970.6"/><circle class="em__dot" cx="308.6" cy="970.6" r="6"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__disc" cx="106.4" cy="970.6" r="28"/><text x="106.4" y="980.1">2</text></a>
+<g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="768" cy="1171.6" r="27.3"/><circle cx="768" cy="1171.6" r="29"/><path d="M768 1171.6L765.8 1166.3L768 1127.6L770.2 1166.3ZM768 1171.6L770.2 1166.3L782 1157.6L773.3 1169.4ZM768 1171.6L773.3 1169.4L812 1171.6L773.3 1173.8ZM768 1171.6L773.3 1173.8L782 1185.6L770.2 1176.9ZM768 1171.6L770.2 1176.9L768 1215.6L765.8 1176.9ZM768 1171.6L765.8 1176.9L754 1185.6L762.7 1173.8ZM768 1171.6L762.7 1173.8L724 1171.6L762.7 1169.4ZM768 1171.6L762.7 1169.4L754 1157.6L765.8 1166.3Z"/><text x="768" y="1115.6">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</p><ol class="em__key"><li><a href="#Helsinki" data-n="1"><span class="em__num">1</span><span>Helsinki</span></a></li><li><a href="#Turku" data-n="2"><span class="em__num">2</span><span>Turku</span></a></li></ol></figcaption></figure>
+</div>
+      </div>
+    </section>
 
     
 <nav class="gallery-pager" aria-label="Previous and next gallery">
   <div class="container container-photography">
     <a class="gallery-pager__link" href="/photography/gallery/spain/">
       <span class="gallery-pager__label">Previous Gallery</span>
-      <span class="gallery-pager__name"><img class="gallery-pager__flag" src="/assets/images/flags/spain.svg" alt="">Spain</span>
+      <span class="gallery-pager__name"><span class="nw"><img class="gallery-pager__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</span></span>
     </a>
     <a class="gallery-pager__link gallery-pager__link--next" href="/photography/gallery/switzerland/">
       <span class="gallery-pager__label">Next Gallery</span>
-      <span class="gallery-pager__name"><img class="gallery-pager__flag" src="/assets/images/flags/switzerland.svg" alt="">Switzerland</span>
+      <span class="gallery-pager__name"><span class="nw"><img class="gallery-pager__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</span></span>
     </a>
   </div>
 </nav>
@@ -283,17 +390,17 @@
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy">© 2015–2026 <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
 
-<button id="btn-scroll-top" type="button" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
-</button>
+</a>
 
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/nav.js"></script>
