@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Behind the Camera | Simon Robin
@@ -144,6 +145,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -164,7 +166,7 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
     </div>
@@ -174,9 +176,10 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div class="page-photography-gallery page-photography-about">
-  <header class="photo-header">
+  <div class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
     <details class="photo-nav__menu">
       <summary class="photo-nav__btn photo-nav__summary">Galleries<svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
@@ -198,7 +201,7 @@
     <a class="photo-nav__btn photo-nav__btn--about photo-nav__btn--active" href="/photography/behind-the-camera/" aria-current="page"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
     <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
-</header>
+</div>
 
 
   <main id="main">
@@ -206,7 +209,7 @@
   <div class="container">
     <div class="about-page__head">
     <div class="about-page__photo">
-      <img src="/assets/images/photography/behind-the-camera/portrait.webp" width="1536" height="1024" alt="Simon Robin’s Instagram profile picture, a LEGO mosaic" decoding="async">
+      <img src="/assets/images/photography/behind-the-camera/portrait.webp" width="1536" height="1024" alt="Simon Robin’s Instagram profile picture, a LEGO mosaic" fetchpriority="high" decoding="async">
     </div>
 
     <h1 class="about-page__title">Behind the Camera</h1>
@@ -233,24 +236,24 @@
     <h2 id="how-it-started">How It Started</h2>
     <p>I’ve always liked taking pictures. As a kid, I was the one in charge of taking the family photos, trying to get them sharp, not blurry, and memorable. This carried on with the arrival of smartphones, where I took pictures from time to time.</p>
 
-    <p>Around the beginning of 2017, I thought it was time to treat photography as an art, not just a source of random memories. I was about to leave for <a href="/photography/gallery/usa/#Seattle" title="Seattle">Seattle</a> for a month, and that was when I decided to jump. I bought a mirrorless camera and a tripod a few days before my departure, and I discovered a new world: choosing a proper subject, choosing the time of day, learning how to adjust the exposure, and how to capture a scene with a lot of dynamic range.</p>
+    <p>Around the beginning of 2017, I thought it was time to treat photography as an art, not just a source of random memories. I was about to leave for <a href="/photography/gallery/usa/#Seattle">Seattle</a> for a month, and that was when I decided to jump. I bought a mirrorless camera and a tripod a few days before my departure, and I discovered a new world: choosing a proper subject, choosing the time of day, learning how to adjust the exposure, and how to capture a scene with a lot of dynamic range.</p>
 
-    <p>As I was living in <a href="/photography/gallery/uk/" title="London">London</a> at the time, I continued my journey and focused mainly on cityscapes, trying to capture some of the most beautiful monuments of the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>. After five years abroad, I decided to come back to <a href="/photography/gallery/france/" title="France">France</a>, my home country.</p>
+    <p>As I was living in <a href="/photography/gallery/uk/">London</a> at the time, I continued my journey and focused mainly on cityscapes, trying to capture some of the most beautiful monuments of the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>. After five years abroad, I decided to come back to <a href="/photography/gallery/france/">France</a>, my home country.</p>
 
-    <p>That is when I turned to landscapes. The lavender fields of <a href="/photography/gallery/france/#Valensole" title="Valensole">Valensole</a> or the seascapes of the <a href="/photography/gallery/france/#West-Coast" title="West Coast">West Coast</a> were, and still are, absolute treasures to my eyes. From time to time I travel beyond my comfort zone, to <a href="/photography/gallery/spain/" title="Spain">Spain</a>, <a href="/photography/gallery/finland/" title="Finland">Finland</a>, or <a href="/photography/gallery/switzerland/" title="Switzerland">Switzerland</a>, to see a different but equally gorgeous nature, and I keep going back to the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>. Still, I keep being drawn back to the landscapes of <a href="/photography/gallery/france/#Etretat" title="Normandy">Normandy</a> and <a href="/photography/gallery/france/#Finistere" title="Brittany">Brittany</a>.</p>
+    <p>That is when I turned to landscapes. The lavender fields of <a href="/photography/gallery/france/#Valensole">Valensole</a> or the seascapes of the <a href="/photography/gallery/france/#West-Coast">West Coast</a> were, and still are, absolute treasures to my eyes. From time to time I travel beyond my comfort zone, to <a href="/photography/gallery/spain/">Spain</a>, <a href="/photography/gallery/finland/">Finland</a>, or <a href="/photography/gallery/switzerland/">Switzerland</a>, to see a different but equally gorgeous nature, and I keep going back to the <a href="/photography/gallery/uk/" title="United Kingdom">UK</a>. Still, I keep being drawn back to the landscapes of <a href="/photography/gallery/france/#Etretat">Normandy</a> and <a href="/photography/gallery/france/#Finistere">Brittany</a>.</p>
 
     <h2 id="my-inspirations">My Inspirations</h2>
-    <p>Over the years, I’ve been inspired by several photographers. To name a few: <a target="_blank" rel="noopener" href="https://elialocardi.com/" title="Elia Locardi">Elia Locardi</a>, <a target="_blank" rel="noopener" href="https://danielkordan.com/" title="Daniel Kordan">Daniel Kordan</a>, <a target="_blank" rel="noopener" href="https://www.facebook.com/aarondowlingphotos/" title="Aaron Dowling">Aaron Dowling</a>, <a target="_blank" rel="noopener" href="https://thomasheaton.co.uk/" title="Thomas Heaton">Thomas Heaton</a>, <a target="_blank" rel="noopener" href="https://www.nickpagephotography.com/" title="Nick Page">Nick Page</a>, and <a target="_blank" rel="noopener" href="https://www.albertdros.com/" title="Albert Dros">Albert Dros</a>. But the artist who inspired me the most at the time was probably <a target="_blank" rel="noopener" href="https://www.marcadamus.com/" title="Marc Adamus">Marc Adamus</a>.</p>
+    <p>Over the years, I’ve been inspired by several photographers. To name a few: <a target="_blank" rel="noopener" href="https://elialocardi.com/">Elia Locardi</a>, <a target="_blank" rel="noopener" href="https://danielkordan.com/">Daniel Kordan</a>, <a target="_blank" rel="noopener" href="https://www.facebook.com/aarondowlingphotos/">Aaron Dowling</a>, <a target="_blank" rel="noopener" href="https://thomasheaton.co.uk/">Thomas Heaton</a>, <a target="_blank" rel="noopener" href="https://www.nickpagephotography.com/">Nick Page</a>, and <a target="_blank" rel="noopener" href="https://www.albertdros.com/">Albert Dros</a>. But the artist who inspired me the most at the time was probably <a target="_blank" rel="noopener" href="https://www.marcadamus.com/">Marc Adamus</a>.</p>
 
-    <p>Now I feel I’m at a turning point with this hobby. I have the feeling I need to try something different, less tailored to social media algorithms, less epic, probably more minimalist. More time outdoors, less time in post-processing. After talking with photographers like <a target="_blank" rel="noopener" href="https://www.jeanlucgirod.com/" title="Jean-Luc Girod">Jean-Luc Girod</a> and <a target="_blank" rel="noopener" href="https://www.ianlawson.com/" title="Ian Lawson">Ian Lawson</a>, I realized pictures were more than a good composition with plenty of colors. They could be moments in time, with emotions and stories to tell.</p>
+    <p>Now I feel I’m at a turning point with this hobby. I have the feeling I need to try something different, less tailored to social media algorithms, less epic, probably more minimalist. More time outdoors, less time in post-processing. After talking with photographers like <a target="_blank" rel="noopener" href="https://www.jeanlucgirod.com/">Jean-Luc Girod</a> and <a target="_blank" rel="noopener" href="https://www.ianlawson.com/">Ian Lawson</a>, I realized pictures were more than a good composition with plenty of colors. They could be moments in time, with emotions and stories to tell.</p>
 
-    <p>So I’m trying to change my approach. Like many before me, I’m studying the pictures of <a target="_blank" rel="noopener" href="https://www.anseladams.com/" title="Ansel Adams">Ansel Adams</a> and <a target="_blank" rel="noopener" href="https://www.mountainlight.com/" title="Galen Rowell">Galen Rowell</a>, who are now a deep inspiration. Artists like <a target="_blank" rel="noopener" href="https://artwolfe.com/" title="Art Wolfe">Art Wolfe</a>, <a target="_blank" rel="noopener" href="https://jimmychin.com/" title="Jimmy Chin">Jimmy Chin</a>, and <a target="_blank" rel="noopener" href="https://www.krystlewright.com/" title="Krystle Wright">Krystle Wright</a> are the examples I’m trying to follow today.</p>
+    <p>So I’m trying to change my approach. Like many before me, I’m studying the pictures of <a target="_blank" rel="noopener" href="https://www.anseladams.com/">Ansel Adams</a> and <a target="_blank" rel="noopener" href="https://www.mountainlight.com/">Galen Rowell</a>, who are now a deep inspiration. Artists like <a target="_blank" rel="noopener" href="https://artwolfe.com/">Art Wolfe</a>, <a target="_blank" rel="noopener" href="https://jimmychin.com/">Jimmy Chin</a>, and <a target="_blank" rel="noopener" href="https://www.krystlewright.com/">Krystle Wright</a> are the examples I’m trying to follow today.</p>
 
     <h2 id="what-i-carry">What I Carry</h2>
-    <p>Since day one, I’ve used <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/" title="Fujifilm X Series">Fujifilm</a> equipment. I’m the lucky owner of an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/cameras/x-t2/" title="Fujifilm X-T2">X-T2</a>. I shoot mostly with the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/discontinued-lenses/xf10-24mmf4-r-ois/" title="Fujinon XF10-24mmF4 R OIS"><abbr>XF</abbr> 10–24 mm <i>f</i>/4</a>, I never got tired of the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf18-55mmf28-4-r-lm-ois/" title="Fujinon XF18-55mmF2.8-4 R LM OIS"><abbr>XF</abbr> 18–55 mm <i>f</i>/2.8–4</a>, and I acquired an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf70-300mmf4-56-r-lm-ois-wr/" title="Fujinon XF70-300mmF4-5.6 R LM OIS WR"><abbr>XF</abbr> 70–300 mm <i>f</i>/4–5.6</a> for very isolated landscapes. My <a target="_blank" rel="noopener" href="https://www.gitzo.com/global/tripod-kit-traveler-series-1-4-sections-gk1545t-82tqd/" title="Gitzo Traveler GK1545T">Gitzo <abbr>GK1545T</abbr></a> tripod has followed me around the world without a single issue. A few years ago I switched to <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/" title="Really Right Stuff">Really Right Stuff</a> ball heads, such as the <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/bh-40/" title="Really Right Stuff BH-40"><abbr>BH</abbr>-40</a>, and I’m still exploring all their possibilities.</p>
+    <p>Since day one, I’ve used <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/" title="Fujifilm X Series">Fujifilm</a> equipment. I’m the lucky owner of an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/cameras/x-t2/" title="Fujifilm X-T2">X-T2</a>. I shoot mostly with the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/discontinued-lenses/xf10-24mmf4-r-ois/" title="Fujinon XF10-24mmF4 R OIS"><abbr>XF</abbr> 10–24 mm <i>f</i>/4</a>, I never got tired of the <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf18-55mmf28-4-r-lm-ois/" title="Fujinon XF18-55mmF2.8-4 R LM OIS"><abbr>XF</abbr> 18–55 mm <i>f</i>/2.8–4</a>, and I acquired an <a target="_blank" rel="noopener" href="https://www.fujifilm-x.com/en-gb/products/lenses/xf70-300mmf4-56-r-lm-ois-wr/" title="Fujinon XF70-300mmF4-5.6 R LM OIS WR"><abbr>XF</abbr> 70–300 mm <i>f</i>/4–5.6</a> for very isolated landscapes. My <a target="_blank" rel="noopener" href="https://www.gitzo.com/global/tripod-kit-traveler-series-1-4-sections-gk1545t-82tqd/" title="Gitzo Traveler GK1545T">Gitzo <abbr>GK1545T</abbr></a> tripod has followed me around the world without a single issue. A few years ago I switched to <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/">Really Right Stuff</a> ball heads, such as the <a target="_blank" rel="noopener" href="https://reallyrightstuff.com/bh-40/" title="Really Right Stuff BH-40"><abbr>BH</abbr>-40</a>, and I’m still exploring all their possibilities.</p>
 
     <h2 id="say-hi">Say Hi</h2>
-    <p>I do have an <a target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/" title="Instagram">Instagram account</a>, even though I’m a very infrequent user. The <a href="/photography/#galleries" title="Galleries">galleries</a> on this website contain the pieces of my work I found the most interesting to share, but for the most curious, additional pictures can be found there. Either way, feel free to say hi!</p>
+    <p>I do have an <a target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/" title="Instagram">Instagram account</a>, even though I’m a very infrequent user. The <a href="/photography/#galleries">galleries</a> on this website contain the pieces of my work I found the most interesting to share, but for the most curious, additional pictures can be found there. Either way, feel free to say hi!</p>
     </div>
   </div>
 </article>
@@ -263,26 +266,24 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
 
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 
     <script src="/assets/js/scroll.js"></script>
     <script src="/assets/js/nav.js"></script>
-    <script type="application/json" id="photo-meta">{}</script>
-    <script type="module" src="/assets/js/photoswipe-init.js"></script>
   </body>
 </html>

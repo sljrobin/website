@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       USA · Photography | Simon Robin
@@ -224,6 +225,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -244,7 +246,7 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
     </div>
@@ -254,9 +256,10 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div class="page-photography-gallery" data-gallery="usa">
-  <header class="photo-header">
+  <div class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
     <details class="photo-nav__menu">
       <summary class="photo-nav__btn photo-nav__summary"><img class="photo-nav__flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">Galleries<span class="photo-nav__hidden">, USA open</span><svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
@@ -278,7 +281,7 @@
     <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
     <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
-</header>
+</div>
 
 
   <main id="main">
@@ -353,15 +356,15 @@
         <div class="gal-story__text">
           <h2 class="gal-story__title">About this Gallery</h2>
           
-<p>A few days before leaving for <a href="#Seattle" title="Seattle">Seattle</a>, I decided to take photography seriously and bought a mirrorless camera: I knew I wouldn’t fly to this country again for a while, so the occasion was perfect. This trip taught me the basics of cityscapes, chasing the good light, and trying different exposures.</p>
+<p>A few days before leaving for <a href="#Seattle">Seattle</a>, I decided to take photography seriously and bought a mirrorless camera: I knew I wouldn’t fly to this country again for a while, so the occasion was perfect. This trip taught me the basics of cityscapes, chasing the good light, and trying different exposures.</p>
 
 <p>Besides Pike Place Market, the Aquarium, and the ports with their beautiful sailing boats, I tried to capture the magnificence of the iconic Space Needle, which I was lucky enough to admire from my workplace, and from Kerry Park at sunset and blue hour.</p>
 
         </div>
         <div class="gal-story__map">
-<figure class="em" style="--ar: 1.482"><svg class="em__map" viewBox="-175.8 152 1229.8 830" role="img" aria-label="Map of the USA with the places of this gallery">
+<figure class="em" style="--ar: 1.482"><svg class="em__map" viewBox="-175.8 152 1229.8 830" role="group" aria-label="Map of the USA with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/us.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/us.svg#land"/>
-<a class="em__pin" href="#Seattle" data-n="1" aria-label="Seattle"><title>Seattle</title><path class="em__lead" d="M42.7 237.7L36.7 237.7L-81.8 237.7"/><circle class="em__dot" cx="42.7" cy="237.7" r="6"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__disc" cx="-109.8" cy="237.7" r="28"/><text x="-109.8" y="247.3">1</text></a>
+<a class="em__pin" href="#Seattle" data-n="1" tabindex="-1" aria-hidden="true"><title>Seattle</title><path class="em__lead" d="M42.7 237.7L36.7 237.7L-81.8 237.7"/><circle class="em__dot" cx="42.7" cy="237.7" r="6"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__disc" cx="-109.8" cy="237.7" r="28"/><text x="-109.8" y="247.3">1</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="984" cy="937" r="27.3"/><circle cx="984" cy="937" r="29"/><path d="M984 937L981.8 931.7L984 893L986.2 931.7ZM984 937L986.2 931.7L998 923L989.3 934.8ZM984 937L989.3 934.8L1028 937L989.3 939.2ZM984 937L989.3 939.2L998 951L986.2 942.3ZM984 937L986.2 942.3L984 981L981.8 942.3ZM984 937L981.8 942.3L970 951L978.7 939.2ZM984 937L978.7 939.2L940 937L978.7 934.8ZM984 937L978.7 934.8L970 923L981.8 931.7Z"/><text x="984" y="881">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</p><ol class="em__key"><li><a href="#Seattle" data-n="1"><span class="em__num">1</span><span>Seattle</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -389,19 +392,19 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 

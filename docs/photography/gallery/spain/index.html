@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Spain · Photography | Simon Robin
@@ -281,6 +282,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -301,7 +303,7 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
     </div>
@@ -311,9 +313,10 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div class="page-photography-gallery" data-gallery="spain">
-  <header class="photo-header">
+  <div class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
     <details class="photo-nav__menu">
       <summary class="photo-nav__btn photo-nav__summary"><img class="photo-nav__flag" src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Galleries<span class="photo-nav__hidden">, Spain open</span><svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
@@ -335,7 +338,7 @@
     <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
     <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
-</header>
+</div>
 
 
   <main id="main">
@@ -455,7 +458,7 @@
         <div class="gal-story__text">
           <h2 class="gal-story__title">About this Gallery</h2>
           
-<p>Having decided it was time to dive into the genre, I dedicated a whole road trip to it and drove along the <a href="#Northern-Coast" title="Northern Coast">Northern Coast</a>, from the flysch of Zumaia to the beaches of Cantabria, with a stop at the iconic <a href="#San-Juan-de-Gaztelugatxe" title="San Juan de Gaztelugatxe">San Juan de Gaztelugatxe</a>.</p>
+<p>Having decided it was time to dive into the genre, I dedicated a whole road trip to it and drove along the <a href="#Northern-Coast">Northern Coast</a>, from the flysch of Zumaia to the beaches of Cantabria, with a stop at the iconic <a href="#San-Juan-de-Gaztelugatxe">San Juan de Gaztelugatxe</a>.</p>
 
 <p>New challenges came with this adventure: planning the shots, reading the weather, getting up while the sun is still asleep, or standing in the water for hours to capture a sunset.</p>
 
@@ -463,10 +466,10 @@
 
         </div>
         <div class="gal-story__map">
-<figure class="em" style="--ar: 1.479"><svg class="em__map" viewBox="-176 101.7 1376 930.1" role="img" aria-label="Map of Spain with the places of this gallery">
+<figure class="em" style="--ar: 1.479"><svg class="em__map" viewBox="-176 101.7 1376 930.1" role="group" aria-label="Map of Spain with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/es.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/es.svg#land"/>
-<a class="em__pin" href="#Northern-Coast" data-n="1" aria-label="Northern Coast"><title>Northern Coast</title><path class="em__lead" d="M529.3 183.2L535.3 183.2L1106 183.2"/><circle class="em__dot" cx="529.3" cy="183.2" r="6"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__disc" cx="1134" cy="183.2" r="28"/><text x="1134" y="192.7">1</text></a>
-<a class="em__pin" href="#San-Juan-de-Gaztelugatxe" data-n="2" aria-label="San Juan de Gaztelugatxe"><title>San Juan de Gaztelugatxe</title><path class="em__lead" d="M489.5 167.7L483.5 167.7L-82 167.7"/><circle class="em__dot" cx="489.5" cy="167.7" r="6"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__disc" cx="-110" cy="167.7" r="28"/><text x="-110" y="177.2">2</text></a>
+<a class="em__pin" href="#Northern-Coast" data-n="1" tabindex="-1" aria-hidden="true"><title>Northern Coast</title><path class="em__lead" d="M529.3 183.2L535.3 183.2L1106 183.2"/><circle class="em__dot" cx="529.3" cy="183.2" r="6"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__disc" cx="1134" cy="183.2" r="28"/><text x="1134" y="192.7">1</text></a>
+<a class="em__pin" href="#San-Juan-de-Gaztelugatxe" data-n="2" tabindex="-1" aria-hidden="true"><title>San Juan de Gaztelugatxe</title><path class="em__lead" d="M489.5 167.7L483.5 167.7L-82 167.7"/><circle class="em__dot" cx="489.5" cy="167.7" r="6"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__disc" cx="-110" cy="167.7" r="28"/><text x="-110" y="177.2">2</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="1130" cy="986.8" r="27.3"/><circle cx="1130" cy="986.8" r="29"/><path d="M1130 986.8L1127.8 981.5L1130 942.8L1132.2 981.5ZM1130 986.8L1132.2 981.5L1144 972.8L1135.3 984.6ZM1130 986.8L1135.3 984.6L1174 986.8L1135.3 989ZM1130 986.8L1135.3 989L1144 1000.8L1132.2 992.1ZM1130 986.8L1132.2 992.1L1130 1030.8L1127.8 992.1ZM1130 986.8L1127.8 992.1L1116 1000.8L1124.7 989ZM1130 986.8L1124.7 989L1086 986.8L1124.7 984.6ZM1130 986.8L1124.7 984.6L1116 972.8L1127.8 981.5Z"/><text x="1130" y="930.8">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</p><ol class="em__key"><li><a href="#Northern-Coast" data-n="1"><span class="em__num">1</span><span>Northern Coast</span></a></li><li><a href="#San-Juan-de-Gaztelugatxe" data-n="2"><span class="em__num">2</span><span>San Juan de Gaztelugatxe</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -494,19 +497,19 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 

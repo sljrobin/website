@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Moog EXO Cameras: 4 CVEs in an IOActive Advisory | Simon Robin
@@ -150,6 +151,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -168,7 +170,7 @@
   <div class="site-strip__menu" id="site-menu">
     <div class="site-strip__sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
-    <a href="/blog/" class="is-current" aria-current="page"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/blog/" class="is-current" aria-current="true"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
     <a href="/photography/"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
@@ -180,24 +182,28 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div id="page-blog-post">
   
-<header class="blog-header">
+<div class="blog-header">
   <nav class="blog-nav" aria-label="Blog">
-    <form class="blog-search" action="/blog/" method="get" role="search">
-      <svg class="icon icon-search blog-search__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/search.svg#search"/></svg>
-      <input class="blog-search__input" type="search" name="q" placeholder="Search" aria-label="Search posts" title="Search posts" autocomplete="off">
-    </form>
+    <search class="blog-search">
+      <form class="blog-search__form" action="/blog/" method="get">
+        <label class="blog-search__label" for="blog-search-q">Search posts</label>
+        <svg class="icon icon-search blog-search__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/search.svg#search"/></svg>
+        <input class="blog-search__input" id="blog-search-q" type="search" name="q" placeholder="Search">
+      </form>
+    </search>
     <button class="blog-nav__btn blog-nav__feed" type="button" popovertarget="feed-panel"><svg class="icon icon-rss blog-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/rss.svg#rss"/></svg>Feed</button>
   </nav>
   <div class="search-panel feed-panel" id="feed-panel" popover role="dialog" aria-label="The blog’s feed">
     <div class="search-panel__head"><p class="search-panel__status feed-panel__title"><span class="feed-panel__icon" aria-hidden="true"><svg class="icon icon-rss" aria-hidden="true" focusable="false"><use href="/assets/images/icons/rss.svg#rss"/></svg></span>Feed</p><button type="button" class="search-panel__close" popovertarget="feed-panel" popovertargetaction="hide" aria-label="Close" title="Close"><svg class="icon icon-cross" aria-hidden="true" focusable="false"><use href="/assets/images/icons/cross.svg#cross"/></svg></button></div>
     <p class="feed-panel__lede">This is the blog’s feed. Copy its address into a feed reader and new posts will reach you there. Nothing to sign up for.</p>
-    <div class="feed-panel__address"><code>https://sljrobin.org/feed.xml</code><button type="button" class="code-copy" aria-label="Copy the address" title="Copy"><svg class="icon icon-copy" aria-hidden="true" focusable="false"><use href="/assets/images/icons/copy.svg#copy"/></svg></button></div>
+    <div class="feed-panel__address"><code>https://sljrobin.org/feed.xml</code><button type="button" class="code-copy" aria-label="Copy the address" title="Copy the address"><svg class="icon icon-copy" aria-hidden="true" focusable="false"><use href="/assets/images/icons/copy.svg#copy"/></svg></button></div>
     <p class="feed-panel__note">For anyone without a reader yet, <a target="_blank" rel="noopener" href="https://aboutfeeds.com/">About Feeds</a> explains what one is and lists a few. The feed itself is <a href="/feed.xml" target="_blank" rel="noopener">plain Atom</a>.</p>
   </div>
-</header>
+</div>
 <script src="/assets/js/search.js" defer></script>
 <script src="/assets/js/feed.js" defer></script>
 
@@ -206,10 +212,10 @@
     <div class="container">
       <article class="post" data-pagefind-body>
         <header class="post__head" data-pagefind-ignore>
-          <div class="post__field" aria-hidden="true"><img src="/assets/images/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras-illustration.svg" width="1200" height="630" alt="" fetchpriority="high" decoding="async" onload="this.classList.add('is-loaded')"></div>
+          <div class="post__field" aria-hidden="true"><img src="/assets/images/blog/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras/disclosing-multiple-vulnerabilities-in-moog-exo-series-cameras-illustration.svg" width="1200" height="630" alt="" fetchpriority="high" decoding="async"></div>
           <h1 data-pagefind-meta="title">Disclosing Multiple Vulnerabilities in Moog EXO Series Cameras</h1>
           <p class="post-meta">
-            <time datetime="2020-06-18T00:00:00+02:00" data-pagefind-meta="date[datetime]">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> Published with <span data-pagefind-meta="venue:IOActive"><a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/" title="IOActive"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></span>
+            <time datetime="2020-06-18T00:00:00+02:00" data-pagefind-meta="date[datetime]">Jun 18, 2020</time> <span class="post-meta__sep" aria-hidden="true">·</span> Published with <span data-pagefind-meta="venue:IOActive"><a class="venue-button venue-button--ioactive" target="_blank" rel="noopener" href="https://www.ioactive.com/"><svg class="icon venue-button__logo venue-button__logo--mark" style="--ratio: 0.73" aria-hidden="true" focusable="false"><use href="/assets/images/icons/ioactive.svg#ioactive"/></svg><span class="venue-button__label">IOActive</span></a></span>
             <span class="post-meta__sep" aria-hidden="true">·</span> <span class="post-meta__read">2 min read</span>
 
           </p>
@@ -323,14 +329,14 @@
 <footer class="site-footer">
   <nav class="site-footer__links" aria-label="Sections">
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
-    <a href="/blog/" class="is-current" aria-current="page"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
+    <a href="/blog/" class="is-current" aria-current="true"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
     <a href="/photography/"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a><span class="site-footer__sep" aria-hidden="true">·</span><label class="theme-switch" title="Dark theme"><input class="theme-switch__input" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme"><svg class="icon icon-moon theme-switch__moon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/moon.svg#moon"/></svg><svg class="icon icon-sun theme-switch__sun" aria-hidden="true" focusable="false"><use href="/assets/images/icons/sun.svg#sun"/></svg></label>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a><span class="site-footer__sep" aria-hidden="true">·</span><label class="theme-switch" title="Dark theme"><input class="theme-switch__input" type="checkbox" role="switch" id="theme-switch" aria-label="Dark theme"><svg class="icon icon-moon theme-switch__moon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/moon.svg#moon"/></svg><svg class="icon icon-sun theme-switch__sun" aria-hidden="true" focusable="false"><use href="/assets/images/icons/sun.svg#sun"/></svg></label>
 </p>
   </div>
 </footer>
@@ -338,7 +344,7 @@
 
 </div>
 
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 

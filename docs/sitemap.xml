@@ -85,13 +85,13 @@
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/provence/valensole-lavender-hot-air-balloons.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/saint-emilion/saint-emilion-chateau-belair-monange.jpg</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/saint-emilion/saint-emilion-vineyards-bell-tower.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/saint-emilion/saint-emilion-chateau-belair-monange-cypresses.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/saint-emilion/saint-emilion-chateau-belair-monange.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/charente-maritime/la-rochelle-old-port-towers.jpg</image:loc>
@@ -103,13 +103,13 @@
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/toulouse/toulouse-chapelle-saint-joseph-sunset.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset.jpg</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/west-coast/batz-sur-mer-cliff-house.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/west-coast/atlantic-coast-wave-between-rocks.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://sljrobin.org/assets/images/photography/galleries/france/west-coast/batz-sur-mer-bay-sunset.jpg</image:loc>
     </image:image>
   </url>
   <url>
@@ -190,22 +190,22 @@
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/lake-district/culgaith-grain-field-fells-sunset.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene.jpg</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/lake-district/derwentwater-dead-tree-sheep.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/lake-district/derwentwater-island-autumn.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/glencoe/glencoe-crags-mist.jpg</image:loc>
+      <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/lake-district/derwentwater-hazeldene.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/glencoe/glencoe-sgorr-nam-fiannaidh-waterfalls.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/glencoe/glencoe-three-sisters-valley.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/glencoe/glencoe-crags-mist.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://sljrobin.org/assets/images/photography/galleries/uk/glencoe/glencoe-torren-river.jpg</image:loc>

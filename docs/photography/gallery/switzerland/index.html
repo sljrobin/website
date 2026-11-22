@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Switzerland · Photography | Simon Robin
@@ -224,6 +225,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -244,7 +246,7 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
     </div>
@@ -254,9 +256,10 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div class="page-photography-gallery" data-gallery="switzerland">
-  <header class="photo-header">
+  <div class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
     <details class="photo-nav__menu">
       <summary class="photo-nav__btn photo-nav__summary"><img class="photo-nav__flag" src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Galleries<span class="photo-nav__hidden">, Switzerland open</span><svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
@@ -278,7 +281,7 @@
     <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
     <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
-</header>
+</div>
 
 
   <main id="main">
@@ -374,16 +377,16 @@
         <div class="gal-story__text">
           <h2 class="gal-story__title">About this Gallery</h2>
           
-<p>From <a href="#Zürich" title="Zürich">Zürich</a> and its churches to <a href="#Geneva" title="Geneva">Geneva</a>, with the Jet d’Eau on its lake, this country clearly has an architecture of its own, not seen in the rest of Europe, with buildings in the Gothic and Renaissance styles.</p>
+<p>From <a href="#Zürich">Zürich</a> and its churches to <a href="#Geneva">Geneva</a>, with the Jet d’Eau on its lake, this country clearly has an architecture of its own, not seen in the rest of Europe, with buildings in the Gothic and Renaissance styles.</p>
 
 <p>Surrounded by lakes and mountains, it has always struck me as a place where natural elements find their way into a cityscape.</p>
 
         </div>
         <div class="gal-story__map">
-<figure class="em" style="--ar: 1.673"><svg class="em__map" viewBox="-175.7 156 1375.5 822" role="img" aria-label="Map of Switzerland with the places of this gallery">
+<figure class="em" style="--ar: 1.673"><svg class="em__map" viewBox="-175.7 156 1375.5 822" role="group" aria-label="Map of Switzerland with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/ch.svg#land"/>
-<a class="em__pin" href="#Zürich" data-n="1" aria-label="Zürich"><title>Zürich</title><path class="em__lead" d="M583.4 330.3L589.4 330.3L1105.8 330.3"/><circle class="em__dot" cx="583.4" cy="330.3" r="6"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__disc" cx="1133.8" cy="330.3" r="28"/><text x="1133.8" y="339.8">1</text></a>
-<a class="em__pin" href="#Geneva" data-n="2" aria-label="Geneva"><title>Geneva</title><path class="em__lead" d="M41.6 714L35.6 714L-81.7 714"/><circle class="em__dot" cx="41.6" cy="714" r="6"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__disc" cx="-109.7" cy="714" r="28"/><text x="-109.7" y="723.6">2</text></a>
+<a class="em__pin" href="#Zürich" data-n="1" tabindex="-1" aria-hidden="true"><title>Zürich</title><path class="em__lead" d="M583.4 330.3L589.4 330.3L1105.8 330.3"/><circle class="em__dot" cx="583.4" cy="330.3" r="6"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__disc" cx="1133.8" cy="330.3" r="28"/><text x="1133.8" y="339.8">1</text></a>
+<a class="em__pin" href="#Geneva" data-n="2" tabindex="-1" aria-hidden="true"><title>Geneva</title><path class="em__lead" d="M41.6 714L35.6 714L-81.7 714"/><circle class="em__dot" cx="41.6" cy="714" r="6"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__disc" cx="-109.7" cy="714" r="28"/><text x="-109.7" y="723.6">2</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="1129.8" cy="933" r="27.3"/><circle cx="1129.8" cy="933" r="29"/><path d="M1129.8 933L1127.6 927.7L1129.8 889L1132 927.7ZM1129.8 933L1132 927.7L1143.8 919L1135.1 930.8ZM1129.8 933L1135.1 930.8L1173.8 933L1135.1 935.2ZM1129.8 933L1135.1 935.2L1143.8 947L1132 938.3ZM1129.8 933L1132 938.3L1129.8 977L1127.6 938.3ZM1129.8 933L1127.6 938.3L1115.8 947L1124.5 935.2ZM1129.8 933L1124.5 935.2L1085.8 933L1124.5 930.8ZM1129.8 933L1124.5 930.8L1115.8 919L1127.6 927.7Z"/><text x="1129.8" y="877">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</p><ol class="em__key"><li><a href="#Zürich" data-n="1"><span class="em__num">1</span><span>Zürich</span></a></li><li><a href="#Geneva" data-n="2"><span class="em__num">2</span><span>Geneva</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -411,19 +414,19 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 

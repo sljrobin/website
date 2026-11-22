@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Finland · Photography | Simon Robin
@@ -205,6 +206,7 @@
 
     
 <a class="skip-link" href="#main">Skip to Content</a>
+<header class="site-header">
 <nav class="site-strip" aria-label="Sections and profiles">
   <a class="site-strip__logo" href="/" title="Home">
     <img src="/assets/images/site/signature/signature.svg" alt="Simon Robin" width="891" height="305">
@@ -225,7 +227,7 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
     </div>
@@ -235,9 +237,10 @@
     </div>
   </div>
 </nav>
+</header>
 
     <div class="page-photography-gallery" data-gallery="finland">
-  <header class="photo-header">
+  <div class="photo-header">
   <nav class="photo-nav" aria-label="Photography">
     <details class="photo-nav__menu">
       <summary class="photo-nav__btn photo-nav__summary"><img class="photo-nav__flag" src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Galleries<span class="photo-nav__hidden">, Finland open</span><svg class="icon icon-chevron-right photo-nav__chevron" aria-hidden="true" focusable="false"><use href="/assets/images/icons/chevron-right.svg#chevron-right"/></svg></summary>
@@ -259,7 +262,7 @@
     <a class="photo-nav__btn photo-nav__btn--about" href="/photography/behind-the-camera/"><svg class="icon icon-frame photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/frame.svg#frame"/></svg>Behind the Camera</a>
     <a class="photo-nav__btn photo-nav__instagram" target="_blank" rel="noopener" href="https://www.instagram.com/sljrobin/"><svg class="icon icon-instagram photo-nav__icon" aria-hidden="true" focusable="false"><use href="/assets/images/icons/instagram.svg#instagram"/></svg><span class="photo-nav__word">Instagram</span></a>
   </nav>
-</header>
+</div>
 
 
   <main id="main">
@@ -349,16 +352,16 @@
         <div class="gal-story__text">
           <h2 class="gal-story__title">About this Gallery</h2>
           
-<p>From its capital, <a href="#Helsinki" title="Helsinki">Helsinki</a>, to <a href="#Turku" title="Turku">Turku</a> and the famous Archipelago, I was lucky to see the summer nights, when the sky is never fully dark and the blue hour stretches on for a while.</p>
+<p>From its capital, <a href="#Helsinki">Helsinki</a>, to <a href="#Turku">Turku</a> and the famous Archipelago, I was lucky to see the summer nights, when the sky is never fully dark and the blue hour stretches on for a while.</p>
 
 <p>The light is like nowhere else, and the city’s buildings, rich in history, sit in a mood somewhere between sunset and blue hour.</p>
 
         </div>
         <div class="gal-story__map">
-<figure class="em" style="--ar: 0.640"><svg class="em__map" viewBox="40.4 -29.9 797.6 1246.5" role="img" aria-label="Map of Finland with the places of this gallery">
+<figure class="em" style="--ar: 0.640"><svg class="em__map" viewBox="40.4 -29.9 797.6 1246.5" role="group" aria-label="Map of Finland with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/fi.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/fi.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/fi.svg#land"/>
-<a class="em__pin" href="#Helsinki" data-n="1" aria-label="Helsinki"><title>Helsinki</title><path class="em__lead" d="M451.6 994.1L414.5 1040.6L134.4 1040.6"/><circle class="em__dot" cx="451.6" cy="994.1" r="6"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__disc" cx="106.4" cy="1040.6" r="28"/><text x="106.4" y="1050.1">1</text></a>
-<a class="em__pin" href="#Turku" data-n="2" aria-label="Turku"><title>Turku</title><path class="em__lead" d="M308.6 970.6L302.6 970.6L134.4 970.6"/><circle class="em__dot" cx="308.6" cy="970.6" r="6"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__disc" cx="106.4" cy="970.6" r="28"/><text x="106.4" y="980.1">2</text></a>
+<a class="em__pin" href="#Helsinki" data-n="1" tabindex="-1" aria-hidden="true"><title>Helsinki</title><path class="em__lead" d="M451.6 994.1L414.5 1040.6L134.4 1040.6"/><circle class="em__dot" cx="451.6" cy="994.1" r="6"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__ping" cx="106.4" cy="1040.6" r="28"/><circle class="em__disc" cx="106.4" cy="1040.6" r="28"/><text x="106.4" y="1050.1">1</text></a>
+<a class="em__pin" href="#Turku" data-n="2" tabindex="-1" aria-hidden="true"><title>Turku</title><path class="em__lead" d="M308.6 970.6L302.6 970.6L134.4 970.6"/><circle class="em__dot" cx="308.6" cy="970.6" r="6"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__ping" cx="106.4" cy="970.6" r="28"/><circle class="em__disc" cx="106.4" cy="970.6" r="28"/><text x="106.4" y="980.1">2</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="768" cy="1171.6" r="27.3"/><circle cx="768" cy="1171.6" r="29"/><path d="M768 1171.6L765.8 1166.3L768 1127.6L770.2 1166.3ZM768 1171.6L770.2 1166.3L782 1157.6L773.3 1169.4ZM768 1171.6L773.3 1169.4L812 1171.6L773.3 1173.8ZM768 1171.6L773.3 1173.8L782 1185.6L770.2 1176.9ZM768 1171.6L770.2 1176.9L768 1215.6L765.8 1176.9ZM768 1171.6L765.8 1176.9L754 1185.6L762.7 1173.8ZM768 1171.6L762.7 1173.8L724 1171.6L762.7 1169.4ZM768 1171.6L762.7 1169.4L754 1157.6L765.8 1166.3Z"/><text x="768" y="1115.6">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/finland.svg" alt="" width="140" height="110">Finland</p><ol class="em__key"><li><a href="#Helsinki" data-n="1"><span class="em__num">1</span><span>Helsinki</span></a></li><li><a href="#Turku" data-n="2"><span class="em__num">2</span><span>Turku</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -386,20 +389,20 @@
     <a href="/"><svg class="icon icon-home" aria-hidden="true" focusable="false"><use href="/assets/images/icons/home.svg#home"/></svg><span>Home</span></a>
     <a href="/blog/"><svg class="icon icon-pen" aria-hidden="true" focusable="false"><use href="/assets/images/icons/pen.svg#pen"/></svg><span>Blog</span></a>
     <a href="/talks/"><svg class="icon icon-mic" aria-hidden="true" focusable="false"><use href="/assets/images/icons/mic.svg#mic"/></svg><span>Talks</span></a>
-    <a href="/photography/" class="is-current" aria-current="page"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
+    <a href="/photography/" class="is-current" aria-current="true"><svg class="icon icon-camera" aria-hidden="true" focusable="false"><use href="/assets/images/icons/camera.svg#camera"/></svg><span>Photography</span></a>
     <a href="/about/"><svg class="icon icon-user" aria-hidden="true" focusable="false"><use href="/assets/images/icons/user.svg#user"/></svg><span>About</span></a>
 
   </nav>
   <div class="site-footer__small">
-    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/" title="Simon Robin">Simon Robin</a></p>
-    <p class="site-footer__copy" id="rights">All photographs © <a href="/" title="Simon Robin">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
+    <p class="site-footer__copy"><span class="site-footer__years">© 2014–2026</span> <a href="/">Simon Robin</a></p>
+    <p class="site-footer__copy" id="rights">All photographs © <a href="/">Simon Robin</a>, all rights reserved. Please do not copy, reuse, or sell them without permission.</p>
   </div>
 </footer>
 
 
 </div>
 
-<a id="btn-scroll-top" href="#top" aria-label="Scroll to top" title="Back to top">
+<a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
 
