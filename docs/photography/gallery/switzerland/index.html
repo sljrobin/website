@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-3ZhzIMKkPGTlQYQKCMJmLAASdxTJaOWleWlaad+QlbA=' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Switzerland · Photography | Simon Robin
@@ -186,7 +186,11 @@
     if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
-    function finish() { if (done) return; done = true; leave(550); }
+    // a touch screen: the shorter intro (the pen's speed by --sig-k, which every stroke's delay and duration read)
+    var touch = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+    var HOLD = touch ? 300 : 650, LEAVE = touch ? 350 : 550;
+    if (touch) el.style.setProperty('--sig-k', '0.6');
+    function finish() { if (done) return; done = true; leave(LEAVE); }
     // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
     // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
     // under the fade instead of running on beneath it.
@@ -213,7 +217,7 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () {
       el.classList.add('is-drawing');
       var fallback = setTimeout(finish, 2930);
-      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, HOLD); }, { once: true });
     }); });
   })();
 </script>
@@ -298,7 +302,7 @@
     <article>
       <section id="Zürich">
   <div class="container container-photography">
-    <svg class="sec-map sec-map--l" viewBox="258.1 -160.9 451.9 982.3" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="571.6" y="307.4" width="23.8" height="23.8"/></svg>
+    <svg class="sec-map sec-map--l" viewBox="260.7 -166.8 453.2 985.3" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="575.1" y="302.9" width="23.9" height="23.9"/></svg>
 
     <div class="row row-bottom location">
       <div class="column">
@@ -313,6 +317,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires.jpg" title="The Green Spire" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="zurich-old-town-church-spires" data-pswp-srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-1600.jpg 1600w, /assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-1600.avif 1600w, /assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-640.avif 640w, /assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-640.avif 640w, /assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-1200.avif 1200w">
               <img fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/switzerland/zurich/zurich-old-town-church-spires-1080.jpg" alt="The green spire of the Fraumünster among the old town’s church towers of Zürich, wooded hills behind">
             </picture>
@@ -321,6 +326,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset.jpg" title="The Fiery Lake" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="zurich-lake-swan-sunset" data-pswp-srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1600.jpg 1600w, /assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1600.avif 1600w, /assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-640.avif 640w, /assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-640.avif 640w, /assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/switzerland/zurich/zurich-lake-swan-sunset-1080.jpg" alt="A swan on Lake Zürich under a fiery stormy sunset, the far shore dark">
             </picture>
@@ -335,7 +341,7 @@
 
       <section id="Geneva">
   <div class="container container-photography">
-    <svg class="sec-map sec-map--r" viewBox="-84.9 222.9 451.9 982.3" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="29.8" y="691.2" width="23.8" height="23.8"/></svg>
+    <svg class="sec-map sec-map--r" viewBox="-83.1 216.4 455.0 989.1" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="32.3" y="687.9" width="23.9" height="23.9"/></svg>
 
     <div class="row row-bottom location">
       <div class="column">
@@ -350,6 +356,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset.jpg" title="The Light over Geneva" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="geneva-lake-sunset" data-pswp-srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-1600.jpg 1600w, /assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-1600.avif 1600w, /assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-640.avif 640w, /assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-640.avif 640w, /assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/switzerland/geneva/geneva-lake-sunset-1080.jpg" alt="Geneva and its lake from the air in golden evening light under broken clouds">
             </picture>
@@ -358,6 +365,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk.jpg" title="The Fountain on the Lake" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="geneva-jet-d-eau-dusk" data-pswp-srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-1600.jpg 1600w, /assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-1600.avif 1600w, /assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-640.avif 640w, /assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 767px) calc(50vw - 30px), min(calc(50vw - 65px), 570px)" srcset="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-640.avif 640w, /assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-1200.avif 1200w">
               <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/switzerland/geneva/geneva-jet-d-eau-dusk-1080.jpg" alt="The Jet d’Eau rising from Lake Geneva at dusk under a pink sky">
             </picture>
@@ -385,8 +393,8 @@
         <div class="gal-story__map">
 <figure class="em" style="--ar: 1.673"><svg class="em__map" viewBox="-175.7 156 1375.5 822" role="group" aria-label="Map of Switzerland with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/ch.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/ch.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/ch.svg#land"/>
-<a class="em__pin" href="#Zürich" data-n="1" tabindex="-1" aria-hidden="true"><title>Zürich</title><path class="em__lead" d="M583.4 330.3L589.4 330.3L1105.8 330.3"/><circle class="em__dot" cx="583.4" cy="330.3" r="6"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__ping" cx="1133.8" cy="330.3" r="28"/><circle class="em__disc" cx="1133.8" cy="330.3" r="28"/><text x="1133.8" y="339.8">1</text></a>
-<a class="em__pin" href="#Geneva" data-n="2" tabindex="-1" aria-hidden="true"><title>Geneva</title><path class="em__lead" d="M41.6 714L35.6 714L-81.7 714"/><circle class="em__dot" cx="41.6" cy="714" r="6"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__ping" cx="-109.7" cy="714" r="28"/><circle class="em__disc" cx="-109.7" cy="714" r="28"/><text x="-109.7" y="723.6">2</text></a>
+<a class="em__pin" href="#Zürich" data-n="1" tabindex="-1" aria-hidden="true"><title>Zürich</title><path class="em__lead" d="M587.1 325.8L593.1 325.8L1105.8 325.8"/><circle class="em__dot" cx="587.1" cy="325.8" r="6"/><circle class="em__ping" cx="1133.8" cy="325.8" r="28"/><circle class="em__ping" cx="1133.8" cy="325.8" r="28"/><circle class="em__disc" cx="1133.8" cy="325.8" r="28"/><text x="1133.8" y="335.4">1</text></a>
+<a class="em__pin" href="#Geneva" data-n="2" tabindex="-1" aria-hidden="true"><title>Geneva</title><path class="em__lead" d="M44.3 710.9L38.3 710.9L-81.7 710.9"/><circle class="em__dot" cx="44.3" cy="710.9" r="6"/><circle class="em__ping" cx="-109.7" cy="710.9" r="28"/><circle class="em__ping" cx="-109.7" cy="710.9" r="28"/><circle class="em__disc" cx="-109.7" cy="710.9" r="28"/><text x="-109.7" y="720.5">2</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="1129.8" cy="933" r="27.3"/><circle cx="1129.8" cy="933" r="29"/><path d="M1129.8 933L1127.6 927.7L1129.8 889L1132 927.7ZM1129.8 933L1132 927.7L1143.8 919L1135.1 930.8ZM1129.8 933L1135.1 930.8L1173.8 933L1135.1 935.2ZM1129.8 933L1135.1 935.2L1143.8 947L1132 938.3ZM1129.8 933L1132 938.3L1129.8 977L1127.6 938.3ZM1129.8 933L1127.6 938.3L1115.8 947L1124.5 935.2ZM1129.8 933L1124.5 935.2L1085.8 933L1124.5 930.8ZM1129.8 933L1124.5 930.8L1115.8 919L1127.6 927.7Z"/><text x="1129.8" y="877">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/switzerland.svg" alt="" width="140" height="110">Switzerland</p><ol class="em__key"><li><a href="#Zürich" data-n="1"><span class="em__num">1</span><span>Zürich</span></a></li><li><a href="#Geneva" data-n="2"><span class="em__num">2</span><span>Geneva</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -409,11 +417,11 @@
   </main>
 
   
-<div class="btt-dock">
+<div class="btt-dock"><div class="btt-hold">
 <a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
-</div>
+</div></div>
 
 <footer class="site-footer">
   <nav class="site-footer__links" aria-label="Sections">

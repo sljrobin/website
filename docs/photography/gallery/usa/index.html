@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-3ZhzIMKkPGTlQYQKCMJmLAASdxTJaOWleWlaad+QlbA=' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       USA · Photography | Simon Robin
@@ -186,7 +186,11 @@
     if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
-    function finish() { if (done) return; done = true; leave(550); }
+    // a touch screen: the shorter intro (the pen's speed by --sig-k, which every stroke's delay and duration read)
+    var touch = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+    var HOLD = touch ? 300 : 650, LEAVE = touch ? 350 : 550;
+    if (touch) el.style.setProperty('--sig-k', '0.6');
+    function finish() { if (done) return; done = true; leave(LEAVE); }
     // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
     // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
     // under the fade instead of running on beneath it.
@@ -213,7 +217,7 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () {
       el.classList.add('is-drawing');
       var fallback = setTimeout(finish, 2930);
-      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, HOLD); }, { once: true });
     }); });
   })();
 </script>
@@ -288,7 +292,7 @@
 
     <section class="gal-open">
       <div class="gal-open__maps" aria-hidden="true"><div class="gal-open__grid"></div>
-<svg class="hm" viewBox="-418.6 92 1861.5 840" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><text class="hm__sea" style="font-size:21.7px" x="-93.2" y="538.1">Pacific Ocean</text><text class="hm__sea" style="font-size:21.7px" x="1040.8" y="640">Atlantic Ocean</text><text class="hm__sea" style="font-size:21.7px" x="615.6" y="807.9">Gulf of Mexico</text></svg><svg class="hm-compass" viewBox="-75 -112 150 187" aria-hidden="true" focusable="false"><g class="hm__compass"><circle cx="0" cy="0" r="43.4"/><circle cx="0" cy="0" r="46.2"/><path d="M0 0L-3.5 -8.4L0 -70L3.5 -8.4ZM0 0L3.5 -8.4L22.3 -22.3L8.4 -3.5ZM0 0L8.4 -3.5L70 0L8.4 3.5ZM0 0L8.4 3.5L22.3 22.3L3.5 8.4ZM0 0L3.5 8.4L0 70L-3.5 8.4ZM0 0L-3.5 8.4L-22.3 22.3L-8.4 3.5ZM0 0L-8.4 3.5L-70 0L-8.4 -3.5ZM0 0L-8.4 -3.5L-22.3 -22.3L-3.5 -8.4Z"/><text x="0" y="-82">N</text></g></svg>
+<svg class="hm" viewBox="-418.6 92 1861.4 840" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><text class="hm__sea" style="font-size:21.7px" x="-93.2" y="538.1">Pacific Ocean</text><text class="hm__sea" style="font-size:21.7px" x="1040.8" y="640">Atlantic Ocean</text><text class="hm__sea" style="font-size:21.7px" x="615.6" y="807.9">Gulf of Mexico</text></svg><svg class="hm-compass" viewBox="-75 -112 150 187" aria-hidden="true" focusable="false"><g class="hm__compass"><circle cx="0" cy="0" r="43.4"/><circle cx="0" cy="0" r="46.2"/><path d="M0 0L-3.5 -8.4L0 -70L3.5 -8.4ZM0 0L3.5 -8.4L22.3 -22.3L8.4 -3.5ZM0 0L8.4 -3.5L70 0L8.4 3.5ZM0 0L8.4 3.5L22.3 22.3L3.5 8.4ZM0 0L3.5 8.4L0 70L-3.5 8.4ZM0 0L-3.5 8.4L-22.3 22.3L-8.4 3.5ZM0 0L-8.4 3.5L-70 0L-8.4 -3.5ZM0 0L-8.4 -3.5L-22.3 -22.3L-3.5 -8.4Z"/><text x="0" y="-82">N</text></g></svg>
 </div>
       <div class="container">
         <h1><img class="gallery-flag" src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</h1>
@@ -298,7 +302,7 @@
     <article>
       <section id="Seattle">
   <div class="container container-photography">
-    <svg class="sec-map sec-map--l" viewBox="-84.9 45.1 177.2 385.2" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="38.1" y="228.8" width="9.3" height="9.3"/></svg>
+    <svg class="sec-map sec-map--l" viewBox="-34.9 53.3 165.4 359.6" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="79.8" y="224.7" width="8.7" height="8.7"/></svg>
 
     <div class="row row-bottom location">
       <div class="column">
@@ -313,6 +317,7 @@
       <div class="gal-cell gal-cell--big">
         <a href="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset.jpg" title="The Needle at Sundown" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="seattle-kerry-park-space-needle-sunset" data-pswp-srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1600.jpg 1600w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1600.avif 1600w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(66.7vw - 80px), 770px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1200.avif 1200w">
               <img fetchpriority="high" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-sunset-1080.jpg" alt="Seattle and the Space Needle from Kerry Park at sunset">
             </picture>
@@ -321,6 +326,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour.jpg" title="The Needle at Blue Hour" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="seattle-kerry-park-space-needle-blue-hour" data-pswp-srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-1600.jpg 1600w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-1600.avif 1600w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 50px), 380px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/usa/seattle/seattle-kerry-park-space-needle-blue-hour-1080.jpg" alt="Seattle and the Space Needle from Kerry Park at blue hour">
             </picture>
@@ -329,6 +335,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial.jpg" title="The Towers from Above" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1441" data-pswp-slug="seattle-downtown-aerial" data-pswp-srcset="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-1600.jpg 1600w, /assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-1600.avif 1600w, /assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 50px), 380px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/usa/seattle/seattle-downtown-aerial-1080.jpg" alt="Downtown Seattle’s towers from the air, the Space Needle and Puget Sound beyond">
             </picture>
@@ -338,6 +345,7 @@
     <div class="gal-banner">
       <a href="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm.jpg" title="The Boat under the Clouds" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1440" data-pswp-slug="seattle-puget-sound-sailboat-storm" data-pswp-srcset="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-1600.jpg 1600w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-1600.avif 1600w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-2560.avif 2560w">
         <picture>
+          <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-800.avif 800w">
           <source media="(width < 40rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-1200.avif 1200w">
           <source media="(width < 40rem)" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-1080.jpg 1080w">
           <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(100vw - 96px), 1160px)" srcset="/assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-band-640.avif 640w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-band-1200.avif 1200w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-band-1600.avif 1600w, /assets/images/photography/galleries/usa/seattle/seattle-puget-sound-sailboat-storm-band-2560.avif 2560w">
@@ -352,7 +360,7 @@
 
     <section class="gal-story">
       <div class="gal-story__bg" aria-hidden="true"><div class="gal-open__grid"></div>
-<svg class="hm" viewBox="-418.6 92 1861.5 840" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/></svg>
+<svg class="hm" viewBox="-418.6 92 1861.4 840" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/us.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/us.svg#rivers"/></svg>
 </div>
       <div class="container">
         <div class="gal-story__text">
@@ -366,7 +374,7 @@
         <div class="gal-story__map">
 <figure class="em" style="--ar: 1.482"><svg class="em__map" viewBox="-175.8 152 1229.8 830" role="group" aria-label="Map of the USA with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/us.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/us.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/us.svg#land"/>
-<a class="em__pin" href="#Seattle" data-n="1" tabindex="-1" aria-hidden="true"><title>Seattle</title><path class="em__lead" d="M42.7 237.7L36.7 237.7L-81.8 237.7"/><circle class="em__dot" cx="42.7" cy="237.7" r="6"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__ping" cx="-109.8" cy="237.7" r="28"/><circle class="em__disc" cx="-109.8" cy="237.7" r="28"/><text x="-109.8" y="247.3">1</text></a>
+<a class="em__pin" href="#Seattle" data-n="1" tabindex="-1" aria-hidden="true"><title>Seattle</title><path class="em__lead" d="M84.2 233L78.2 233L-81.8 233"/><circle class="em__dot" cx="84.2" cy="233" r="6"/><circle class="em__ping" cx="-109.8" cy="233" r="28"/><circle class="em__ping" cx="-109.8" cy="233" r="28"/><circle class="em__disc" cx="-109.8" cy="233" r="28"/><text x="-109.8" y="242.6">1</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="984" cy="937" r="27.3"/><circle cx="984" cy="937" r="29"/><path d="M984 937L981.8 931.7L984 893L986.2 931.7ZM984 937L986.2 931.7L998 923L989.3 934.8ZM984 937L989.3 934.8L1028 937L989.3 939.2ZM984 937L989.3 939.2L998 951L986.2 942.3ZM984 937L986.2 942.3L984 981L981.8 942.3ZM984 937L981.8 942.3L970 951L978.7 939.2ZM984 937L978.7 939.2L940 937L978.7 934.8ZM984 937L978.7 934.8L970 923L981.8 931.7Z"/><text x="984" y="881">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/usa.svg" alt="" width="140" height="110">USA</p><ol class="em__key"><li><a href="#Seattle" data-n="1"><span class="em__num">1</span><span>Seattle</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -389,11 +397,11 @@
   </main>
 
   
-<div class="btt-dock">
+<div class="btt-dock"><div class="btt-hold">
 <a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
-</div>
+</div></div>
 
 <footer class="site-footer">
   <nav class="site-footer__links" aria-label="Sections">

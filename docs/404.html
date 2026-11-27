@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-3ZhzIMKkPGTlQYQKCMJmLAASdxTJaOWleWlaad+QlbA=' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Page Not Found | Simon Robin
@@ -96,7 +96,11 @@
     if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
-    function finish() { if (done) return; done = true; leave(550); }
+    // a touch screen: the shorter intro (the pen's speed by --sig-k, which every stroke's delay and duration read)
+    var touch = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+    var HOLD = touch ? 300 : 650, LEAVE = touch ? 350 : 550;
+    if (touch) el.style.setProperty('--sig-k', '0.6');
+    function finish() { if (done) return; done = true; leave(LEAVE); }
     // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
     // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
     // under the fade instead of running on beneath it.
@@ -123,7 +127,7 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () {
       el.classList.add('is-drawing');
       var fallback = setTimeout(finish, 2930);
-      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, HOLD); }, { once: true });
     }); });
   })();
 </script>

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0=' 'sha256-g0b8ZjmaeN1pMPT7FOjP5ZvNFUMDFCpQ95+KcpRebR4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-3ZhzIMKkPGTlQYQKCMJmLAASdxTJaOWleWlaad+QlbA=' 'sha256-5GT4wX1hr/DfZvYlRNXX+PxxjbIKSa+emRY9P1LD1pA=' 'sha256-HNVnklOG9YYF4as9/XKQrtkcMB2a4AOhaCyDEiJgIp0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 
   <title>
       Spain · Photography | Simon Robin
@@ -243,7 +243,11 @@
     if (!first) { remove(); return; }   // a landing page opened for the first time: the view transition does the rest
     document.documentElement.classList.add('sig-intro-playing');   // motions under the overlay wait for it (the home greeting's stroke)
     var done = false;
-    function finish() { if (done) return; done = true; leave(550); }
+    // a touch screen: the shorter intro (the pen's speed by --sig-k, which every stroke's delay and duration read)
+    var touch = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+    var HOLD = touch ? 300 : 650, LEAVE = touch ? 350 : 550;
+    if (touch) el.style.setProperty('--sig-k', '0.6');
+    function finish() { if (done) return; done = true; leave(LEAVE); }
     // A click or a plain key stops the pen where it is and fades the overlay out (owner's request, 2026-11-05):
     // each stroke's offset is read and written back inline with its transition off, so the drawing freezes
     // under the fade instead of running on beneath it.
@@ -270,7 +274,7 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () {
       el.classList.add('is-drawing');
       var fallback = setTimeout(finish, 2930);
-      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, 650); }, { once: true });
+      if (last) last.addEventListener('transitionend', function () { clearTimeout(fallback); setTimeout(finish, HOLD); }, { once: true });
     }); });
   })();
 </script>
@@ -355,7 +359,7 @@
     <article>
       <section id="Northern-Coast">
   <div class="container container-photography">
-    <svg class="sec-map sec-map--l" viewBox="356.2 -78.1 240.4 522.6" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="523" y="171" width="12.7" height="12.7"/></svg>
+    <svg class="sec-map sec-map--l" viewBox="357.6 -81.9 241.8 525.7" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="525.3" y="168.8" width="12.7" height="12.7"/></svg>
 
     <div class="row row-bottom location">
       <div class="column">
@@ -369,6 +373,7 @@
     <div class="gal-banner">
       <a href="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset.jpg" title="The Sun on the Flysch" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="zumaia-flysch-sunset" data-pswp-srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1600.jpg 1600w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1600.avif 1600w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-2560.avif 2560w">
         <picture>
+          <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-800.avif 800w">
           <source media="(width < 40rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1200.avif 1200w">
           <source media="(width < 40rem)" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-1080.jpg 1080w">
           <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(100vw - 96px), 1160px)" srcset="/assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-band-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-band-1200.avif 1200w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-band-1600.avif 1600w, /assets/images/photography/galleries/spain/northern-coast/zumaia-flysch-sunset-band-2560.avif 2560w">
@@ -380,6 +385,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks.jpg" title="The Cantabrian Blue" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="playa-de-la-arnia-sea-stacks" data-pswp-srcset="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1600.jpg 1600w, /assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1600.avif 1600w, /assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 45px), 373px)" srcset="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/northern-coast/playa-de-la-arnia-sea-stacks-1080.jpg" alt="Rock stacks rising from a blue sea below the cliffs of Playa de la Arnía, Cantabria">
             </picture>
@@ -388,6 +394,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset.jpg" title="The Rock Waves" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="barrika-beach-rock-layers-sunset" data-pswp-srcset="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-1600.jpg 1600w, /assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-1600.avif 1600w, /assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 45px), 373px)" srcset="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-1200.avif 1200w">
               <img loading="eager" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/northern-coast/barrika-beach-rock-layers-sunset-1080.jpg" alt="Layers of rock curving across the beach of Barrika toward the sea at sunset, Basque Country">
             </picture>
@@ -396,6 +403,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks.jpg" title="The Twin Stacks" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="liencres-urros-sea-stacks" data-pswp-srcset="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1600.jpg 1600w, /assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1600.avif 1600w, /assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 45px), 373px)" srcset="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-640.avif 640w, /assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1200.avif 1200w">
               <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/northern-coast/liencres-urros-sea-stacks-1080.jpg" alt="The twin sea stacks of the Urros de Liencres in a calm blue sea, yellow flowers on the cliff, Cantabria">
             </picture>
@@ -410,7 +418,7 @@
 
       <section id="San-Juan-de-Gaztelugatxe">
   <div class="container container-photography">
-    <svg class="sec-map sec-map--r" viewBox="422.1 -93.6 240.4 522.6" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="483.1" y="155.5" width="12.7" height="12.7"/></svg>
+    <svg class="sec-map sec-map--r" viewBox="424.0 -97.6 242.0 526.0" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use class="hm__ripple" style="stroke-width:57px;opacity:0.16" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:55px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:43px;opacity:0.25" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:41px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:29px;opacity:0.34" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:27px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple" style="stroke-width:15px;opacity:0.43" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__ripple-cut" style="stroke-width:13px" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__land" href="/assets/images/photography/maps/es.svg#land"/><use class="hm__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="sec-map__pin" href="/assets/images/icons/location.svg#location" x="485.4" y="153.2" width="12.7" height="12.7"/></svg>
 
     <div class="row row-bottom location">
       <div class="column">
@@ -425,6 +433,7 @@
       <div class="gal-cell gal-cell--big">
         <a href="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise.jpg" title="Gaztelugatxe on Fire" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1704" data-pswp-slug="san-juan-de-gaztelugatxe-sunrise" data-pswp-srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1600.jpg 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1600.avif 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(66.7vw - 80px), 770px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1200.avif 1200w">
               <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-sunrise-1080.jpg" alt="The islet of San Juan de Gaztelugatxe under a red sunrise sky, the sea smooth around it, Basque Country">
             </picture>
@@ -433,6 +442,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps.jpg" title="The Bridge to the Hermitage" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1705" data-pswp-slug="san-juan-de-gaztelugatxe-steps" data-pswp-srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-1600.jpg 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-1600.avif 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 50px), 380px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-1200.avif 1200w">
               <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-steps-1080.jpg" alt="The stone path and steps climbing to the hermitage of San Juan de Gaztelugatxe, Basque Country">
             </picture>
@@ -441,6 +451,7 @@
       <div class="gal-cell">
         <a href="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening.jpg" title="Golden Evening at Gaztelugatxe" target="_blank" rel="noopener" data-pswp-width="2560" data-pswp-height="1707" data-pswp-slug="san-juan-de-gaztelugatxe-golden-evening" data-pswp-srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-1600.jpg 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening.jpg 2560w" data-pswp-srcset-avif="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-1600.avif 1600w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-2560.avif 2560w">
             <picture>
+              <source media="(width < 30rem)" type="image/avif" sizes="calc(100vw - 40px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-800.avif 800w">
               <source type="image/avif" sizes="(max-width: 639px) calc(100vw - 40px), min(calc(33.3vw - 50px), 380px)" srcset="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-640.avif 640w, /assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-1200.avif 1200w">
               <img loading="lazy" decoding="async" width="1080" height="720" src="/assets/images/photography/galleries/spain/san-juan-de-gaztelugatxe/san-juan-de-gaztelugatxe-golden-evening-1080.jpg" alt="San Juan de Gaztelugatxe and its hermitage in golden evening light, Basque Country">
             </picture>
@@ -468,10 +479,10 @@
 
         </div>
         <div class="gal-story__map">
-<figure class="em" style="--ar: 1.479"><svg class="em__map" viewBox="-176 101.7 1376 930.1" role="group" aria-label="Map of Spain with the places of this gallery">
+<figure class="em" style="--ar: 1.476"><svg class="em__map" viewBox="-176 99.4 1376 932.4" role="group" aria-label="Map of Spain with the places of this gallery">
 <use class="em__land" href="/assets/images/photography/maps/es.svg#land"/><use class="em__rivers" href="/assets/images/photography/maps/es.svg#rivers"/><use class="em__coast" href="/assets/images/photography/maps/es.svg#land"/>
-<a class="em__pin" href="#Northern-Coast" data-n="1" tabindex="-1" aria-hidden="true"><title>Northern Coast</title><path class="em__lead" d="M529.3 183.2L535.3 183.2L1106 183.2"/><circle class="em__dot" cx="529.3" cy="183.2" r="6"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__ping" cx="1134" cy="183.2" r="28"/><circle class="em__disc" cx="1134" cy="183.2" r="28"/><text x="1134" y="192.7">1</text></a>
-<a class="em__pin" href="#San-Juan-de-Gaztelugatxe" data-n="2" tabindex="-1" aria-hidden="true"><title>San Juan de Gaztelugatxe</title><path class="em__lead" d="M489.5 167.7L483.5 167.7L-82 167.7"/><circle class="em__dot" cx="489.5" cy="167.7" r="6"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__ping" cx="-110" cy="167.7" r="28"/><circle class="em__disc" cx="-110" cy="167.7" r="28"/><text x="-110" y="177.2">2</text></a>
+<a class="em__pin" href="#Northern-Coast" data-n="1" tabindex="-1" aria-hidden="true"><title>Northern Coast</title><path class="em__lead" d="M531.7 181L537.7 181L1106 181"/><circle class="em__dot" cx="531.7" cy="181" r="6"/><circle class="em__ping" cx="1134" cy="181" r="28"/><circle class="em__ping" cx="1134" cy="181" r="28"/><circle class="em__disc" cx="1134" cy="181" r="28"/><text x="1134" y="190.5">1</text></a>
+<a class="em__pin" href="#San-Juan-de-Gaztelugatxe" data-n="2" tabindex="-1" aria-hidden="true"><title>San Juan de Gaztelugatxe</title><path class="em__lead" d="M491.7 165.4L485.7 165.4L-82 165.4"/><circle class="em__dot" cx="491.7" cy="165.4" r="6"/><circle class="em__ping" cx="-110" cy="165.4" r="28"/><circle class="em__ping" cx="-110" cy="165.4" r="28"/><circle class="em__disc" cx="-110" cy="165.4" r="28"/><text x="-110" y="175">2</text></a>
 <g class="em__legend" aria-hidden="true"><g class="hm__compass"><circle cx="1130" cy="986.8" r="27.3"/><circle cx="1130" cy="986.8" r="29"/><path d="M1130 986.8L1127.8 981.5L1130 942.8L1132.2 981.5ZM1130 986.8L1132.2 981.5L1144 972.8L1135.3 984.6ZM1130 986.8L1135.3 984.6L1174 986.8L1135.3 989ZM1130 986.8L1135.3 989L1144 1000.8L1132.2 992.1ZM1130 986.8L1132.2 992.1L1130 1030.8L1127.8 992.1ZM1130 986.8L1127.8 992.1L1116 1000.8L1124.7 989ZM1130 986.8L1124.7 989L1086 986.8L1124.7 984.6ZM1130 986.8L1124.7 984.6L1116 972.8L1127.8 981.5Z"/><text x="1130" y="930.8">N</text></g></g></svg><figcaption><p class="em__cartouche"><img src="/assets/images/flags/spain.svg" alt="" width="140" height="110">Spain</p><ol class="em__key"><li><a href="#Northern-Coast" data-n="1"><span class="em__num">1</span><span>Northern Coast</span></a></li><li><a href="#San-Juan-de-Gaztelugatxe" data-n="2"><span class="em__num">2</span><span>San Juan de Gaztelugatxe</span></a></li></ol></figcaption></figure>
 </div>
       </div>
@@ -494,11 +505,11 @@
   </main>
 
   
-<div class="btt-dock">
+<div class="btt-dock"><div class="btt-hold">
 <a id="btn-scroll-top" href="#top" aria-label="Back to top" title="Back to top">
   <svg class="icon icon-arrow-up" aria-hidden="true" focusable="false"><use href="/assets/images/icons/arrow-up.svg#arrow-up"/></svg>
 </a>
-</div>
+</div></div>
 
 <footer class="site-footer">
   <nav class="site-footer__links" aria-label="Sections">
